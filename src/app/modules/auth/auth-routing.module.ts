@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuardService } from '../../services/auth-guard.service';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { UserPermissionsComponent } from './user-permissions/user-permissions.component';
 
 
 const routes: Routes = [
@@ -20,11 +19,6 @@ const routes: Routes = [
         component: RegisterComponent,
       }
     ]
-  },
-  {
-    path: 'userPermission',
-    component: UserPermissionsComponent,
-    canActivate: [AuthGuardService]
   }
 ];
 

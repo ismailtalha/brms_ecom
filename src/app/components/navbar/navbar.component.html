@@ -15,8 +15,8 @@
                 <div class="col-lg-4 col-md-6 ml-auto mr-auto">
                     <div class="search-box-view">
                         <form action="#">
-                            <input type="text" class="email" placeholder="Search Your Product" name="product">
-                            <button type="submit" class="submit"></button>
+                            <input type="text" class="email" [(ngModel)]="productname" placeholder="Search Your Product" name="product">
+                            <button (click)="search(productname)" class="submit"></button>
                         </form>
                     </div>                                           
                 </div>

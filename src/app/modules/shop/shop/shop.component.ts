@@ -4,6 +4,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { forkJoin, Observable } from 'rxjs';
 import { itemgroup } from 'src/app/models/itemgroup';
 import { DataService } from 'src/app/services/data.service';
+import { EmitterService } from 'src/app/services/emitter.service';
 import { GetDataService } from 'src/app/services/getdata.service';
 
 
@@ -23,13 +24,15 @@ export class ShopComponent implements OnInit {
   brands: any = [];
   itemsPerPage:any = 6;
 
-  constructor(private dataService: DataService, public cartservice: GetDataService, private toastr: ToastrService, private loader: NgxUiLoaderService) { }
+  constructor(private dataService: DataService, public eventemitter:EmitterService,public cartservice: GetDataService, private toastr: ToastrService, private loader: NgxUiLoaderService) { }
 
   items: any = [];
   ngOnInit(): void {
     console.log('hello shop')
     this.getmultiplerequests();
-
+    this.eventemitter.listen('searchproduct',data => {
+      this.filter(data,'productsearch')
+    })
   }  cards = [
     {
       title: 'Card Title 1',
@@ -176,6 +179,15 @@ export class ShopComponent implements OnInit {
     if (this.filterarray)
 
       this.items = this.applyfilters(this.filterarray);
+
+    if(filtertype == "productsearch")
+    {
+        let query = data.toLowerCase();
+        let items = this.cartservice.allitems.items;
+        this.items = items.filter(item => item.itemname.toLowerCase().indexOf(query) >= 0);
+        
+      
+    }
 
   }
 

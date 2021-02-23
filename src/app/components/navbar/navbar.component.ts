@@ -6,6 +6,7 @@ import {CookieService} from 'ngx-cookie-service';
 import { DataService } from 'src/app/services/data.service';
 import { GetDataService } from 'src/app/services/getdata.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl} from '@angular/platform-browser';
+import { EmitterService } from '../../services/emitter.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class NavbarComponent implements OnChanges {
   companydata: import("e:/Projects/ecom/front End/src/app/models/company.model").company;
   imageurl: any;
   customer:any = [];
-  constructor(public domSanitizer: DomSanitizer,public route:Router,public cartservice:GetDataService, location: Location,  private element: ElementRef, private router: Router, private cookies: CookieService, private dataService: DataService) {
+  constructor(public domSanitizer: DomSanitizer,public eventemitter : EmitterService,public route:Router,public cartservice:GetDataService, location: Location,  private element: ElementRef, private router: Router, private cookies: CookieService, private dataService: DataService) {
     this.location = location;
     this.cartcount = this.cartservice.cartdata.count ;
     this.companydata = this.cartservice.companydata;
@@ -45,6 +46,10 @@ export class NavbarComponent implements OnChanges {
     localStorage.removeItem('customer');
   // this.reload();
     
+  }
+  search(pname)
+  {
+    this.eventemitter.emit('searchproduct',pname)
   }
   reload()
   {
