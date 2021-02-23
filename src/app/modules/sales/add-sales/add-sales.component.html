@@ -1,0 +1,160 @@
+<div class="header pb-5 pt-5 pt-lg-8 d-flex align-items-center">
+    <!-- Mask -->
+    <span class="mask bg-gradient-primary opacity-8"></span>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+      <div class="col-xl-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Sales</h3>
+              </div>
+
+              <div class="col-4">
+                <!-- <div class="form-group">
+                  <label class="form-control-label" for="input-username">Currency Stock</label>
+                  <input class="form-control form-control-alternative" placeholder="Currency Stock" type="number" [disabled]="true" [ngModelOptions]="{standalone: true}" [(ngModel)]="currencyStock">
+                </div> -->
+                <div class="form-group stock">
+                  <label class="form-control-label" for="input-username">Currency Stock</label>
+                  <span class="stocktext">{{currencyStock}}</span>
+                 <!-- k <input class="form-control form-control-alternative" placeholder="Currency Stock" type="number" [disabled]="true" [ngModelOptions]="{standalone: true}" [(ngModel)]="currencyStock"> -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+              <form [formGroup]="header">
+                <div class="pl-lg-4">
+
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-username">GL Accounts*</label>
+                            <select formControlName="AccountId"  class="form-control form-control-alternative">
+                                <option [ngValue]="null" disabled>Select Account</option>
+                                <option *ngFor="let a of glAccounts" [value]="a?.id">{{a?.Name}}</option>
+                            </select>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-username">Date</label>
+                            <input formControlName="Date" class="form-control form-control-alternative" placeholder="Select date" type="date">
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </form>
+              <hr class="my-4" />
+              <form [formGroup]="detail" >
+                <div class="pl-lg-4">
+
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-username">Select Currency*</label>
+                            <ng-select [items]="currencies"
+                                      (change)="onCurrencyChange($event)"
+                                      bindLabel="Name"
+                                      bindValue="Id"
+                                      placeholder="Select Currency"
+                                      formControlName="CurrencyId">
+                                      <ng-template ng-label-tmp let-item="item">
+                                        <b>{{item.Name}}({{item.Code}})</b>
+                                    </ng-template>
+                                    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                                      <b>{{item.Name}}({{item.Code}})</b>
+                                  </ng-template>
+                            </ng-select>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-username">Qty*</label>
+
+                          <input formControlName="Qty" class="form-control  form-control-alternative" placeholder="Quantity" type="number" (keyup)="calculateAmount($event.target.value)" >
+                        </div>
+                      </div>
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-username">Rate*</label>
+                          <input (keyup)="calculateAmount($event.target.value)" formControlName="CostPrice" class="form-control form-control-alternative" placeholder="Rate" type="number">
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-username">Amount*</label>
+
+                            <input [disabled]="true" [ngModelOptions]="{standalone: true}" [(ngModel)]="amount" class="form-control form-control-alternative" placeholder="Select Amount" type="number">
+                        </div>
+                      </div>
+
+                      <div class="col-lg-11">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-username">Description</label>
+                          <input formControlName="Description" class="form-control form-control-alternative" placeholder="Description" type="text">
+                        </div>
+                      </div>
+                      <div class="col-lg-1" style="margin-top: 32px; padding-left: 0px;">
+                        <div class="form-group">
+                          <button [disabled]="!detail.valid" type="button" (click)="add()" class="btn btn-primary btncustom">Add</button>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+              </form>
+
+              <div class="row">
+                <div class="col">
+                  <div class="card shadow">
+                    <div class="card-header border-0">
+                      <h3 class="mb-0">Sales Detail</h3>
+                    </div>
+                    <div class="table-responsive">
+                      <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Currency</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">Rate</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Actions</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let de of details">
+                            <td>{{getCurrency(de.CurrencyId)?.Code}}</td>
+                            <td>{{de.Qty}}</td>
+                            <td>{{de.CostPrice}}</td>
+                            <td>{{de.Amount}}</td>
+                            <td>{{de.Description}}</td>
+
+
+                              <td style="text-align: center; cursor: pointer;">
+                                  <i class="pi pi-pencil pr-5" (click)="onEdit(de)"></i>
+                                  <i class="pi pi-trash pl-5" (click)="onDelete(de)"></i>
+                              </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row" style="float: right;" *ngIf="details.length > 0">
+                <div class="form-group">
+                  <button [disabled]="!header.valid && (details.length > 0)" type="button" (click)="onSave()" class="btn btn-primary btncustom">Save</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

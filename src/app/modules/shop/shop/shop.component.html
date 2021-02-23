@@ -1,0 +1,268 @@
+   <!-- Shop Page Start -->
+   
+   <div class="breadcrumb-area ptb-60 ptb-sm-30">
+    <div class="container">
+        <div class="breadcrumb">
+            <ul>
+               
+                <li class="active"><a href="#">Shop</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- Container End -->
+</div>
+   <div class="main-shop-page pb-60">
+  
+        
+                                    
+        <!-- Delete This -->                        
+       
+    <div class="container">
+        <!-- Row End -->
+        <div class="row">
+            <!-- Sidebar Shopping Option Start -->
+            <div class="col-lg-3  order-2">
+                <div class="sidebar white-bg">
+                    <div class="single-sidebar">
+                        <div class="group-title">
+                            <h2>Brands</h2>
+                        </div>
+                        <ul class="manufactures-list" *ngFor="let brand of resbrands">
+                            <li><input type="checkbox" value={{brand.makeno}} (change)="filter(brand.makeno,'brand')">&nbsp;<a href="#">{{brand.makename}} (9)</a></li>
+                        </ul>
+                    </div>
+                    <div class="single-sidebar">
+                        <div class="group-title">
+                            <h2>categories</h2>
+                        </div>
+                        <ul *ngFor="let cat of categories">
+                            <li><input type="checkbox" value={{cat.productno}} (change)="filter(cat.productno,'category')">&nbsp;<a href="#">{{cat.productname}} (9)</a></li>
+                            <!-- <li><a href="#">Hardware (11)</a></li>
+                            <li><a href="#">Drill Machine (8)</a></li>
+                            <li><a href="#">Tools Box (10)</a></li>
+                            <li><a href="#">Power Saw (5)</a></li> -->
+                        </ul>
+                    </div>
+                    <!-- <div class="single-sidebar">
+                        <div class="group-title">
+                            <h2>color</h2>
+                        </div>
+                        <ul class="color-option">
+                            <li>
+                                <a class="blue" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="green" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="black" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="rose" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="red" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="purple" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="rose" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="yellow" href="#"></a>
+                            </li>
+                            <li>
+                                <a class="orange" href="#"></a>
+                            </li>
+                        </ul>
+                    </div> -->
+                    <!-- <div class="single-sidebar">
+                        <div class="group-title">
+                            <h2>price</h2>
+                        </div>
+                        <form action="#">
+                            <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header" ></div>
+                            </div>
+                                <input id="amount" class="amount" readonly="" type="text">
+                        </form>
+                    </div> -->
+                    <div class="single-sidebar">
+                        <div class="group-title">
+                            <h2>Item Groups</h2>
+                        </div>
+                        <ul class="manufactures-list" *ngFor="let group of itemgroups">
+                            <li><input type="checkbox" value={{group.itemgroupno}} (change)="filter(group.itemgroupno,'itemgroup')">&nbsp;<a href="#">{{group.itemgroupname}} (9)</a></li>
+                        </ul>
+                    </div>
+
+                 
+                 
+                    <!-- Single Banner Start -->
+                
+                    <!-- Single Banner End -->
+                </div>
+            </div>
+            <!-- Sidebar Shopping Option End -->                    
+            <!-- Product Categorie List Start -->
+            <div class="col-lg-9 order-lg-2">
+                <!-- Grid & List View Start -->
+                <div class="grid-list-top border-default universal-padding fix mb-30">
+                    <div class="grid-list-view f-left">
+                        <ul class="list-inline nav">
+                            <li><a data-toggle="tab" href="#grid-view"><i class="fa fa-th"></i></a></li>
+                            <li><a  class="active" data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a></li>
+                            <li><span class="grid-item-list"> Items 1-12 of 13</span></li>
+                        </ul>
+                    </div>
+                    <!-- Toolbar Short Area Start -->
+                    <div class="main-toolbar-sorter f-right">
+                        <div class="toolbar-sorter">
+                            <label>sort by</label>
+                            <select class="sorter" name="sorter">
+                                <option value="Position" selected="selected">position</option>
+                                <option value="Product Name">Product Name</option>
+                                <option value="Price">Price</option>
+                            </select>
+                            <span><a href="#"><i class="fa fa-arrow-up"></i></a></span>
+                        </div>
+                    </div>
+                    <!-- Toolbar Short Area End -->
+                </div>
+                <!-- Grid & List View End -->
+                <div class="main-categorie">
+                    <!-- Grid & List Main Area End -->
+                    <div class="tab-content fix">
+                        <div id="grid-view" class="tab-pane ">
+                            <div class="row">
+                      
+                            <div class="col-lg-4 col-sm-6" *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                                <div class="single-product">
+                                    <!-- Product Image Start -->
+                                    <div class="pro-img">
+                                        <a routerLink ="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">
+                                            <img class="primary-img" src="../../../../assets/img/products/10.jpg" alt="single-product">
+                                            <img class="secondary-img" src="../../../../assets/img/products/10.jpg" alt="single-product">
+                                        </a>
+                                    </div>
+                                    <!-- Product Image End -->
+                                    <!-- Product Content Start -->
+                                    <div class="pro-content">
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>                                
+                                        <h4><a a routerLink ="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">{{item.itemname}}</a></h4>
+                                        <p><span class="price">{{cartservice?.companydata?.currency}} {{item.saleprice}}</span> </p>
+                                        <div class="pro-actions">
+                                            <div class="actions-secondary">
+                                                <a href="wishlist.html" data-toggle="tooltip" title="Add to Wishlist"><i class="fa fa-heart"></i></a>
+                                                <a class="add-cart" (click)="addtocart(item)" data-toggle="tooltip" title="Add to Cart">Add To Cart</a>
+                                                <a href="compare.html" data-toggle="tooltip" title="Add to Compare"><i class="fa fa-signal"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Product Content End -->
+                                    <span class="sticker-new">-20%</span>
+                                </div>
+                            </div>
+                                   
+                            </div>                                    
+                        </div>
+                        <!-- #grid view End -->
+                        <div id="list-view" class="tab-pane active">
+                            <!-- Single Product Start -->
+                            <div *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                                <div class="single-product">
+                                    <!-- Product Image Start -->
+                                    <div class="pro-img">
+                                        <a a routerLink ="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">
+                                            <img class="primary-img" src=" ../../../../assets/img/products/10.jpg" alt="single-product">
+                                            <img class="secondary-img" src="../../../../assets/img/products/10.jpg" alt="single-product">
+                                        </a>
+                                    </div>
+                                    <!-- Product Image End -->
+                                    <!-- Product Content Start -->
+                                    <div class="pro-content">
+                                        <div class="product-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>                                
+                                        <h4><a routerLink ="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">{{item.itemname}}</a></h4>
+                                        <p><span class="price">{{cartservice?.companydata?.currency}}{{item.saleprice}}</span> </p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati velit, similique voluptas doloribus assumenda quis libero animi cumque dignissimos quisquam, quaerat ea laboriosam incidunt ullam.</p>
+                                        <div class="pro-actions">
+                                            <div class="actions-secondary">
+                                                <a href="wishlist.html" data-toggle="tooltip" title="Add to Wishlist"><i class="fa fa-heart"></i></a>
+                                                <a class="add-cart" (click)="addtocart(item)" data-toggle="tooltip" title="Add to Cart">Add To Cart</a>
+                                                <a href="compare.html" data-toggle="tooltip" title="Add to Compare"><i class="fa fa-signal"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Product Content End -->
+                                </div>
+                            </div>
+                         
+                                                     
+                        </div>
+                        <!-- #list view End -->
+                    </div>
+                    <!-- Grid & List Main Area End -->
+                </div>
+                <!--Breadcrumb and Page Show Start -->
+                <div class="pagination-box fix">
+                    <!-- <ul class="blog-pagination "> -->
+                        <!-- <li><a href="#">1</a></li>
+                        <li class="active"><a href="#">2</a></li>
+                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
+                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <!-- </ul> -->
+                    <div class="toolbar-sorter-footer">
+                        <label>show</label>
+                        <select class="sorter" name="sorter">
+                            <option (click)="perpageitems(10)" value="Position" selected="selected">10</option>
+                            <option (click)="perpageitems(20)" value="Product Name">20</option>
+                            <option (click)="perpageitems(30)" value="Price">30</option>
+                        </select>
+                        <span>per page</span>
+                    </div>
+                </div>
+                <!--Breadcrumb and Page Show End -->
+            </div>
+            <!-- product Categorie List End -->
+            
+        </div>
+        <div class="pt-10">
+            <!-- <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
+            [animation]="'slide'">
+<mdb-carousel-item *ngFor="let item of slides; let i = index">
+  <div class="col-md-4" *ngFor="let card of item; let cardIndex = index">
+    <mdb-card class="my-1">
+      <mdb-card-img [src]="card.img" alt="Card image cap"></mdb-card-img>
+      <mdb-card-body>
+        <mdb-card-title>
+          <h4>{{card.title}}</h4>
+        </mdb-card-title>
+        <p>{{card.description}}</p>
+        <a href="#" mdbBtn color="primary" class="waves-light" mdbWavesEffect>{{card.buttonText}}</a>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</mdb-carousel-item>
+</mdb-carousel> -->
+        </div>
+       
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
+</div>
+
+<!-- Shop Page End -->
+

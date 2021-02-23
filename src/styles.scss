@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+// @import "~@ng-select/ng-select/themes/default.theme.css";
+// @import "~owl.carousel/dist/assets/owl.carousel.css";
+// @import "~owl.carousel/dist/assets/owl.theme.default.css";
+.stocktext
+{
+  font-size: 20px;
+  font-weight: 700;
+  padding: 5px;
+  margin: 5px;
+}
+.stock{
+  border: 1px solid black;
+    text-align: center;
+
+}
+body .ui-table .ui-table-thead > tr > th {
+  padding: 0.571em 0.857em;
+   border: none !important; 
+  font-weight: 700;
+  color: white !important;
+   background-color: #5e72e4 !important; 
+}
+body .ui-table .ui-table-tbody > tr > td {
+   background-color: none !important; 
+   border:none !important;  
+   border-bottom: 1px solid #c8c8c8 !important; 
+   
+  -webkit-transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s;
+  text-align: left !important;
+}
+body .ui-table .ui-table-thead {
+  background: #5e72e4 !important; 
+  font-size: 20px !important;
+}
+.collapsible {
+  background-color: white !important; 
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+.collapsible:after {
+  content: "+";
+  color: black !important;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}

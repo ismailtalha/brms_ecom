@@ -1,0 +1,78 @@
+<div class="header pb-5 pt-5 pt-lg-8 d-flex align-items-center">
+  <span class="mask bg-gradient-primary opacity-8"></span>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-12 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Transaction</h3>
+            </div>
+            <div class="col-4 text-right">
+              <a [routerLink]="['/payment/addNewPayment']" class="btn btn-sm btn-primary">Add Transaction</a>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive table align-items-center table-flush">
+          <p-table #customer [columns]="customerRecord.cols" [value]="customerRecord.data" [paginator]="true" [rows]="10" sortMode="multiple"
+          [showCurrentPageReport]="false" editMode="row">
+
+             <ng-template pTemplate="header" let-columns>
+                 <tr>
+ 
+                     <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                         {{col.header}}
+                         <!-- <p-sortIcon [field]="col.field"></p-sortIcon> -->
+                     </th>
+                     <th>Action</th>
+                 </tr>
+                 <!-- <tr>
+                     <th *ngFor="let col of columns" [ngSwitch]="col.field">
+
+                         <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget"
+                             *ngSwitchCase="'CustomerName'" pInputText type="text"
+                             (input)="customer.filter($event.target.value, col.field, 'contains')">
+
+                          <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget"
+                             *ngSwitchCase="'TransactionType'" pInputText type="text"
+                             (input)="customer.filter($event.target.value, col.field, 'contains')">
+
+                          <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget"
+                             *ngSwitchCase="'Amount'" pInputText type="text"
+                             (input)="customer.filter($event.target.value, col.field, 'contains')">
+
+                        <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget"
+                             *ngSwitchCase="'Description'" pInputText type="text"
+                             (input)="customer.filter($event.target.value, col.field, 'contains')">
+
+                     </th>
+                 </tr> -->
+             </ng-template>
+
+             <ng-template pTemplate="body" let-rowData let-columns="columns" let-row="rowData">
+ 
+                 <tr>
+                     <td style="text-align:center" *ngFor="let col of columns">
+                         <span> {{rowData[col.field]}}</span>
+                     </td>
+                     <td style="text-align: center; cursor: pointer;">
+                      <i class="pi pi-pencil pr-5" (click)="onEdit(rowData)"></i>
+                      <i class="pi pi-trash pl-5" (click)="onDelete(rowData)"></i>
+                     </td>
+                 </tr>
+             </ng-template>
+ 
+             <ng-template pTemplate="paginatorleft" let-state>
+                 Showing {{state.first + 1}}to {{state.first +  state.rows}} of {{customer.approvedTotalRows}} entries
+             </ng-template>
+          </p-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

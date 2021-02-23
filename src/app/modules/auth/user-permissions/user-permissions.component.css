@@ -1,0 +1,104 @@
+.tableFixHead          { overflow-y: auto; height: 68vh; }
+.tableFixHead thead th { position: sticky; top: -1px; }
+ 
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; }
+
+.group-level-access_table th {
+  border-bottom: 2px solid #dee2e6;
+  align-self: center;
+  text-align: center;
+  vertical-align: middle !important;
+  color: #A3A6B4 !important;
+  min-width: 25%;
+  width: 300px;
+  font-size: 12px;
+  background: #F4f4f4 !important;
+}
+
+.group-level-access_table tr:nth-of-type(even) {
+  background-color: rgba(0, 0, 0, .05);
+}
+
+.group-level-access_table tr:nth-of-type(odd) {
+  background-color: transparent;
+}
+
+.group-level-access_table .restricted select {
+  box-shadow: none;
+  background: #eda11c;
+  color: #fff !important;
+}
+
+.group-level-access_table .changevalue select {
+  box-shadow: none;
+  background: rgba(237, 28, 36, 0.77);
+  color: #fff !important;
+}
+
+.group-level-access_table .changevalue select option {
+  box-shadow: none;
+  background: #fff !important;
+  color: #A3A6B4 !important;
+}
+
+.group-level-access_table th:first-child {
+  min-width: 170px;
+  width: 13%;
+}
+
+.group-level-access_table td {
+  vertical-align: middle !important;
+  color: #9a9a9a !important;
+  font-size: 14px;
+  text-align: center;
+}
+
+.table-grey-border {
+  border: 1px solid #dee2e6 !important;
+}
+
+.group-level-access_table td:first-child {
+  text-align: left !important;
+  width: 11%;
+  min-width: 170px;
+  padding-left: 20px !important;
+}
+
+.group-level-access_table select {
+  word-wrap: normal;
+  padding: 4px 5px;
+  border: 1px solid #efefef;
+  color: #9a9a9a;
+  box-shadow: inset 0px 1px 4px #efefef;
+}
+
+.group-level-access_table td,
+.group-level-access_table th {
+  padding: 0.5em !important;
+}
+
+.table {
+  margin-bottom: 0 !important;
+}
+
+table td {
+border-right: 1px solid grey;
+}
+
+table th {
+  border-right: 1px solid grey;
+  }
+
+  table tr{
+    border:1px solid grey
+  }
+
+  .screen
+  {
+    font-size: 10px !important;
+    font-weight: 800 !important;
+  }
+  .btncustom{
+    background-color: #172b4db8;
+  }

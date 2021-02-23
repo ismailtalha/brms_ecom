@@ -1,0 +1,107 @@
+<div class="header pb-5 pt-5 pt-lg-8 d-flex align-items-center">
+    <!-- Mask -->
+    <span class="mask bg-gradient-primary opacity-8"></span>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+      <div class="col-xl-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Ledger Report</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="pl-lg-4" [formGroup]="form">
+              <div class="row">
+                <div class="col-lg-6">
+                  <div class="form-group">
+                        <label class="form-control-label" for="input-username">GL Accounts</label>
+                          <select formControlName="id" class="form-control form-control-alternative">
+                              <option [ngValue]="null" disabled>Select GL Account</option>
+                              <option *ngFor="let a of glAccounts" [value]="a?.id">{{a?.Name}}</option>
+                          </select>
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-username">From Date</label>
+                      <input formControlName="fromdate" type="date" id="input-username" class="form-control form-control-alternative" placeholder="From Date">
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-email">To Date</label>
+                      <input formControlName="todate" type="date" class="form-control form-control-alternative" placeholder="To date">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                      <div class="form-group">
+                        <button style="margin-top: 33px;" [disabled]="form.invalid" (click)="onLedgerReport()" type="button" class="btn btn-primary btn-md">Search</button>
+                      </div>
+                </div>
+              </div>
+            </div>
+  
+            <div *ngIf="legderReport.data.length > 0">
+             <div style="float: right;">
+              <label>Opn.Bal: </label>
+              <span> {{openingBalane}}</span>
+             </div>
+              <div class="table-responsive table align-items-center table-flush">
+              <p-table #ledger [columns]="legderReport.cols" [value]="legderReport.data" [paginator]="true" [rows]="10" sortMode="multiple"
+             [showCurrentPageReport]="false" editMode="row" class="gridstyle">
+                 <ng-template pTemplate="header" let-columns>
+                     <tr>
+  
+                         <th style="text-align: left;" *ngFor="let col of columns" [pSortableColumn]="col.field">
+                             {{col.header}}
+                             <!-- <p-sortIcon [field]="col.field"></p-sortIcon> -->
+                         </th>
+                     </tr>
+                     <!-- <tr>
+                         <th style="text-align: center;" *ngFor="let col of columns" [ngSwitch]="col.field">
+  
+                             <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'Date'" pInputText type="text" (input)="ledger.filter($event.target.value, col.field, 'contains')">
+  
+                            <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'Credit'" pInputText type="text" (input)="ledger.filter($event.target.value, col.field, 'startsWith')">
+  
+                            <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'Debit'" pInputText type="text" (input)="ledger.filter($event.target.value, col.field, 'startsWith')">
+  
+                            <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'Balance'" pInputText type="text" (input)="ledger.filter($event.target.value, col.field, 'startsWith')">
+                         </th>
+                     </tr> -->
+                 </ng-template>
+  
+                 <ng-template pTemplate="body" let-rowData let-columns="columns" let-row="rowData">
+  
+                     <tr>
+                         <td style="text-align:left" *ngFor="let col of columns">
+                             <span *ngIf="col.field == 'Date'"> {{rowData[col.field] | date:'dd-MM-yyyy'}}</span>
+                             <span *ngIf="col.field == 'Balance'"> {{rowData[col.field]}} {{(rowData[col.field] > 0) ? 'DR' : 'CR' }}</span>
+                             <span *ngIf="!(col.field == 'Date' || col.field == 'Balance')"> {{rowData[col.field]}}</span>
+                         </td>
+  
+                     </tr>
+                 </ng-template>
+                 <ng-template pTemplate="footer">
+                  <tr>
+                    <td colspan="2"></td>
+                    <td>{{debitAmount}}</td>
+                    <td>{{creditAmount}}</td>
+                    <td>{{balance}} {{(balance > 0) ? 'DR' : 'CR' }}</td>
+                  </tr>
+                 </ng-template>
+              </p-table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

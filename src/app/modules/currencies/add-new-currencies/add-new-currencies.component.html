@@ -1,0 +1,60 @@
+<div class="header pb-5 pt-5 pt-lg-8 d-flex align-items-center">
+    <!-- Mask -->
+    <span class="mask bg-gradient-primary opacity-8"></span>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+      <div class="col-xl-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Currency</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+              <h6 class="heading-small text-muted mb-4">Currency information</h6>
+              <form [formGroup]="currency">
+                <div class="pl-lg-4">
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-username">Name*</label>
+                          <input formControlName="Name" type="text" id="input-username" class="form-control form-control-alternative" placeholder="name">
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-email">Currency Code*</label>
+                          <input formControlName="Code" type="test" id="input-email" class="form-control form-control-alternative" placeholder="Currency Code">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-username">Opening Quantity</label>
+                          <input formControlName="OpeningQty" type="text" id="input-username" class="form-control form-control-alternative" placeholder="Opening Quantity">
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label class="form-control-label" for="input-email">Opening Amount</label>
+                          <input formControlName="OpeningAmount" type="test" id="input-email" class="form-control form-control-alternative" placeholder="Opening Amount">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row" style="float: right;">
+                          <div class="form-group">
+                            <a routerLink="/currencies" class="btn btn-secondary btn-md">Back</a>
+                            <button [disabled]="!currency.valid" (click)="create()" type="button" class="btn btn-primary btn-md">{{(edit) ? 'Update' : 'Save'}}</button>
+                          </div>
+                    </div>
+                </div>
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

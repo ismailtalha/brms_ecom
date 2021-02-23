@@ -1,0 +1,119 @@
+<div class="header pb-5 pt-5 pt-lg-8 d-flex align-items-center">
+  <!-- Mask -->
+  <span class="mask bg-gradient-primary opacity-8"></span>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-12 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Journal Report</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive table align-items-center table-flush">
+          <p-table #journal [columns]="journalRecords.cols" [value]="journalRecords.data" [paginator]="true" [rows]="10" dataKey="JournalHeaderId" sortMode="multiple" [paginator]="false"
+            [showCurrentPageReport]="false" editMode="row">
+               <ng-template pTemplate="header" let-columns>
+                   <tr>
+                      <th style="width: 3rem">
+                      </th>
+                       <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+                           {{col.header}}
+                           <!-- <p-sortIcon [field]="col.field"></p-sortIcon> -->
+                       </th>
+                   </tr>
+                   <!-- <tr>
+                        <th></th>
+                       <th *ngFor="let col of columns" [ngSwitch]="col.field">
+
+                           <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'InvoiceNo'" pInputText type="text" (input)="journal.filter($event.target.value, col.field, 'contains')">
+
+                           <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'headerDate'" pInputText type="date" (input)="journal.filter($event.target.value, col.field, 'contains')">
+                       </th>
+                   </tr> -->
+               </ng-template>
+
+               <ng-template pTemplate="body" let-rowData let-columns="columns" let-row="rowData" let-expanded="expanded" >
+
+                   <tr>
+                      <td>
+                          <a href="javascript:void(0)" [pRowToggler]="rowData">
+                              <i [ngClass]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'">
+                              </i>
+                          </a>
+                      </td>
+                       <td style="text-align:left" *ngFor="let col of columns">
+                           <span *ngIf="col.field == 'headerDate'"> 
+                             {{rowData[col.field] | date:'dd-MM-yyyy'}}
+                           </span>
+                           <span *ngIf="!(col.field == 'headerDate')"> 
+                             {{rowData[col.field]}}
+                           </span>
+                        </td>
+                   </tr>
+               </ng-template>
+
+               <ng-template pTemplate="rowexpansion" let-rowData let-columns="columns">
+                <tr >
+                    <td [attr.colspan]="columns.length + 1">
+                        <div class="p-grid ui-fluid" style="font-size:16px;padding:20px" [@rowExpansionTrigger]="'active'">
+                            <div class="p-col-12">
+                                <div class="p-grid">
+                                    <div class="p-col-12">
+                                      <h3>Journal Details</h3>
+                                      <div class="table">
+                                        <thead>
+                                          <tr>
+                                            <th>
+                                              Date
+                                            </th>
+                                            <th>
+                                              Account
+                                            </th>
+                                            <th>
+                                              Amount
+                                            </th>
+                                            <th>
+                                              Nature
+                                            </th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr *ngFor="let row of rowData.JournalEntryDetails">
+                                              <td>
+                                                {{(row?.Date) ? (row?.Date | date:'dd-MM-yyyy') : '-'}}
+                                              </td>
+                                              <td>
+                                                {{(row.AccountName) ? row.AccountName : '-'}}
+                                              </td>
+                                              <td>
+                                                {{(row?.Amount) ? row?.Amount : '-'}}
+                                              </td>
+                                            <td>
+                                              {{(row.Nature) ? row.Nature : '-'}}
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+             <ng-template pTemplate="paginatorRight" let-state>
+                   Showing {{state.first + 1}}to {{state.first +  state.rows}} of {{journalRecords.approvedTotalRows}} entries
+               </ng-template>
+            </p-table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

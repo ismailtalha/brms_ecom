@@ -1,0 +1,88 @@
+
+    .ds-print-button {
+      float: left;
+      width: 50%;
+      text-align: left;
+  }
+
+  .ds-globalserch {
+      float: right;
+      width: 50%;
+      text-align: right;
+  }
+
+  thead tr:first-child th {
+          background-color: #303f9f !important;
+          color: #fff !important;
+  }
+
+      p-dropdown {
+          float: right;
+          margin-right: 8px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+      }
+
+      .ui-paginator-left-content {
+          padding-top: 12px;
+          padding-left: 5px;
+      }
+
+      .ui-paginator-first, .ui-paginator-prev, .ui-paginator-pages, .ui-paginator-next, .ui-paginator-last {
+          margin-top: 4px !important;
+      }
+
+      .ui-datepicker {
+          top: 0 !important;
+      }
+
+.history {
+  height: 30px;
+  vertical-align: middle;
+  background-color: white;
+  border: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.filter-on {
+  vertical-align: sub;
+  color: darkblue;
+}
+
+.filter-off {
+  vertical-align: sub;
+  color: black;
+}
+
+.filter-on:hover {
+  cursor: pointer;
+}
+.filter-off:hover {
+  cursor: pointer;
+}
+
+.hide-filter {
+  display: none;
+}
+.edit:hover {
+  cursor: pointer;
+}
+
+.filter-width{
+  width:100%;
+}
+.gridstyle
+{
+border: none;
+background: none;
+padding: 0;
+margin: 0;
+}
+.pr-5
+{
+padding-right: 5px !important;
+}
+.pl-5
+{
+padding-left: 5px !important;
+}

@@ -1,0 +1,87 @@
+  <!-- Register Account Start -->
+<div class="wrapper">
+  <div class="register-account pb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="register-title">
+                    <h3 class="mb-10">REGISTER ACCOUNT</h3>
+                    <p class="mb-10">If you already have an account with us, please login at the login page.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Row End -->
+        <div class="row">
+            <div class="col-sm-12">
+              
+                <form [formGroup]="customer" class="form-horizontal" action="createcustomer()">
+                    <fieldset>
+                        <legend>Your Personal Details</legend>
+                        <div class="form-group">
+                            <label class="control-label" for="f-name"><span class="require">*</span>First Name</label>
+                            <div class="col-sm-10">
+                                <input formControlName="fname"  type="text" class="form-control" id="f-name" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="l-name"><span class="require">*</span>Last Name</label>
+                            <div class="col-sm-10">
+                                <input formControlName="lname" type="text" class="form-control" id="l-name" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="email"><span class="require">*</span>Enter your email address here...</label>
+                            <div class="col-sm-10">
+                                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter your email address here...">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label" for="number"><span class="require">*</span>Telephone</label>
+                            <div class="col-sm-10">
+                                <input formControlName="phone" type="email" class="form-control" id="number" placeholder="Telephone">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Your Password</legend>
+                        <div class="form-group">
+                            <label class="control-label" for="pwd"><span class="require">*</span>Password:</label>
+                            <div class="col-sm-10">
+                                <input formControlName="password" type="password" class="form-control" id="pwd" placeholder="Password">
+                            </div>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label class="control-label" for="pwd-confirm"><span class="require">*</span>Confirm Password</label>
+                            <div class="col-sm-10">
+                                <input  type="password" class="form-control" id="pwd-confirm" placeholder="Confirm password">
+                            </div>
+                        </div> -->
+                    </fieldset>
+                    <fieldset class="newsletter-input">
+                        <legend>Newsletter</legend>
+                        <div class="form-group">
+                            <label class="control-label">Subscribe</label>
+                            <div class="col-sm-10">
+                                <label class="radio-inline">
+                                <input type="radio" name="newsletter" value="1"> Yes</label>
+                                <label class="radio-inline">
+                                <input type="radio" name="newsletter" value="0" checked="checked"> No</label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="buttons newsletter-input">
+                        <div class="pull-right">I have read and agree to the <a href="#" class="agree"><b>Privacy Policy</b></a>
+                            <input type="checkbox" name="agree" value="1"> &nbsp; 
+                            <button class="newsletter-btn" (click)="createcustomer()">Continue</button>
+                            <!-- <input type="submit"  value="Continue" class="newsletter-btn"> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Row End -->
+    </div>
+    <!-- Container End -->
+</div>
+</div>
+<!-- Register Account End -->

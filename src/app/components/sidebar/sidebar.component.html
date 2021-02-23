@@ -1,0 +1,138 @@
+<nav class="navbar navbar-vertical navbar-expand-md navbar-light bg-white" id="sidenav-main">
+  <div class="container-fluid">
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" (click)="isCollapsed=!isCollapsed"
+       aria-controls="sidenav-collapse-main">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Brand -->
+    <a href="javascript:void(0)">
+      <img src="./assets/img/brand/red.png" class="navbar-brand-img" alt="...">
+    </a>
+    <!-- User -->
+    <ul class="nav align-items-center d-md-none">
+      <li class="nav-item" ngbDropdown placement="bottom-right">
+        <a class="nav-link" role="button" ngbDropdownToggle>
+          <div class="media align-items-center">
+            <span class="avatar avatar-sm rounded-circle">
+              <img alt="Image placeholder" src="./assets/img/theme/team-4-800x800.png">
+            </span>
+          </div>
+        </a>
+        <div class="dropdown-menu-arrow dropdown-menu-right" ngbDropdownMenu>
+          <a routerLink="/auth/userPermission" class="dropdown-item">
+            <i class="ni ni-settings"></i>
+            <span>User Permissions</span>
+          </a>
+          <div class="dropdown-divider"></div>
+          <a href="javascript:void(0)" (click)="logout()" class="dropdown-item">
+            <i class="ni ni-user-run"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </li>
+    </ul>
+    <!-- Collapse -->
+    <div class="collapse navbar-collapse"  [ngbCollapse]="isCollapsed" id="sidenav-collapse-main">
+      <!-- Collapse header -->
+      <div class="navbar-collapse-header d-md-none">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+            <a href="javascript:void(0)">
+              <img src="./assets/img/brand/red.png">
+            </a>
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" (click)="isCollapsed=!isCollapsed">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Navigation -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a routerLink="/dashboard" class="nav-link dashboard">
+            <i class="ni ni-tv-2 text-primary"></i>
+            Dashboard
+          </a>
+        </li>
+
+        <li class="nav-item" [style.display]="(routesPermissions[0]?.permission === '1' || routesPermissions[1]?.permission === '1') ? 'inline' : 'none'">
+          <a class="nav-link collapsible">
+            <i class="ni fas fa-users text-primary"></i>Users</a>
+          <div class="content">
+            <a routerLink="/users" *ngIf="routesPermissions[0]?.permission === '1'" class="nav-link">Users List</a>
+            <a routerLink="/users/addNewUser" *ngIf="routesPermissions[1]?.permission === '1'" class="nav-link">Add Users</a>
+          </div>
+        </li>
+        <li class="nav-item" [style.display]="(routesPermissions[2]?.permission === '1' || routesPermissions[3]?.permission === '1') ? 'inline' : 'none'">
+          <a class="nav-link collapsible">
+            <i class="ni ni-money-coins text-primary"></i>Currencies</a>
+          <div class="content">
+            <a routerLink="/currencies" *ngIf="routesPermissions[2]?.permission === '1'" class="nav-link">Currencies List</a>
+            <a routerLink="/currencies/addNewCurrency" *ngIf="routesPermissions[3]?.permission === '1'" class="nav-link">Add Curreny</a>
+          </div>
+        </li>
+
+        <li class="nav-item" [style.display]="(routesPermissions[4]?.permission === '1' || routesPermissions[5]?.permission === '1') ? 'inline' : 'none'">
+          <a class="nav-link collapsible">
+            <i class="ni ni-money-coins text-primary"></i>Transaction</a>
+          <div class="content">
+            <a routerLink="/payment" *ngIf="routesPermissions[4]?.permission === '1'" class="nav-link">Transaction List</a>
+            <a routerLink="/payment/addNewPayment" *ngIf="routesPermissions[5]?.permission === '1'" class="nav-link">Add Transaction</a>
+          </div>
+        </li>
+
+        <li class="nav-item" [style.display]="(routesPermissions[6]?.permission === '1' || routesPermissions[7]?.permission === '1') ? 'inline' : 'none'">
+          <a class="nav-link collapsible">
+            <i class="ni ni-single-copy-04 text-primary"></i>GL-Accounts</a>
+          <div class="content"> 
+            <a routerLink="/accounts" *ngIf="routesPermissions[6]?.permission === '1'" class="nav-link">GL-Accounts List</a>
+            <a routerLink="/accounts/addNewAccount" *ngIf="routesPermissions[7]?.permission === '1'" class="nav-link">Add GL-Accounts</a>
+          </div>
+        </li>
+
+        <li class="nav-item" [style.display]="(routesPermissions[8]?.permission === '1' || routesPermissions[9]?.permission === '1') ? 'inline' : 'none'">
+          <a class="nav-link collapsible">
+            <i class="ni ni-single-02 text-primary"></i>Account Type</a>
+          <div class="content">
+            <a *ngIf="routesPermissions[8]?.permission === '1'" routerLink="/accounts/account-type" class="nav-link">Account Type List</a>
+            <a *ngIf="routesPermissions[9]?.permission === '1'" routerLink="/accounts/addAccount-type" class="nav-link">Add Account Type</a>
+          </div>
+        </li>
+
+        <li class="nav-item" [style.display]="(routesPermissions[10]?.permission === '1' || routesPermissions[11]?.permission === '1') ? 'inline' : 'none'">
+          <a class="nav-link collapsible">
+            <i class="fas fa-chart-pie text-primary"></i>Sales</a>
+          <div class="content">
+            <a *ngIf="routesPermissions[10]?.permission === '1'" routerLink="/sales" class="nav-link">Sales List</a>
+            <a *ngIf="routesPermissions[11]?.permission === '1'" routerLink="/sales/addNewSale" class="nav-link">Add Sales</a>
+          </div>
+        </li>
+
+        <li class="nav-item" [style.display]="(routesPermissions[12]?.permission === '1' || routesPermissions[13]?.permission === '1') ? 'inline' : 'none'">
+          <a class="nav-link collapsible">
+            <i class="ni ni-credit-card text-primary"></i>Purchase</a>
+          <div class="content">
+            <a *ngIf="routesPermissions[12]?.permission === '1'" routerLink="/purchase" class="nav-link">Purchase List</a>
+            <a *ngIf="routesPermissions[13]?.permission === '1'" routerLink="/purchase/addNewPurchase" class="nav-link">Add Purchase</a>
+          </div>
+        </li>
+
+        <li class="nav-item" [style.display]="(routesPermissions[14]?.permission === '1' || routesPermissions[15]?.permission === '1' || routesPermissions[16]?.permission === '1' || routesPermissions[17]?.permission === '1' || routesPermissions[18]?.permission === '1') ? 'inline' : 'none'">
+          <a class="nav-link collapsible">
+            <i class="ni ni-collection text-primary"></i>Reports</a>
+          <div class="content">
+            <a *ngIf="routesPermissions[14]?.permission === '1'" routerLink="/reports" class="nav-link">Stock Report</a>
+            <a *ngIf="routesPermissions[15]?.permission === '1'" routerLink="/reports/journal-report" class="nav-link">Journal Report</a>
+            <a *ngIf="routesPermissions[16]?.permission === '1'" routerLink="/reports/ledger-report" class="nav-link">Ledger Report</a>
+            <a *ngIf="routesPermissions[17]?.permission === '1'" routerLink="/reports/currency-report" class="nav-link">Currency Report</a>
+            <a *ngIf="routesPermissions[18]?.permission === '1'" routerLink="/reports/balance-report" class="nav-link">Balance Sheet Report</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

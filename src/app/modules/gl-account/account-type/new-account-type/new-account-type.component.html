@@ -1,0 +1,34 @@
+<div class="header pb-5 pt-5 pt-lg-8 d-flex align-items-center">
+  <!-- Mask -->
+  <span class="mask bg-gradient-primary opacity-8"></span>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-12 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Add New Account Type</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="form">
+              <div class="pl-lg-4">
+
+                  <div class="row">
+                    <div class="col-lg-6">
+                        <input formControlName="name" class="form-control form-control-alternative datepicker" placeholder="Enter name" type="text">  
+                    </div>
+                    <div class="col-lg-6">
+                      <button [disabled]="form.invalid" type="button" (click)="onSave()" class="btn btn-primary btncustom">Save</button>
+                    </div>
+                  </div>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

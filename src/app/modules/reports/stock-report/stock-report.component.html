@@ -1,0 +1,123 @@
+<div class="header pb-5 pt-5 pt-lg-8 d-flex align-items-center">
+  <!-- Mask -->
+  <span class="mask bg-gradient-primary opacity-8"></span>
+</div>
+<div class="container-fluid mt--7">
+  <div class="row">
+    <div class="col-xl-12 order-xl-1">
+      <div class="card bg-secondary shadow">
+        <div class="card-header bg-white border-0">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Stocks</h3>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="date">
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-username">From Date</label>
+                      <input formControlName="FromDate" type="date" id="input-username" class="form-control form-control-alternative" placeholder="From Date">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="input-email">To Date</label>
+                      <input formControlName="ToDate" type="date" class="form-control form-control-alternative" placeholder="To date">
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="form-group">
+                    <a *ngIf="isFilter" (click)="search('clear')" class="btn btn-secondary btn-lg">Clear Filter</a>
+                    <button [disabled]="!date.valid" (click)="search('search')" type="button" class="btn btn-primary btn-md">Search</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="table-responsive table align-items-center table-flush">
+            <p-table #stock [columns]="stocksRecords.cols" [value]="stocksRecords.data" [paginator]="true" [rows]="10" sortMode="multiple"
+            [showCurrentPageReport]="false" editMode="row" class="gridstyle">
+            <ng-template pTemplate="caption">
+              <div class="ui-helper-clearfix">
+                  <div class="ds-print-button">
+                      <button (click)="stock.exportCSV()" icon="pi pi-file-o" iconpos="left" label="CSV" pbutton=""
+                          style="margin-right: 0.5em;" type="button"
+                          class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left">
+                          <span
+                              aria-hidden="true" class="ui-button-icon-left ui-clickable pi pi-file-o">
+                          </span>
+                          <span class="ui-button-text ui-clickable">CSV</span>
+                      </button>
+
+                      <button (click)="exportExcel()"
+                          class="ui-button-success ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"
+                          icon="pi pi-file-excel" iconpos="left" label="EXCEL" pbutton="" style="margin-right: 0.5em;"
+                          type="button"><span aria-hidden="true"
+                              class="ui-button-icon-left ui-clickable pi pi-file-excel"></span><span
+                              class="ui-button-text ui-clickable">EXCEL</span>
+                      </button>
+
+                      <button (click)="exportPDF()"
+                          class="ui-button-warning ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-left"
+                          icon="pi pi-file-pdf" iconpos="left" label="PDF" pbutton="" type="button"><span
+                              aria-hidden="true" class="ui-button-icon-left ui-clickable pi pi-file-pdf"></span><span
+                              class="ui-button-text ui-clickable">PDF</span>
+                      </button>
+                  </div>
+
+                  <div class="ds-globalserch">
+
+                      <div class="ui-table-globalfilter-container ng-star-inserted">
+                          <input pinputtext="" placeholder="Global Search" type="text"
+                              class="ui-inputtext ui-corner-all ui-state-default ui-widget"
+                              (input)="stock.filterGlobal($event.target.value, 'contains')"></div>
+                  </div>
+              </div>
+            </ng-template>
+               <ng-template pTemplate="header" let-columns>
+                   <tr>
+
+                       <th style="text-align: left;" *ngFor="let col of columns" [pSortableColumn]="col.field">
+                           {{col.header}}
+                           <!-- <p-sortIcon [field]="col.field"></p-sortIcon> -->
+                       </th>
+                   </tr>
+                   <!-- <tr>
+                       <th style="text-align: center;" *ngFor="let col of columns" [ngSwitch]="col.field">
+
+                           <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'CurrencyName'" pInputText type="text" (input)="stock.filter($event.target.value, col.field, 'contains')">
+
+                            <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'BalQty'" pInputText type="text" (input)="stock.filter($event.target.value, col.field, 'startsWith')">
+
+                            <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'Amount'" pInputText type="text" (input)="stock.filter($event.target.value, col.field, 'contains')">
+
+                            <input class="filter-width ui-column-filter ui-inputtext ui-corner-all ui-state-default ui-widget" *ngSwitchCase="'Rate'" pInputText type="text" (input)="stock.filter($event.target.value, col.field, 'startsWith')">
+
+                       </th>
+                   </tr> -->
+               </ng-template>
+
+               <ng-template pTemplate="body" let-rowData let-columns="columns" let-row="rowData">
+
+                   <tr>
+                       <td style="text-align:left" *ngFor="let col of columns">
+                           <span> {{rowData[col.field]}}</span>
+                       </td>
+
+                   </tr>
+               </ng-template>
+
+               <ng-template pTemplate="paginatorleft" let-state>
+                   Showing {{state.first + 1}}to {{state.first +  state.rows}} of {{stocksRecords.approvedTotalRows}} entries
+               </ng-template>
+            </p-table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
