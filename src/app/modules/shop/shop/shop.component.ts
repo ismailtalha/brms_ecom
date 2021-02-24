@@ -22,18 +22,18 @@ export class ShopComponent implements OnInit {
   filterarray: any = [];
   category: any = [];
   brands: any = [];
-  itemsPerPage:any = 6;
+  itemsPerPage: any = 6;
 
-  constructor(private dataService: DataService, public eventemitter:EmitterService,public cartservice: GetDataService, private toastr: ToastrService, private loader: NgxUiLoaderService) { }
+  constructor(private dataService: DataService, public eventemitter: EmitterService, public cartservice: GetDataService, private toastr: ToastrService, private loader: NgxUiLoaderService) { }
 
   items: any = [];
   ngOnInit(): void {
     console.log('hello shop')
     this.getmultiplerequests();
-    this.eventemitter.listen('searchproduct',data => {
-      this.filter(data,'productsearch')
+    this.eventemitter.listen('searchproduct', data => {
+      this.filter(data, 'productsearch')
     })
-  }  cards = [
+  } cards = [
     {
       title: 'Card Title 1',
       description: 'Some quick example text to build on the card title and make up the bulk of the card content',
@@ -89,8 +89,7 @@ export class ShopComponent implements OnInit {
       img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
     },
   ];
-  perpageitems(num)
-  {
+  perpageitems(num) {
     this.itemsPerPage = num;
   }
   public getmultiplerequests() {
@@ -180,13 +179,12 @@ export class ShopComponent implements OnInit {
 
       this.items = this.applyfilters(this.filterarray);
 
-    if(filtertype == "productsearch")
-    {
-        let query = data.toLowerCase();
-        let items = this.cartservice.allitems.items;
-        this.items = items.filter(item => item.itemname.toLowerCase().indexOf(query) >= 0);
-        
-      
+    if (filtertype == "productsearch") {
+      let query = data.toLowerCase();
+      let items = this.cartservice.allitems.items;
+      this.items = items.filter(item => item.itemname.toLowerCase().indexOf(query) >= 0);
+
+
     }
 
   }
@@ -215,8 +213,7 @@ export class ShopComponent implements OnInit {
         }
         filtereditems = tempitems;
       }
-      else if(element.type == "itemgroup")
-      {
+      else if (element.type == "itemgroup") {
         let catarr = element.data;
         for (let i = 0; i <= catarr.length; i++) {
           console.log(catarr[i]);
@@ -232,8 +229,7 @@ export class ShopComponent implements OnInit {
         }
         filtereditems = tempitems;
       }
-      else if(element.type == "brand")
-      {
+      else if (element.type == "brand") {
         let catarr = element.data;
         for (let i = 0; i <= catarr.length; i++) {
           console.log(catarr[i]);

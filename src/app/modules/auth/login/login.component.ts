@@ -22,26 +22,5 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  login() {
-    this.loader.start();
-    this.dataService.login(this.form.value).subscribe((res: any) =>{
-      if (res?.code === 200) {
-        this.cookies.set('token', res?.token);
-        localStorage.setItem('userName', res?.data[0][0].Username);
-        localStorage.setItem('id', res?.data[0][0].id);
-        localStorage.setItem('userAccountId', res?.data[0][0].AccountId);
-        localStorage.setItem('permissions', JSON.stringify(res?.data[1]));
-        this.router.navigate(['dashboard']);
-        this.loader.stop();
-        this.toastr.success('Login Successfully', 'Success');
-      } else {
-        this.toastr.error('Wrong User', 'Error');
-        this.loader.stop();
-      }
-    }, (err) => {
-        this.toastr.error("Wrong User", "Error");
-        this.loader.stop();
-    }); 
-  }
 
 }

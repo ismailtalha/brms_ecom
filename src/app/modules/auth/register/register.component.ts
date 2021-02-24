@@ -31,21 +31,55 @@ export class RegisterComponent implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([currentUrl]);
   }
-  createcustomer() {
+  create() {
+    debugger
     if (this.customer.valid) {
+      let userobj = {
+        username: this.customer.value.fname + this.customer.value.lname,
+        password: this.customer.value.password,
+        usertype: "normal",
+        userno: "admin",
+      //   scodepage: "05001",
+      // createdate: "0001-01-01T00:00:00",
+      //   createtime: "0001-01-01T00:00:00",
+      //   createuser: null,
+      //   createterminal: null,
+      //   createterminalip: null,
+      //   updatedate: "0001-01-01T00:00:00",
+      //   updatetime: "0001-01-01T00:00:00",
+      //   updateuser: null,
+      //   updateterminal: null,
+      //   updateterminalip: null
+      }
       this.loader.start();
-      this.dataService.createCustomer(this.customer.value).subscribe((res: any) => {
-        console.log(res);
-        this.getdataservice.customer.customer = res;
-        localStorage.setItem('customer', res);
-        this.loader.stop();
+      this.dataService.createUser(userobj).subscribe((userdata: any) => {
+        let customerobj = this.customer.value;
+        customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
+        customerobj.contact =  this.customer.value.phone;
+        customerobj.userno = userdata.docno;
+        this.dataService.createCustomer(customerobj).subscribe((res: any) => {
+          console.log(res);
+          this.getdataservice.customer.customer = res;
+          localStorage.setItem('customer', res);
+          this.loader.stop();
+          this.toastr.success("Register Successfully")
 
+
+        }, (error) => {
+          console.log(error);
+          this.toastr.show(error, "Error Messege");
+          this.toastr.error("error", "Database Connectivity")
+          this.loader.stop();
+        })
       }, (error) => {
         console.log(error);
         this.toastr.show(error, "Error Messege");
         this.toastr.error("error", "Database Connectivity")
         this.loader.stop();
       })
+
+
+
 
 
     }
