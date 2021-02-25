@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule, } from '@angular/common';
-import { BrowserModule  } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { FullLayoutComponent } from './layouts/full-layout/full-layout.component';
 import { AuthGuardService } from './services/auth-guard.service';
 
-const routes: Routes =[
+const routes: Routes = [
   {
     path: '',
     redirectTo: 'shop',
@@ -22,16 +22,19 @@ const routes: Routes =[
       // },
       {
         path: 'shop',
-        loadChildren: './modules/shop/shop.module#ShopModule', canActivate:[AuthGuardService]
+        loadChildren: './modules/shop/shop.module#ShopModule', canActivate: [AuthGuardService]
       },
       {
         path: 'auth',
-        loadChildren: './modules/auth/auth.module#AuthModule', canActivate:[AuthGuardService]
+        loadChildren: './modules/auth/auth.module#AuthModule', canActivate: [AuthGuardService]
       },
       {
         path: 'company',
-        loadChildren: './modules/company/company.module#CompanyModule', canActivate:[AuthGuardService]
-      }
+        loadChildren: './modules/company/company.module#CompanyModule', canActivate: [AuthGuardService]
+      }, {
+        path: 'order',
+        loadChildren: './modules/order/order.module#OrderModule', canActivate: [AuthGuardService]
+      },
     ]
   },
   {
@@ -44,7 +47,7 @@ const routes: Routes =[
   imports: [
     CommonModule,
     BrowserModule,
-    RouterModule.forRoot(routes,{
+    RouterModule.forRoot(routes, {
       useHash: true
     })
   ],
