@@ -71,6 +71,11 @@ export class DataService {
     return this.http.post(url + 'cobuserhdr', data);
   }
 
+  getsingleuser(id)
+  {
+    return this.http.get(url +`cobuserhdr/${id}`);
+  }
+
   // getProducts() {
   //   return this.http.get(url + '/api/item');
   // }

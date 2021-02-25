@@ -1,4 +1,4 @@
 export class customer
 {
-    customer : any = [];
+    customerdata : any = [];
 }

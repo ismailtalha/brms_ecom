@@ -42,7 +42,7 @@ export class NavbarComponent implements OnChanges {
   {
     debugger
     this.cookies.deleteAll();
-    this.cartservice.customer.customer = [];
+    this.cartservice.customer.customerdata = [];
     localStorage.removeItem('customer');
   // this.reload();
     
@@ -60,11 +60,11 @@ export class NavbarComponent implements OnChanges {
   }
   ngOnInit() {
     debugger
-    if(this.cartservice.customer.customer.length == 0)
+    if(this.cartservice.customer.customerdata.length == 0)
     {
       if(localStorage.getItem('customer'))
       {
-        this.cartservice.customer.customer = localStorage.getItem('customer');
+        this.cartservice.customer.customerdata = localStorage.getItem('customer');
       }
       
     }

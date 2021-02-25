@@ -10,7 +10,7 @@
                       <h3>NEW CUSTOMER</h3>
                       <p class="mtb-10"><strong>Register</strong></p>
                       <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made</p>
-                      <a class="customer-btn" href="register.html">continue</a>
+                      <a class="customer-btn" routerLink ="/auth/register" href="javascript:void(0)">continue</a>
                   </div>
               </div>
           </div>
@@ -21,17 +21,18 @@
                   <div class="return-customer">
                       <h3 class="mb-10">RETURNING CUSTOMER</h3>
                       <p class="mb-10"><strong>I am a returning customer</strong></p>
-                      <form action="#">
+                      <form [formGroup]="login">
                           <div class="form-group">
-                              <label class="control-label">Enter your email address here...</label>
-                              <input type="text" name="email" placeholder="Enter your email address here..." id="input-email" class="form-control">
+                              <label class="control-label">Enter your userno here...</label>
+                              <input formControlName="userno" type="text" name="userno" placeholder="Enter userno here..." id="input-userno" class="form-control">
                           </div>
                           <div class="form-group">
                               <label class="control-label">Password</label>
-                              <input type="text" name="pass" placeholder="Password" id="input-password" class="form-control">
+                              <input type="text" formControlName="password" name="pass" placeholder="Password" id="input-password" class="form-control">
                           </div>
-                          <p class="lost-password"><a href="forgot-password.html">Forgot password?</a></p>
-                          <input type="submit" value="Login" class="return-customer-btn">
+                          <p class="lost-password"><a href="#">Forgot password?</a></p>
+                          <!-- <input  value="Login" class="return-customer-btn"> -->
+                          <button class="return-customer-btn" (click)="loginuser()">Continue</button>
                       </form>
                   </div>
               </div>

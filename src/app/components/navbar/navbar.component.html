@@ -136,15 +136,15 @@
                 <div class="col-lg-3 col-sm-7 col-7">
                     <div class="cart-box text-right">
                         <ul>
-                            <li *ngIf="cartservice?.customer?.customer?.length == 0"><a href="javascript:void(0)"><i class="fa fa-cog"></i></a>
+                            <li *ngIf="cartservice?.customer?.customerdata?.length == 0"><a href="javascript:void(0)"><i class="fa fa-cog"></i></a>
                                
-                                <ul class="ht-dropdown" *ngIf="cartservice?.customer?.customer?.length == 0">
+                                <ul class="ht-dropdown" *ngIf="cartservice?.customer?.customerdata?.length == 0">
                                     <li><a routerLink ="/auth/login" href="javascript:void(0)">Login</a></li>
                                     <li><a routerLink ="/auth/register" href="javascript:void(0)">Register</a></li>
                                  </ul>
                             </li>
-                                 <li *ngIf="cartservice?.customer?.customer?.length != 0"><a href="javascript:void(0)"><i class="fa fa-user"></i></a>
-                                <ul class="ht-dropdown" *ngIf="cartservice?.customer?.customer?.length != 0">
+                                 <li *ngIf="cartservice?.customer?.customerdata?.length != 0"><a href="javascript:void(0)"><i class="fa fa-user"></i></a>
+                                <ul class="ht-dropdown" *ngIf="cartservice?.customer?.customerdata?.length != 0">
                                     <li><a routerLink ="" href="javascript:void(0)">Profile</a></li>
                                     <li><a routerLink ="" href="javascript:void(0)">Orders</a></li>
                                     <li><a (click)="logout()" href="javascript:void(0)">Logout</a></li>

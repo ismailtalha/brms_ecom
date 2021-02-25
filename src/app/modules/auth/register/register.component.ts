@@ -39,28 +39,17 @@ export class RegisterComponent implements OnInit {
         password: this.customer.value.password,
         usertype: "normal",
         userno: "admin",
-      //   scodepage: "05001",
-      // createdate: "0001-01-01T00:00:00",
-      //   createtime: "0001-01-01T00:00:00",
-      //   createuser: null,
-      //   createterminal: null,
-      //   createterminalip: null,
-      //   updatedate: "0001-01-01T00:00:00",
-      //   updatetime: "0001-01-01T00:00:00",
-      //   updateuser: null,
-      //   updateterminal: null,
-      //   updateterminalip: null
       }
       this.loader.start();
       this.dataService.createUser(userobj).subscribe((userdata: any) => {
+        this.getdataservice.user.userdata  = userdata;
         let customerobj = this.customer.value;
         customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
         customerobj.contact =  this.customer.value.phone;
         customerobj.userno = userdata.docno;
-        this.dataService.createCustomer(customerobj).subscribe((res: any) => {
-          console.log(res);
-          this.getdataservice.customer.customer = res;
-          localStorage.setItem('customer', res);
+        this.dataService.createCustomer(customerobj).subscribe((customer: any) => {
+          this.getdataservice.customer.customerdata = customer;
+          localStorage.setItem('customer', customer);
           this.loader.stop();
           this.toastr.success("Register Successfully")
 
