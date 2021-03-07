@@ -1,0 +1,20 @@
+.form-group .checkout-form-list input[type=number], .checkout-form-list input[type=password], .checkout-form-list input[type=email] {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ebebeb;
+    border-radius: 0;
+    height: 34px;
+    width: 100%;
+    padding: 0 0 0 10px;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 8%);
+}
+.form-group .checkout-form-list input[type=text], .checkout-form-list input[type=password], .checkout-form-list input[type=email] {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid #ebebeb;
+    border-radius: 0;
+    height: 34px;
+    width: 100%;
+    padding: 0 0 0 10px;
+    -webkit-box-shadow: 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: 0 1px 1px rgb(0 0 0 / 8%);
+}

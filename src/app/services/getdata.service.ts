@@ -6,6 +6,8 @@ import { itemgroup } from "../models/itemgroup";
 import { allitems } from "../models/items.model";
 import { customer } from "../models/customer.model";
 import { user } from "../models/user.model";
+import { brands } from "../models/brands.models";
+import { ordercheckoutmodel } from "../models/order.models";
 
 
 
@@ -20,6 +22,8 @@ import { user } from "../models/user.model";
     allitems : allitems;
     customer : customer;
     user:user;
+    brands:brands;
+    ordercheckoutmodel:ordercheckoutmodel;
     constructor() {
          this.cartdata = new cart();
          this.companydata = new company();
@@ -28,6 +32,8 @@ import { user } from "../models/user.model";
          this.allitems = new allitems();
          this.customer = new customer();
          this.user = new user();
+         this.brands = new brands();
+         this.ordercheckoutmodel = new ordercheckoutmodel();
      }
 
    

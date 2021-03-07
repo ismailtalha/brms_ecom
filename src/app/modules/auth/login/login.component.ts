@@ -4,7 +4,7 @@ import {CookieService} from 'ngx-cookie-service';
 import { DataService } from 'src/app/services/data.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ToastrService } from 'ngx-toastr';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GetDataService } from 'src/app/services/getdata.service';
 
 @Component({
@@ -13,43 +13,66 @@ import { GetDataService } from 'src/app/services/getdata.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('loginForm') form;
-  email: any;
-  password: any;
-  rememberMe: boolean = false;
+ 
+  submitted=false;
+  loginform:FormGroup;
   constructor(private router: Router, private cookies: CookieService,public getdataservice : GetDataService,
      private dataService: DataService,
      private loader: NgxUiLoaderService,
-     private toastr: ToastrService) { }
+     private toastr: ToastrService,private fb:FormBuilder) { }
 
   ngOnInit(): void {
+    this.loginform = this.fb.group({
+
+      userno : ['',Validators.required],
+      password : ['',Validators.required]
+    })
   }
 
 
-  loginform = new FormGroup({
-
-    userno : new FormControl(null,Validators.required),
-    password : new FormControl(null,Validators.required)
-  })
-
-  userlogin()
+ 
+  get l() { return this.loginform.controls; }
+   loginuser()
   {
+    this.submitted = true;
     console.log(this.loginform.value)
+    if(this.loginform.valid)
+    {
+      this.loader.start();
+      this.dataService.getsinglecustomer(this.loginform.value.userno).subscribe((cust:any)=>{
+        console.log(cust)
+       this.loader.stop();
+       if(cust.userno != null)
+       {
+        if(cust.password == this.loginform.value.password)
+        {
+          this.getdataservice.customer.customerdata = cust;
+          localStorage.setItem('customer',cust)
+          this.router.navigate(["shop"]);
+          this.toastr.success("Login Successfully")
+        }
+        else{
+          this.toastr.error("Password is incorrect")
+        }
+       
+       }
+       else
+       {
+        this.toastr.error("Username is incorrect")
+       }
+    
+      }, (error) => {
+        this.loader.stop();
+       console.log(error);
+       
+     })
+    }
     //get single user by userno
-   let user = this.getsingleuser(this.loginform.value.userno);
-   if(user.password == this.loginform.value.password)
-   {
-    this.getdataservice.user = user;
-    this.toastr.success("Login Successfully")
-   }
-   else
-   {
-    this.toastr.error("Username or password is incorrect")
-   }
-
+   
+   
   }
-
-
+  
+ 
   getsingleuser(userno)
   {
     let userobj;

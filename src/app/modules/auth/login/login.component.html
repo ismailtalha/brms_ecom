@@ -1,47 +1,58 @@
 <!-- LogIn Page Start -->
 <div class="wrapper">
-<div class="log-in pb-60">
-  <div class="container">
-      <div class="row">
-          <!-- New Customer Start -->
-          <div class="col-sm-6">
-              <div class="well">
-                  <div class="new-customer">
-                      <h3>NEW CUSTOMER</h3>
-                      <p class="mtb-10"><strong>Register</strong></p>
-                      <p>By creating an account you will be able to shop faster, be up to date on an order's status, and keep track of the orders you have previously made</p>
-                      <a class="customer-btn" routerLink ="/auth/register" href="javascript:void(0)">continue</a>
-                  </div>
-              </div>
-          </div>
-          <!-- New Customer End -->
-          <!-- Returning Customer Start -->
-          <div class="col-sm-6">
-              <div class="well">
-                  <div class="return-customer">
-                      <h3 class="mb-10">RETURNING CUSTOMER</h3>
-                      <p class="mb-10"><strong>I am a returning customer</strong></p>
-                      <form [formGroup]="login">
-                          <div class="form-group">
-                              <label class="control-label">Enter your userno here...</label>
-                              <input formControlName="userno" type="text" name="userno" placeholder="Enter userno here..." id="input-userno" class="form-control">
-                          </div>
-                          <div class="form-group">
-                              <label class="control-label">Password</label>
-                              <input type="text" formControlName="password" name="pass" placeholder="Password" id="input-password" class="form-control">
-                          </div>
-                          <p class="lost-password"><a href="#">Forgot password?</a></p>
-                          <!-- <input  value="Login" class="return-customer-btn"> -->
-                          <button class="return-customer-btn" (click)="loginuser()">Continue</button>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <!-- Returning Customer End -->
-      </div>
-      <!-- Row End -->
-  </div>
-  <!-- Container End -->
-</div>
+    <div class="log-in pb-60">
+        <div class="container">
+            <div class="row">
+                <!-- New Customer Start -->
+                <div class="col-sm-6">
+                    <div class="well">
+                        <div class="new-customer">
+                            <h3>NEW CUSTOMER</h3>
+                            <p class="mtb-10"><strong>Register</strong></p>
+                            <p>By creating an account you will be able to shop faster, be up to date on an order's
+                                status, and keep track of the orders you have previously made</p>
+                            <a class="customer-btn" routerLink="/auth/register" href="javascript:void(0)">continue</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- New Customer End -->
+                <!-- Returning Customer Start -->
+                <div class="col-sm-6">
+                    <div class="well">
+                        <div class="return-customer">
+                            <h3 class="mb-10">RETURNING CUSTOMER</h3>
+                            <p class="mb-10"><strong>I am a returning customer</strong></p>
+                            <form [formGroup]="loginform" (ngSubmit)="loginuser()">
+                                <div class="form-group">
+                                    <label class="control-label">Enter your userno here...</label>
+                                    <input formControlName="userno" type="text" name="userno"  [ngClass]="{ 'is-invalid': submitted && l.userno.errors }"
+                                        placeholder="Enter userno here..." id="input-userno" class="form-control">
+                                        <div *ngIf="submitted == true && l.userno.errors" >
+                                            <small class="error-text" *ngIf="l.userno.errors.required">Username is required</small>
+                                        </div>
+                                    </div>
+                               
+                                <div class="form-group">
+                                    <label class="control-label">Password</label>
+                                    <input type="text" formControlName="password" name="pass" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && l.password.errors }"
+                                        id="input-password" class="form-control">
+                                        <div *ngIf="submitted == true && l.password.errors" >
+                                            <div class="error-text" *ngIf="l.userno.errors.required">Password is required</div>
+                                        </div>
+                                </div>
+                                
+                                <p class="lost-password"><a href="#">Forgot password?</a></p>
+                                <!-- <input  value="Login" class="return-customer-btn"> -->
+                                <button class="return-customer-btn" >Continue</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- Returning Customer End -->
+            </div>
+            <!-- Row End -->
+        </div>
+        <!-- Container End -->
+    </div>
 </div>
 <!-- LogIn Page End -->

@@ -12,7 +12,7 @@
                 <div class="col-lg-12">
                     <div class="coupon-accordion">
                         <!-- ACCORDION START -->
-                        <h3>Returning customer? <span id="showlogin">Click here to login</span></h3>
+                        <!-- <h3>Returning customer? <span id="showlogin">Click here to login</span></h3> -->
                         <div id="checkout-login" class="coupon-content">
                             <div class="coupon-info">
                                 <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
@@ -40,7 +40,7 @@
                         </div>
                         <!-- ACCORDION END -->
                         <!-- ACCORDION START -->
-                        <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3>
+                        <!-- <h3>Have a coupon? <span id="showcoupon">Click here to enter your code</span></h3> -->
                         <div id="checkout_coupon" class="coupon-checkout-content">
                             <div class="coupon-info">
                                 <form action="#">
@@ -61,7 +61,24 @@
     <!-- checkout-area start -->
     <div class="checkout-area pt-30  pb-60">
         <div class="container">
-            <form action="#">                
+            <form [formGroup]="checkout" (ngSubmit)="loginuser()">   
+                <div class="form-group">
+                    <label class="control-label">Enter your userno here...</label>
+                    <input formControlName="userno" type="text" name="userno"  [ngClass]="{ 'is-invalid': submitted && l.userno.errors }"
+                        placeholder="Enter userno here..." id="input-userno" class="form-control">
+                        <div *ngIf="submitted == true && l.userno.errors" >
+                            <small class="error-text" *ngIf="l.userno.errors.required">Username is required</small>
+                        </div>
+                    </div>
+               
+                <div class="form-group">
+                    <label class="control-label">Password</label>
+                    <input type="text" formControlName="password" name="pass" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && l.password.errors }"
+                        id="input-password" class="form-control">
+                        <div *ngIf="submitted == true && l.password.errors" >
+                            <div class="error-text" *ngIf="l.userno.errors.required">Password is required</div>
+                        </div>
+                </div>          
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="checkbox-form">
@@ -247,6 +264,29 @@
                             </div>
                         </div>
                     </div>
+                    <form [formGroup]="loginform" (ngSubmit)="loginuser()">
+                        <div class="form-group">
+                            <label class="control-label">Enter your userno here...</label>
+                            <input formControlName="userno" type="text" name="userno"  [ngClass]="{ 'is-invalid': submitted && l.userno.errors }"
+                                placeholder="Enter userno here..." id="input-userno" class="form-control">
+                                <div *ngIf="submitted == true && l.userno.errors" >
+                                    <small class="error-text" *ngIf="l.userno.errors.required">Username is required</small>
+                                </div>
+                            </div>
+                       
+                        <div class="form-group">
+                            <label class="control-label">Password</label>
+                            <input type="text" formControlName="password" name="pass" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && l.password.errors }"
+                                id="input-password" class="form-control">
+                                <div *ngIf="submitted == true && l.password.errors" >
+                                    <div class="error-text" *ngIf="l.userno.errors.required">Password is required</div>
+                                </div>
+                        </div>
+                        
+                        <p class="lost-password"><a href="#">Forgot password?</a></p>
+                        <!-- <input  value="Login" class="return-customer-btn"> -->
+                        <button class="return-customer-btn" >Continue</button>
+                    </form>
                     <div class="col-lg-6 col-md-6">
                         <div class="your-order">
                             <h3>Your order</h3>
@@ -329,7 +369,7 @@
                                         </div>
                                     </div>
                                     <div class="order-button-payment">
-                                        <input type="submit" value="Place order" />
+                                        <input type="button" (click)="ordercheckout()" value="Place order" />
                                     </div>
                                 </div>
                             </div>

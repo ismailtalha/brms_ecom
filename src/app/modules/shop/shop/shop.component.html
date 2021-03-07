@@ -1,48 +1,131 @@
-   <!-- Shop Page Start -->
-   
-   <div class="breadcrumb-area ptb-60 ptb-sm-30">
+<!-- Shop Page Start -->
+
+<div class="breadcrumb-area ptb-60 ptb-sm-30">
     <div class="container">
         <div class="breadcrumb">
             <ul>
-               
+
                 <li class="active"><a href="#">Shop</a></li>
             </ul>
         </div>
     </div>
     <!-- Container End -->
 </div>
-   <div class="main-shop-page pb-60">
-  
-        
-                                    
-        <!-- Delete This -->                        
-       
+<div class="main-shop-page pb-60">
+
+
+
+    <!-- Delete This -->
+
     <div class="container">
         <!-- Row End -->
         <div class="row">
             <!-- Sidebar Shopping Option Start -->
             <div class="col-lg-3  order-2">
                 <div class="sidebar white-bg">
-                    <div class="single-sidebar">
-                        <div class="group-title">
-                            <h2>Brands</h2>
+
+
+                    <!-- groups -->
+                    <div class="single-items">
+                        <div class="accordion" id="Groups">
+                            <div class="item">
+                                <div class="item-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Item Groups
+                                            <i class="fa fa-angle-down"></i>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#Groups">
+                                    <input type="text" class="form-control" placeholder="Search Group"
+                                        [(ngModel)]="groupsearch" (ngModelChange)="searchfilter('group',groupsearch)">
+                                    <div class="t-p">
+                                        <ul class="manufactures-list" *ngFor="let group of itemgroups">
+                                            <li><input type="checkbox" id="{{group.itemgroupno}}"
+                                                    value={{group.itemgroupno}}
+                                                    (change)="filter(group.itemgroupno,'itemgroup')">&nbsp;<label
+                                                    style="color: black;"
+                                                    for="{{group.itemgroupno}}">{{group.itemgroupname}} ({{group.itemcount}})</label></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <ul class="manufactures-list" *ngFor="let brand of resbrands">
-                            <li><input type="checkbox" value={{brand.makeno}} (change)="filter(brand.makeno,'brand')">&nbsp;<a href="#">{{brand.makename}} (9)</a></li>
-                        </ul>
                     </div>
-                    <div class="single-sidebar">
-                        <div class="group-title">
-                            <h2>categories</h2>
+
+                    <!-- category -->
+                    <div class="single-items">
+                        <div class="accordion" id="Categories">
+                            <div class="item">
+                                <div class="item-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#CatOne" aria-expanded="true" aria-controls="CatOne">
+                                            Categories
+                                            <i class="fa fa-angle-down"></i>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="CatOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#Categories">
+                                    <input type="text" class="form-control" placeholder="Search Category"
+                                        [(ngModel)]="catsearch" (ngModelChange)="searchfilter('category',catsearch)">
+
+                                    <div class="t-p">
+
+                                        <ul *ngFor="let cat of categories" class="manufactures-list">
+                                            <li>
+
+                                                <input type="checkbox" id="{{cat.productno}}" value={{cat.productno}}
+                                                    (change)="filter(cat.productno,'category')">&nbsp;<label
+                                                    style="color:black" for="{{cat.productno}}">
+                                                    {{cat.productname}}  ({{cat.itemcount}})</label>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <ul *ngFor="let cat of categories">
-                            <li><input type="checkbox" value={{cat.productno}} (change)="filter(cat.productno,'category')">&nbsp;<a href="#">{{cat.productname}} (9)</a></li>
-                            <!-- <li><a href="#">Hardware (11)</a></li>
-                            <li><a href="#">Drill Machine (8)</a></li>
-                            <li><a href="#">Tools Box (10)</a></li>
-                            <li><a href="#">Power Saw (5)</a></li> -->
-                        </ul>
                     </div>
+
+
+                    <!-- brands -->
+
+                    <div class="single-items">
+                        <div class="accordion" id="Brands">
+                            <div class="item">
+                                <div class="item-header" id="headingOne">
+                                    <h2 class="mb-0">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse"
+                                            data-target="#BrandsOne" aria-expanded="true" aria-controls="BrandsOne">
+                                            Brands
+                                            <i class="fa fa-angle-down"></i>
+                                        </button>
+                                    </h2>
+                                </div>
+                                <div id="BrandsOne" class="collapse show" aria-labelledby="headingOne"
+                                    data-parent="#Brands">
+                                    <input type="text" class="form-control" placeholder="Search Brand"
+                                        [(ngModel)]="brandsearch" (ngModelChange)="searchfilter('brand',brandsearch)">
+                                    <div class="t-p">
+
+                                        <ul class="manufactures-list" *ngFor="let brand of resbrands">
+                                            <li><input type="checkbox" id="{{brand.makeno}}" value={{brand.makeno}}
+                                                    (change)="filter(brand.makeno,'brand')">&nbsp; <label
+                                                    style="color:black" for="{{brand.makeno}}">{{brand.makename}}
+                                                    ({{brand.itemcount}})</label></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                  
                     <!-- <div class="single-sidebar">
                         <div class="group-title">
                             <h2>color</h2>
@@ -88,23 +171,34 @@
                                 <input id="amount" class="amount" readonly="" type="text">
                         </form>
                     </div> -->
-                    <div class="single-sidebar">
-                        <div class="group-title">
-                            <h2>Item Groups</h2>
-                        </div>
-                        <ul class="manufactures-list" *ngFor="let group of itemgroups">
-                            <li><input type="checkbox" value={{group.itemgroupno}} (change)="filter(group.itemgroupno,'itemgroup')">&nbsp;<a href="#">{{group.itemgroupname}} (9)</a></li>
-                        </ul>
-                    </div>
 
-                 
-                 
+                    <!-- <div class="single-sidebar">
+                        <div class="group-title">
+                          
+                            <h2 data-toggle="collapse" href="#multiCollapseExample1">Item Groups</h2>
+                        </div>
+                        <div class="collapse multi-collapse" id="multiCollapseExample1">
+                        <ul #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="manufactures-list"
+                            *ngFor="let group of itemgroups">
+                            <li><input type="checkbox" value={{group.itemgroupno}}
+                                    (change)="filter(group.itemgroupno,'itemgroup')">&nbsp;<a
+                                    href="#">{{group.itemgroupname}} (9)</a></li>
+                        </ul>
+                        </div>
+                    </div> -->
+
+                  
+
+
+
+
+
                     <!-- Single Banner Start -->
-                
+
                     <!-- Single Banner End -->
                 </div>
             </div>
-            <!-- Sidebar Shopping Option End -->                    
+            <!-- Sidebar Shopping Option End -->
             <!-- Product Categorie List Start -->
             <div class="col-lg-9 order-lg-2">
                 <!-- Grid & List View Start -->
@@ -112,7 +206,8 @@
                     <div class="grid-list-view f-left">
                         <ul class="list-inline nav">
                             <li><a data-toggle="tab" href="#grid-view"><i class="fa fa-th"></i></a></li>
-                            <li><a  class="active" data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a></li>
+                            <li><a class="active" data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a>
+                            </li>
                             <li><span class="grid-item-list"> Items 1-12 of 13</span></li>
                         </ul>
                     </div>
@@ -136,42 +231,51 @@
                     <div class="tab-content fix">
                         <div id="grid-view" class="tab-pane ">
                             <div class="row">
-                      
-                            <div class="col-lg-4 col-sm-6" *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
-                                <div class="single-product">
-                                    <!-- Product Image Start -->
-                                    <div class="pro-img">
-                                        <a routerLink ="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">
-                                            <img class="primary-img" src="../../../../assets/img/products/10.jpg" alt="single-product">
-                                            <img class="secondary-img" src="../../../../assets/img/products/10.jpg" alt="single-product">
-                                        </a>
-                                    </div>
-                                    <!-- Product Image End -->
-                                    <!-- Product Content Start -->
-                                    <div class="pro-content">
-                                        <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>                                
-                                        <h4><a a routerLink ="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">{{item.itemname}}</a></h4>
-                                        <p><span class="price">{{cartservice?.companydata?.currency}} {{item.saleprice}}</span> </p>
-                                        <div class="pro-actions">
-                                            <div class="actions-secondary">
-                                                <a href="wishlist.html" data-toggle="tooltip" title="Add to Wishlist"><i class="fa fa-heart"></i></a>
-                                                <a class="add-cart" (click)="addtocart(item)" data-toggle="tooltip" title="Add to Cart">Add To Cart</a>
-                                                <a href="compare.html" data-toggle="tooltip" title="Add to Compare"><i class="fa fa-signal"></i></a>
+
+                                <div class="col-lg-4 col-sm-6"
+                                    *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                                    <div class="single-product">
+                                        <!-- Product Image Start -->
+                                        <div class="pro-img">
+                                            <a routerLink="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">
+                                                <img class="primary-img" src="../../../../assets/img/products/10.jpg"
+                                                    alt="single-product">
+                                                <img class="secondary-img" src="../../../../assets/img/products/10.jpg"
+                                                    alt="single-product">
+                                            </a>
+                                        </div>
+                                        <!-- Product Image End -->
+                                        <!-- Product Content Start -->
+                                        <div class="pro-content">
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+                                            <h4><a a routerLink="/shop/itemdetail/{{item.rowno}}"
+                                                    href="javascript:void(0)">{{item.itemname}}</a></h4>
+                                            <p><span class="price">{{cartservice?.companydata[0]?.currency}}
+                                                    {{item.saleprice}}</span> </p>
+                                                    <p>{{item.itemdetails}}</p>
+                                            <div class="pro-actions">
+                                                <div class="actions-secondary">
+                                                    <a href="wishlist.html" data-toggle="tooltip"
+                                                        title="Add to Wishlist"><i class="fa fa-heart"></i></a>
+                                                    <a class="add-cart" (click)="addtocart(item)" data-toggle="tooltip"
+                                                        title="Add to Cart">Add To Cart</a>
+                                                    <a href="compare.html" data-toggle="tooltip"
+                                                        title="Add to Compare"><i class="fa fa-signal"></i></a>
+                                                </div>
                                             </div>
                                         </div>
+                                        <!-- Product Content End -->
+                                        <span class="sticker-new">-20%</span>
                                     </div>
-                                    <!-- Product Content End -->
-                                    <span class="sticker-new">-20%</span>
                                 </div>
+
                             </div>
-                                   
-                            </div>                                    
                         </div>
                         <!-- #grid view End -->
                         <div id="list-view" class="tab-pane active">
@@ -180,9 +284,11 @@
                                 <div class="single-product">
                                     <!-- Product Image Start -->
                                     <div class="pro-img">
-                                        <a a routerLink ="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">
-                                            <img class="primary-img" src=" ../../../../assets/img/products/10.jpg" alt="single-product">
-                                            <img class="secondary-img" src="../../../../assets/img/products/10.jpg" alt="single-product">
+                                        <a a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
+                                            <img class="primary-img" src=" ../../../../assets/img/products/10.jpg"
+                                                alt="single-product">
+                                            <img class="secondary-img" src="../../../../assets/img/products/10.jpg"
+                                                alt="single-product">
                                         </a>
                                     </div>
                                     <!-- Product Image End -->
@@ -194,23 +300,30 @@
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
-                                        </div>                                
-                                        <h4><a routerLink ="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">{{item.itemname}}</a></h4>
-                                        <p><span class="price">{{cartservice?.companydata?.currency}}{{item.saleprice}}</span> </p>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati velit, similique voluptas doloribus assumenda quis libero animi cumque dignissimos quisquam, quaerat ea laboriosam incidunt ullam.</p>
+                                        </div>
+                                        <h4><a routerLink="/shop/itemdetail/{{item.itemno}}"
+                                                href="javascript:void(0)">{{item.itemname}}</a></h4>
+                                        <p><span
+                                                class="price">{{cartservice?.companydata[0]?.currency}}{{item.saleprice}}</span>
+                                        </p>
+                                        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati velit, similique voluptas doloribus assumenda quis libero animi cumque dignissimos quisquam, quaerat ea laboriosam incidunt ullam.</p> -->
+                                        <p>{{item.itemdetails}}</p>
                                         <div class="pro-actions">
                                             <div class="actions-secondary">
-                                                <a href="wishlist.html" data-toggle="tooltip" title="Add to Wishlist"><i class="fa fa-heart"></i></a>
-                                                <a class="add-cart" (click)="addtocart(item)" data-toggle="tooltip" title="Add to Cart">Add To Cart</a>
-                                                <a href="compare.html" data-toggle="tooltip" title="Add to Compare"><i class="fa fa-signal"></i></a>
+                                                <a href="wishlist.html" data-toggle="tooltip" title="Add to Wishlist"><i
+                                                        class="fa fa-heart"></i></a>
+                                                <a class="add-cart" (click)="addtocart(item)" data-toggle="tooltip"
+                                                    title="Add to Cart">Add To Cart</a>
+                                                <a href="compare.html" data-toggle="tooltip" title="Add to Compare"><i
+                                                        class="fa fa-signal"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Product Content End -->
                                 </div>
                             </div>
-                         
-                                                     
+
+
                         </div>
                         <!-- #list view End -->
                     </div>
@@ -219,10 +332,10 @@
                 <!--Breadcrumb and Page Show Start -->
                 <div class="pagination-box fix">
                     <!-- <ul class="blog-pagination "> -->
-                        <!-- <li><a href="#">1</a></li>
+                    <!-- <li><a href="#">1</a></li>
                         <li class="active"><a href="#">2</a></li>
                         <li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
-                        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     <!-- </ul> -->
                     <div class="toolbar-sorter-footer">
                         <label>show</label>
@@ -237,7 +350,7 @@
                 <!--Breadcrumb and Page Show End -->
             </div>
             <!-- product Categorie List End -->
-            
+
         </div>
         <div class="pt-10">
             <!-- <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
@@ -258,11 +371,10 @@
 </mdb-carousel-item>
 </mdb-carousel> -->
         </div>
-       
+
         <!-- Row End -->
     </div>
     <!-- Container End -->
 </div>
 
 <!-- Shop Page End -->
-

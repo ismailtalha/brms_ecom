@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -14,16 +14,18 @@ import { GetDataService } from '../../../services/getdata.service';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private dataService: DataService, private getdataservice: GetDataService, public router: Router, private toastr: ToastrService, private loader: NgxUiLoaderService) { }
-  customer = new FormGroup({
-    fname: new FormControl(null, Validators.required),
-    lname: new FormControl(null, Validators.required),
-    phone: new FormControl(null),
-    email: new FormControl(null, [Validators.email]),
-    password: new FormControl(null, Validators.required),
-  });
+  constructor(private dataService: DataService, private getdataservice: GetDataService, public router: Router, private toastr: ToastrService, private loader: NgxUiLoaderService,private fb:FormBuilder) { }
+ customer:FormGroup
   edit: any;
   ngOnInit(): void {
+    this.customer = this.fb.group({
+      fname: [null, Validators.required],
+      lname:[null, Validators.required],
+      phone:[null,, Validators.required],
+      email:[null, Validators.email],
+      password:[null, Validators.required],
+      userno:[null,Validators.required]
+    });
   }
   reload() {
     let currentUrl = this.router.url;
@@ -31,41 +33,86 @@ export class RegisterComponent implements OnInit {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([currentUrl]);
   }
+  // create() {
+    
+  //   if (this.customer.valid) {
+  //     let userobj = {
+  //       username: this.customer.value.fname + this.customer.value.lname,
+  //       password: this.customer.value.password,
+  //       usertype: "normal",
+  //     }
+  //     this.loader.start();
+  //     this.dataService.createUser(userobj).subscribe((userdata: any) => {
+  //       this.getdataservice.user.userdata  = userdata;
+  //       let customerobj = this.customer.value;
+  //       customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
+  //       customerobj.contact =  this.customer.value.phone;
+  //       customerobj.userno = userdata.docno;
+  //       this.dataService.createCustomer(customerobj).subscribe((customer: any) => {
+  //         this.getdataservice.customer.customerdata = customer;
+  //         localStorage.setItem('customer', customer);
+  //         this.loader.stop();
+  //         this.toastr.success("Register Successfully")
+
+
+  //       }, (error) => {
+  //         console.log(error);
+  //         this.toastr.show(error, "Error Messege");
+  //         this.toastr.error("error", "Database Connectivity")
+  //         this.loader.stop();
+  //       })
+  //     }, (error) => {
+  //       console.log(error);
+  //       this.toastr.show(error, "Error Messege");
+  //       this.toastr.error("error", "Database Connectivity")
+  //       this.loader.stop();
+  //     })
+  //   }
+  // }
+
   create() {
-    debugger
+    
     if (this.customer.valid) {
       let userobj = {
         username: this.customer.value.fname + this.customer.value.lname,
         password: this.customer.value.password,
         usertype: "normal",
-        userno: "admin",
       }
       this.loader.start();
-      this.dataService.createUser(userobj).subscribe((userdata: any) => {
-        this.getdataservice.user.userdata  = userdata;
-        let customerobj = this.customer.value;
-        customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
-        customerobj.contact =  this.customer.value.phone;
-        customerobj.userno = userdata.docno;
-        this.dataService.createCustomer(customerobj).subscribe((customer: any) => {
-          this.getdataservice.customer.customerdata = customer;
-          localStorage.setItem('customer', customer);
+      this.dataService.getsinglecustomer(this.customer.value.userno).subscribe((custinfo: any) => {
+        if(custinfo.userno == null)
+        {
+          let customerobj = this.customer.value;
+          customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
+          customerobj.contact =  this.customer.value.phone;
+          customerobj.password  = this.customer.value.password;
+          this.dataService.createCustomer(customerobj).subscribe((customer: any) => {
+            this.getdataservice.customer.customerdata = customer;
+            localStorage.setItem('customer', customer);
+            this.loader.stop();
+            this.router.navigate(['shop']);
+            this.toastr.success("Register Successfully")
+  
+  
+          }, (error) => {
+            console.log(error);
+            this.toastr.show(error, "Error Messege");
+            this.toastr.error("error", "Database Connectivity")
+            this.loader.stop();
+          })
+        }
+        else
+        {
+          this.toastr.error("error", "Customer ALready Exist")
           this.loader.stop();
-          this.toastr.success("Register Successfully")
-
-
-        }, (error) => {
+        }
+        }
+        , (error) => {
           console.log(error);
           this.toastr.show(error, "Error Messege");
           this.toastr.error("error", "Database Connectivity")
           this.loader.stop();
         })
-      }, (error) => {
-        console.log(error);
-        this.toastr.show(error, "Error Messege");
-        this.toastr.error("error", "Database Connectivity")
-        this.loader.stop();
-      })
 
 
 

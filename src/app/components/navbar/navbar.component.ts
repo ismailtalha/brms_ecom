@@ -22,16 +22,37 @@ export class NavbarComponent implements OnChanges {
   date = new Date();
   userName = (localStorage.getItem('userName')) ? localStorage.getItem('userName').toUpperCase() : 'Admin';
   cartcount : number ;
-  companydata: import("e:/Projects/ecom/front End/src/app/models/company.model").company;
+  companydata: any;
   imageurl: any;
   customer:any = [];
+  productname;
   constructor(public domSanitizer: DomSanitizer,public eventemitter : EmitterService,public route:Router,public cartservice:GetDataService, location: Location,  private element: ElementRef, private router: Router, private cookies: CookieService, private dataService: DataService) {
     this.location = location;
     this.cartcount = this.cartservice.cartdata.count ;
-    this.companydata = this.cartservice.companydata;
-    console.log('data',this.companydata)
+   
   }
- 
+  getcompanyinfo()
+  {
+    this.dataService.getcompany().subscribe((res:any) => {
+      
+      
+      this.companydata = res[0];
+      this.cartservice.companydata = res;
+      let TYPED_ARRAY = new Uint8Array(this.companydata.logo);
+      const STRING_CHAR = TYPED_ARRAY.reduce((data, byte)=> {
+        return data + String.fromCharCode(byte);
+        }, '');
+     /// const STRING_CHAR = String.fromCharCode.apply(null, TYPED_ARRAY);
+      let base64String = btoa(STRING_CHAR);
+      this.imageurl = 'data:image/jpeg;base64,' + btoa(this.companydata.logo);
+     // this.imageurl = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+base64String);
+      this.cartservice.companydata = this.companydata;
+      this.cartservice.companydata.logo = this.imageurl;
+      console.log(this.cartservice.companydata)
+   }),(error) => {
+    console.log(error);
+  }
+  }
   ngOnChanges(OnChanges)
   {
     
@@ -40,7 +61,6 @@ export class NavbarComponent implements OnChanges {
   }
   logout()
   {
-    debugger
     this.cookies.deleteAll();
     this.cartservice.customer.customerdata = [];
     localStorage.removeItem('customer');
@@ -59,7 +79,7 @@ export class NavbarComponent implements OnChanges {
     this.router.navigate([currentUrl]);
   }
   ngOnInit() {
-    debugger
+    
     if(this.cartservice.customer.customerdata.length == 0)
     {
       if(localStorage.getItem('customer'))
@@ -70,6 +90,7 @@ export class NavbarComponent implements OnChanges {
     }
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     this.getcartdata();
+   // this.getcompanyinfo();
   }
 
   getcartdata()

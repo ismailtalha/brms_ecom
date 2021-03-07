@@ -73,8 +73,13 @@ export class DataService {
 
   getsingleuser(id)
   {
-    return this.http.get(url +`cobuserhdr/${id}`);
+    return this.http.get(url +`cobuserhdr?no=${id}`);
   }
+  getsinglecustomer(id)
+  {
+    return this.http.get(url +`custinfo?no=${id}`);
+  }
+
 
   // getProducts() {
   //   return this.http.get(url + '/api/item');
@@ -86,7 +91,7 @@ export class DataService {
 
   getsingleProduct(id) {
     console.log(id)
-    return this.http.get(url + `iteminfo/getiteminfo/${id}`);
+    return this.http.get(url + `iteminfo/getiteminfo?no=${id}`);
   }
   getcompany()
   {
@@ -103,5 +108,9 @@ export class DataService {
   getbrands()
   {
     return this.http.get(url + 'makeinfo');
+  }
+  createorder(data)
+  {
+    return this.http.post(url + "sldsaleorderhdr" , data);
   }
 }

@@ -7,7 +7,7 @@
                 <!-- Header Top left Start -->                        
                 <div class="col-lg-4 col-md-12 d-center">
                     <div class="header-top-left">
-                        <img  src="../assets/img//icon/call.png" alt="">{{cartservice?.companydata?.contact}}
+                        <img  src="../assets/img//icon/call.png" alt="">{{cartservice?.companydata[0]?.contact}}
                     </div>                        
                 </div>
                 <!-- Header Top left End -->
@@ -173,7 +173,7 @@
                                         <!-- Cart Footer Inner Start -->
                                         <div class="cart-footer fix">
                                             <h5>total :<span class="f-right">{{cartservice.cartdata.total}}</span></h5>
-                                            <div class="cart-actions">
+                                            <div class="cart-actions" *ngIf="cartservice?.cartdata?.count != 0">
                                                 <a class="checkout" routerLink ="/order/checkout" href="javascript:void(0)">Checkout</a>
                                             </div>
                                         </div>
@@ -181,7 +181,8 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a routerLink ="/order/checkout" href="javascript:void(0)"><i class="fa fa-money"></i><span class="cart-counter">{{cartservice.cartdata.total}}</span></a></li>
+                            <li><a href="javascript:void(0)" *ngIf="cartservice?.cartdata?.count == 0" ><i class="fa fa-money"></i><span class="cart-counter">{{cartservice.cartdata.total}}</span></a></li>
+                            <li><a   *ngIf="cartservice?.cartdata?.count != 0" routerLink ="/order/checkout"  href="javascript:void(0)"><i class="fa fa-money"></i><span class="cart-counter">{{cartservice.cartdata.total}}</span></a></li>
                         </ul>
                     </div>
                 </div>

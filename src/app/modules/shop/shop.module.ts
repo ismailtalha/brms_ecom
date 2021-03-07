@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { MDBBootstrapModule  } from 'mdbootstrap'
 import {NgxPaginationModule} from 'ngx-pagination';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -18,7 +18,9 @@ import {NgxPaginationModule} from 'ngx-pagination';
     FormsModule,
     ReactiveFormsModule,
     NgImageSliderModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule
+    
   ]
 })
 export class ShopModule { }

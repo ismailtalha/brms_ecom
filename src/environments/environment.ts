@@ -2,10 +2,13 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { url } from "inspector";
+
 export const environment = {
   production: false,
   // url: 'http://localhost:8080'
   url:'http://192.168.100.4:1322/brmsapi/'
+  // url:"http://192.168.10.168:12345/brmsapi/"
 };
 
 /*

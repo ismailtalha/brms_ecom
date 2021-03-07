@@ -23,7 +23,11 @@ export class ShopComponent implements OnInit {
   category: any = [];
   brands: any = [];
   itemsPerPage: any = 6;
-
+  isCollapsed=false;
+  catsearch;
+  groupsearch;
+  brandsearch;
+  p;
   constructor(private dataService: DataService, public eventemitter: EmitterService, public cartservice: GetDataService, private toastr: ToastrService, private loader: NgxUiLoaderService) { }
 
   items: any = [];
@@ -99,12 +103,18 @@ export class ShopComponent implements OnInit {
     let itemgroups = this.dataService.getitemgroup();
     let brands = this.dataService.getbrands();
     forkJoin([items, category, itemgroups, brands]).subscribe(([itemres, catres, itemgroupres, resbrands]) => {
-      debugger
+      
       this.items = itemres;
       this.cartservice.allitems.items = this.items;
       this.categories = catres;
+      this.getitemscount(this.categories,'productno');
+      this.cartservice.category.items = this.categories;
       this.itemgroups = itemgroupres;
+      this.getitemscount(this.itemgroups,'itemgroupno');
+      this.cartservice.itemgroup.items = this.itemgroups;
       this.resbrands = resbrands
+      this.getitemscount(this.resbrands,'makeno');
+      this.cartservice.brands.items = this.resbrands;
       console.log('items', this.items, 'categories', this.categories, 'groups', this.itemgroups);
       this.loader.stop();
     }), (error) => {
@@ -114,6 +124,13 @@ export class ShopComponent implements OnInit {
       this.loader.stop();
     }
 
+  }
+  getitemscount(array,key)
+  {
+    array.forEach(element => {
+      let result = this.items.filter(o2 => o2[key] == element[key]);
+      element.itemcount = result.length ;
+    });
   }
   addtocart(data) {
     let items = [];
@@ -147,14 +164,9 @@ export class ShopComponent implements OnInit {
   addOrReplace(object) {
 
   }
-  // singleproduct(data)
-  // {
-  //     this.router.navigate(['/accounts/edit-account', data?.id]);
-
-  // }
 
   filter(data, filtertype) {
-    debugger
+    
     let index = this.filterarray.findIndex(x => x.type === filtertype);
 
     if (index > -1) {
@@ -248,5 +260,36 @@ export class ShopComponent implements OnInit {
     });
 
     return filtereditems;
+  }
+
+  ///// Search Filter for category brands groups
+
+  searchfilter(type,text)
+  {
+    
+    if(type=="category")
+    {
+      let categories = this.cartservice.category.items ;
+      let query = text.toLowerCase();
+      this.categories = categories.filter(item => item.productname.toLowerCase().indexOf(query) >= 0);
+      return;
+
+    }
+    else if (type=="brand")
+    {
+      let brands = this.cartservice.brands.items ;
+      let query = text.toLowerCase();
+      this.resbrands = brands.filter(item => item.makename.toLowerCase().indexOf(query) >= 0);
+      return;
+
+    }
+    else if (type=="group")
+    {
+      let itemgroup = this.cartservice.itemgroup.items ;
+      let query = text.toLowerCase();
+      this.itemgroups = itemgroup.filter(item => item.itemgroupname.toLowerCase().indexOf(query) >= 0);
+      return;
+    }
+
   }
 }

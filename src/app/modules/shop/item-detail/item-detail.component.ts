@@ -73,7 +73,8 @@ export class ItemDetailComponent implements OnInit {
       this.dataService.getsingleProduct(id).subscribe((res:any) => {
 
         this.singleitem = {};
-        this.singleitem = res?.data[0];
+        this.singleitem = res ;
+        console.log(res?.data)
         this.loader.stop();
       })
     }
