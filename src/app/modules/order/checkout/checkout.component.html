@@ -29,7 +29,7 @@
                                         <input type="submit" value="Login" />
                                         <label>
                                         <input type="checkbox" />
-                                         Remember me 
+                                         Remember me
                                     </label>
                                     </p>
                                     <p class="lost-password">
@@ -61,30 +61,14 @@
     <!-- checkout-area start -->
     <div class="checkout-area pt-30  pb-60">
         <div class="container">
-            <form [formGroup]="checkout" (ngSubmit)="loginuser()">   
-                <div class="form-group">
-                    <label class="control-label">Enter your userno here...</label>
-                    <input formControlName="userno" type="text" name="userno"  [ngClass]="{ 'is-invalid': submitted && l.userno.errors }"
-                        placeholder="Enter userno here..." id="input-userno" class="form-control">
-                        <div *ngIf="submitted == true && l.userno.errors" >
-                            <small class="error-text" *ngIf="l.userno.errors.required">Username is required</small>
-                        </div>
-                    </div>
-               
-                <div class="form-group">
-                    <label class="control-label">Password</label>
-                    <input type="text" formControlName="password" name="pass" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && l.password.errors }"
-                        id="input-password" class="form-control">
-                        <div *ngIf="submitted == true && l.password.errors" >
-                            <div class="error-text" *ngIf="l.userno.errors.required">Password is required</div>
-                        </div>
-                </div>          
+            <form [formGroup]="checkout" (ngSubmit)="loginuser()">
+
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="checkbox-form">
                             <h3>Billing Details</h3>
                             <div class="row">
-                                <div class="col-md-12">
+                                <!-- <div class="col-md-12">
                                     <div class="country-select mb-30">
                                         <label>Country <span class="required">*</span></label>
                                         <select>
@@ -98,195 +82,99 @@
                                             <option value="audi5">Dominican Republic</option>
                                         </select>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list">
-                                        <label>First Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
+                                </div> -->
+
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Customer Name <span class="required">*</span></label>
+                                            <input type="text" formControlName="custname" placeholder="" />
+                                            <div *ngIf="submitted == true && order.custname.errors" >
+                                                <small class="error-text" *ngIf="order.custname.errors.required">Customer Name is required</small>
+                                            </div>
+                                        </div>
+                                       
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+
+
+                                  
+
+
+                                <div class="col-md-12 mtb-10">
                                     <div class="checkout-form-list mb-30">
-                                        <label>Last Name <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
+                                        <label>User No<span class="required">*</span></label>
+                                        <input type="text" formControlName="userno" placeholder="" />
+                                        <div *ngIf="submitted == true && order.userno.errors" >
+                                            <small class="error-text" *ngIf="order.userno.errors.required">User No is required</small>
+                                        </div>
                                     </div>
+                                  
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list mb-30">
-                                        <label>Company Name</label>
-                                        <input type="text" placeholder="" />
+                                        <label>Password</label>
+                                        <input type="text" formControlName="password" placeholder="" />
+                                        <div *ngIf="submitted == true && order.password.errors" >
+                                            <small class="error-text" *ngIf="order.password.errors.required">Password is required</small>
+                                        </div>
                                     </div>
+                                   
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list">
-                                        <label>Address <span class="required">*</span></label>
-                                        <input type="text" placeholder="Street address" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="checkout-form-list mtb-30">
-                                        <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
+                                <!-- <div class="col-md-6">
                                     <div class="checkout-form-list mb-30">
-                                        <label>Town / City <span class="required">*</span></label>
-                                        <input type="text" placeholder="Town / City" />
+                                        <label>Confim Password</label>
+                                        <input type="text" formControlName="cpassword" placeholder="" />
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list mb-30">
-                                        <label>State / County <span class="required">*</span></label>
-                                        <input type="text" placeholder="" />
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="checkout-form-list mb-30">
-                                        <label>Postcode / Zip <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip" />
-                                    </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-6">
                                     <div class="checkout-form-list mb-30">
                                         <label>Email Address <span class="required">*</span></label>
-                                        <input type="email" placeholder="" />
+                                        <input type="email" formControlName="email" placeholder="" />
+                                        <div *ngIf="submitted == true && order.email.errors" >
+                                            <small class="error-text" *ngIf="order.email.errors.required">Email is required</small>
+                                            <small class="error-text" *ngIf="order.email.errors.is-invalid">Email format is invalid</small>
+                                        </div>
                                     </div>
+                                   
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list mb-30">
                                         <label>Phone  <span class="required">*</span></label>
-                                        <input type="text" placeholder="Postcode / Zip" />
+                                        <input type="text" formControlName="phone" placeholder="" />
+                                        <div *ngIf="submitted == true && order.phone.errors" >
+                                            <small class="error-text" *ngIf="order.phone.errors.required">Phone is required</small>
+                                        </div>
                                     </div>
+                                   
                                 </div>
                                 <div class="col-md-12">
-                                    <div class="checkout-form-list create-acc mb-30">
-                                        <input id="cbox" type="checkbox" />
-                                        <label>Create an account?</label>
-                                    </div>
-                                    <div id="cbox_info" class="checkout-form-list create-accounts mb-25">
-                                        <p class="mb-10">Create an account by entering the information below. If you are a returning customer please login at the top of the page.</p>
-                                        <label>Account password  <span class="required">*</span></label>
-                                        <input type="password" placeholder="password" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="different-address">
-                                <div class="ship-different-title">
-                                    <h3>
-                                        <label>Ship to a different address?</label>
-                                        <input id="ship-box" type="checkbox" />
-                                    </h3>
-                                </div>
-                                <div id="ship-box-info">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="country-select mb-30">
-                                                <label>Country <span class="required">*</span></label>
-                                                <select>
-                                                    <option value="volvo">Bangladesh</option>
-                                                    <option value="saab">Algeria</option>
-                                                    <option value="mercedes">Afghanistan</option>
-                                                    <option value="audi">Ghana</option>
-                                                    <option value="audi2">Albania</option>
-                                                    <option value="audi3">Bahrain</option>
-                                                    <option value="audi4">Colombia</option>
-                                                    <option value="audi5">Dominican Republic</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>First Name <span class="required">*</span></label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>Last Name <span class="required">*</span></label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>Company Name</label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>Address <span class="required">*</span></label>
-                                                <input type="text" placeholder="Street address" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list mb-30">
-                                                <input type="text" placeholder="Apartment, suite, unit etc. (optional)" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-12">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>Town / City <span class="required">*</span></label>
-                                                <input type="text" placeholder="Town / City" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>State / County <span class="required">*</span></label>
-                                                <input type="text" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>Postcode / Zip <span class="required">*</span></label>
-                                                <input type="text" placeholder="Postcode / Zip" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>Email Address <span class="required">*</span></label>
-                                                <input type="email" placeholder="" />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="checkout-form-list mb-30">
-                                                <label>Phone  <span class="required">*</span></label>
-                                                <input type="text" placeholder="Postcode / Zip" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="order-notes">
                                     <div class="checkout-form-list">
-                                        <label>Order Notes</label>
-                                        <textarea id="checkout-mess" cols="30" rows="10" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                                        <label>Address <span class="required">*</span></label>
+                                        <input type="text" formControlName="address" placeholder="Street address" />
+                                        <div *ngIf="submitted == true && order.address.errors" >
+                                            <small class="error-text" *ngIf="order.address.errors.required">Address is required</small>
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list mtb-30">
+                                        <input type="text" formControlName="address2" placeholder="Apartment, suite, unit etc. (optional)" />
                                     </div>
                                 </div>
+                                <!-- <div class="col-md-12">
+                                    <div class="checkout-form-list mb-30">
+                                        <label>Town / City <span class="required">*</span></label>
+                                        <input type="text" formControlName="address2" placeholder="Town / City" />
+                                    </div>
+                                </div> -->
+
+
+
                             </div>
+
                         </div>
                     </div>
-                    <form [formGroup]="loginform" (ngSubmit)="loginuser()">
-                        <div class="form-group">
-                            <label class="control-label">Enter your userno here...</label>
-                            <input formControlName="userno" type="text" name="userno"  [ngClass]="{ 'is-invalid': submitted && l.userno.errors }"
-                                placeholder="Enter userno here..." id="input-userno" class="form-control">
-                                <div *ngIf="submitted == true && l.userno.errors" >
-                                    <small class="error-text" *ngIf="l.userno.errors.required">Username is required</small>
-                                </div>
-                            </div>
-                       
-                        <div class="form-group">
-                            <label class="control-label">Password</label>
-                            <input type="text" formControlName="password" name="pass" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && l.password.errors }"
-                                id="input-password" class="form-control">
-                                <div *ngIf="submitted == true && l.password.errors" >
-                                    <div class="error-text" *ngIf="l.userno.errors.required">Password is required</div>
-                                </div>
-                        </div>
-                        
-                        <p class="lost-password"><a href="#">Forgot password?</a></p>
-                        <!-- <input  value="Login" class="return-customer-btn"> -->
-                        <button class="return-customer-btn" >Continue</button>
-                    </form>
+
                     <div class="col-lg-6 col-md-6">
                         <div class="your-order">
                             <h3>Your order</h3>
@@ -299,7 +187,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="cart_item" *ngFor="let item of cartservice?.cartdata?.items">
+                                        <tr class="cart_item" *ngFor="let item of getdataservice?.cartdata?.items">
                                             <td class="product-name">
                                                 {{item.Name}} <strong class="product-quantity"> × {{item.Qty}}</strong>
                                             </td>
@@ -307,16 +195,16 @@
                                                 <span class="amount">${{item.Total}}</span>
                                             </td>
                                         </tr>
-                                       
+
                                     </tbody>
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">${{cartservice?.cartdata?.total}}</span></td>
+                                            <td><span class="amount">${{getdataservice?.cartdata?.total}}</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">${{cartservice?.cartdata?.total}}</span></strong>
+                                            <td><strong><span class="amount">${{getdataservice?.cartdata?.total}}</span></strong>
                                             </td>
                                         </tr>
                                     </tfoot>
@@ -376,7 +264,7 @@
                         </div>
                     </div>
                 </div>
-             </form>   
+             </form>
         </div>
     </div>
     <!-- checkout-area end -->
@@ -416,7 +304,7 @@
                     <a href="#"><img src="img/brand/5.png" alt="brand-image"></a>
                 </div>
             </div>
-            <!-- Brand Banner End -->                
+            <!-- Brand Banner End -->
         </div>
     </div>
     <!-- Brand Logo End -->

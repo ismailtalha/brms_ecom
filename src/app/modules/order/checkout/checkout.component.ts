@@ -19,58 +19,82 @@ export class CheckoutComponent implements OnInit {
   constructor(private router: Router, private cookies: CookieService, public getdataservice: GetDataService,
     private dataService: DataService,
     private loader: NgxUiLoaderService,
-    private toastr: ToastrService, private fb: FormBuilder ) { }
+    private toastr: ToastrService, private fb: FormBuilder) { }
   checkout: FormGroup;
-  loginform:FormGroup;
+  loginform: FormGroup;
+  submitted = false;
   ngOnInit(): void {
     this.checkout = this.fb.group({
 
-      fname:['',Validators.required],
-      lname:['',Validators.required],
-      address:['',Validators.required],
-      address2:['',null],
-      email:['',Validators.email,Validators.required],
-      password:['',Validators.required]
+      custname: [null, [Validators.required]],
+      address: [null, [Validators.required]],
+      address2: [null, null],
+      email: [null, [Validators.email, Validators.required]],
+      password: [null, [Validators.required]],
+      userno: [null, [Validators.required]],
+      phone: [null, [Validators.required]],
     })
 
-    // if(this.getdataservice.customer.customerdata.length > 0)
-    // {
-    //   this.checkout.patchValue({
+    let localStorageCustomer = localStorage.getItem('customer');
+    if (this.getdataservice.customer.customerdata || localStorageCustomer) {
+      let cust = this.getdataservice.customer.customerdata == undefined ? localStorageCustomer : this.getdataservice.customer.customerdata;
+      this.checkout.patchValue({
+        custname: cust.custname,
+        address: cust.address,
+        address2: "",
+        email: cust.email,
+        password: cust.password,
+        userno: cust.userno,
+        phone: cust.phone
 
 
-    //   })
-    // }
+
+
+      })
+    }
   }
-
-  get fcontrols() { return this.checkout.controls; }
-
+  get order() { return this.checkout.controls; }
 
   ordercheckout() {
 
-    debugger
-    if(this.checkout.valid)
-    {
-      let orderobj = this.getdataservice.ordercheckoutmodel ;
 
-      let customer = this.getdataservice.customer.customerdata;
-      this.getdataservice.ordercheckoutmodel.custno = customer.custno,
-      this.getdataservice.ordercheckoutmodel.custname= customer.custname,
-      this.getdataservice.ordercheckoutmodel.contact= customer.contact,
-      this.getdataservice.ordercheckoutmodel.address= customer.address,
-      this.getdataservice.ordercheckoutmodel.mobileno = customer.mobileno,
-      this.getdataservice.ordercheckoutmodel.area=customer.area,
-      this.getdataservice.ordercheckoutmodel.contactperson = customer.contactperson,
-      this.getdataservice.ordercheckoutmodel.manualcustno=customer.manualcustno,
-      this.getdataservice.ordercheckoutmodel.custtype=customer.custtype,
-      this.getdataservice.ordercheckoutmodel.email=customer.email;
+    this.submitted = true;
+    this.loader.start();
+    if (this.checkout.valid) {
+      let orderobj = this.getdataservice.ordercheckoutmodel;
+
+      let customer = this.checkout.value;
+      this.getdataservice.ordercheckoutmodel.custno = this.getdataservice.customer.customerdata.custno,
+        this.getdataservice.ordercheckoutmodel.custname = customer.custname,
+        this.getdataservice.ordercheckoutmodel.contact = customer.contact,
+        this.getdataservice.ordercheckoutmodel.address = customer.address,
+        this.getdataservice.ordercheckoutmodel.mobileno = customer.phone,
+        this.getdataservice.ordercheckoutmodel.area = customer.area,
+        this.getdataservice.ordercheckoutmodel.contactperson = customer.custno,
+        this.getdataservice.ordercheckoutmodel.manualcustno = "",
+        this.getdataservice.ordercheckoutmodel.custtype = customer.custtype,
+        this.getdataservice.ordercheckoutmodel.email = customer.email;
       this.getdataservice.ordercheckoutmodel.sldsaleorderdtls = this.getdataservice.cartdata.items;
       console.log(orderobj);
       this.dataService.createorder(orderobj).subscribe((res: any) => {
-      console.log(res)
-  
+        this.loader.stop();
+        this.router.navigate(["shop"]);
+        this.toastr.success('Order Sccessfully Done')
+        this.reset();
+
       })
     }
-   
+
   }
 
+  reset() {
+    this.getdataservice.cartdata.items = [];
+    this.getdataservice.cartdata.count = 0;
+    this.getdataservice.cartdata.total = 0;
+    localStorage.removeItem('items')
+    localStorage.removeItem('count')
+    localStorage.removeItem('total')
+    localStorage.removeItem('cart-data')
+    this.checkout.reset();
+  }
 }
