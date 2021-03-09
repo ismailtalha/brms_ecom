@@ -31,9 +31,14 @@ const routes: Routes = [
       {
         path: 'company',
         loadChildren: './modules/company/company.module#CompanyModule', canActivate: [AuthGuardService]
-      }, {
+      },
+       {
         path: 'order',
         loadChildren: './modules/order/order.module#OrderModule', canActivate: [AuthGuardService]
+      },
+      {
+        path: 'adminpanel',
+        loadChildren: './modules/adminpanel/adminpanel.module#AdminpanelModule', canActivate: [AuthGuardService]
       },
     ]
   },

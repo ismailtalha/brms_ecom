@@ -141,12 +141,14 @@
                                 <ul class="ht-dropdown" *ngIf="cartservice?.customer?.customerdata?.length == 0">
                                     <li><a routerLink ="/auth/login" href="javascript:void(0)">Login</a></li>
                                     <li><a routerLink ="/auth/register" href="javascript:void(0)">Register</a></li>
+                                   
                                  </ul>
                             </li>
                                  <li *ngIf="cartservice?.customer?.customerdata?.length != 0"><a href="javascript:void(0)"><i class="fa fa-user"></i></a>
                                 <ul class="ht-dropdown" *ngIf="cartservice?.customer?.customerdata?.length != 0">
                                     <li><a routerLink ="" href="javascript:void(0)">Profile</a></li>
                                     <li><a routerLink ="" href="javascript:void(0)">Orders</a></li>
+                                    <li><a routerLink ="/adminpanel/panel" href="javascript:void(0)">Admin Panel</a></li>
                                     <li><a (click)="logout()" href="javascript:void(0)">Logout</a></li>
                                     <!-- <li ><a href="account.html">Account</a></li>                                             -->
                                 </ul>
