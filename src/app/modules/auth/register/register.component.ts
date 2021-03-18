@@ -17,14 +17,15 @@ export class RegisterComponent implements OnInit {
   constructor(private dataService: DataService, private getdataservice: GetDataService, public router: Router, private toastr: ToastrService, private loader: NgxUiLoaderService,private fb:FormBuilder) { }
  customer:FormGroup
   edit: any;
+  submitted=false;
   ngOnInit(): void {
     this.customer = this.fb.group({
-      fname: [null, Validators.required],
-      lname:[null, Validators.required],
-      phone:[null,, Validators.required],
-      email:[null, Validators.email],
-      password:[null, Validators.required],
-      userno:[null,Validators.required]
+      fname: [null, [Validators.required]],
+       lname:[null, [Validators.required]],
+       phone:[null, [Validators.required]],
+       email:[null, [Validators.email,Validators.required]],
+       password:[null,[Validators.required]],
+       userno:[null,[Validators.required]]
     });
   }
   reload() {
@@ -69,9 +70,10 @@ export class RegisterComponent implements OnInit {
   //     })
   //   }
   // }
-
+  get register() { return this.customer.controls; }
   create() {
-    
+    debugger
+    this.submitted = true;
     if (this.customer.valid) {
       let userobj = {
         username: this.customer.value.fname + this.customer.value.lname,

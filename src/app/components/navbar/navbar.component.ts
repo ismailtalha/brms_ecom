@@ -121,8 +121,8 @@ export class NavbarComponent implements OnChanges {
     if(index >= 0)
     {
       
-      this.cartservice.cartdata.count = this.cartservice.cartdata.count - this.cartservice.cartdata.items[index].Qty;
-      this.cartservice.cartdata.total = this.cartservice.cartdata.total - this.cartservice.cartdata.items[index].Total;
+      this.cartservice.cartdata.count = this.cartservice.cartdata.count - this.cartservice.cartdata.items[index].quantity;
+      this.cartservice.cartdata.total = this.cartservice.cartdata.total - this.cartservice.cartdata.items[index].amount;
       this.cartservice.cartdata.items.splice(index,1);
       localStorage.removeItem('cart-data');
       localStorage.setItem('cart-data',JSON.stringify(this.cartservice.cartdata) )

@@ -147,7 +147,7 @@
                                  <li *ngIf="cartservice?.customer?.customerdata?.length != 0"><a href="javascript:void(0)"><i class="fa fa-user"></i></a>
                                 <ul class="ht-dropdown" *ngIf="cartservice?.customer?.customerdata?.length != 0">
                                     <li><a routerLink ="" href="javascript:void(0)">Profile</a></li>
-                                    <li><a routerLink ="" href="javascript:void(0)">Orders</a></li>
+                                    <li><a routerLink ="/order/orderlist" href="javascript:void(0)">Orders</a></li>
                                     <li><a routerLink ="/adminpanel/panel" href="javascript:void(0)">Admin Panel</a></li>
                                     <li><a (click)="logout()" href="javascript:void(0)">Logout</a></li>
                                     <!-- <li ><a href="account.html">Account</a></li>                                             -->
@@ -164,8 +164,8 @@
                                                 <a href="#"><img  src="../assets/img//menu/1.jpg" alt="cart-image"></a>
                                             </div>
                                             <div class="cart-content">
-                                                <h6><a href="product.html">{{item.Name}}</a></h6>
-                                                <span>{{item.Qty}} ×{{item.Price}}</span>
+                                                <h6><a href="product.html">{{item.itemname}}</a></h6>
+                                                <span>{{item.quantity}} ×{{item.price}}</span>
                                             </div>
                                             <a  class="del-icone" (click)="remove(item)"><i class="fa fa-window-close-o"></i></a>
                                         </div>

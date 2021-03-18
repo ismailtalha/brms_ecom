@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import * as jsPDF from 'jspdf';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
@@ -8,6 +9,7 @@ import { ordercheckoutmodel } from 'src/app/models/order.models';
 import { DataService } from 'src/app/services/data.service';
 import { GetDataService } from 'src/app/services/getdata.service';
 import { MustMatch } from '../../../services/mustmatch';
+import {SweetalertService} from '../../../Utilities/sweetalert.service';
 
 @Component({
   selector: 'app-checkout',
@@ -16,10 +18,12 @@ import { MustMatch } from '../../../services/mustmatch';
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private router: Router, private cookies: CookieService, public getdataservice: GetDataService,
+  constructor(private router: Router, private cookies: CookieService,public displaybox:SweetalertService, public getdataservice: GetDataService,
     private dataService: DataService,
     private loader: NgxUiLoaderService,
-    private toastr: ToastrService, private fb: FormBuilder) { }
+    private toastr: ToastrService, private fb: FormBuilder , ) { }
+
+    @ViewChild('cartbill', {static: false}) cartbill: ElementRef;
   checkout: FormGroup;
   loginform: FormGroup;
   submitted = false;
@@ -29,15 +33,16 @@ export class CheckoutComponent implements OnInit {
       custname: [null, [Validators.required]],
       address: [null, [Validators.required]],
       address2: [null, null],
-      email: [null, [Validators.email, Validators.required]],
+      email: [null, [Validators.email,Validators.required]],
       password: [null, [Validators.required]],
       userno: [null, [Validators.required]],
       phone: [null, [Validators.required]],
     })
 
     let localStorageCustomer = localStorage.getItem('customer');
+    debugger
     if (this.getdataservice.customer.customerdata || localStorageCustomer) {
-      let cust = this.getdataservice.customer.customerdata == undefined ? localStorageCustomer : this.getdataservice.customer.customerdata;
+      let cust = this.getdataservice.customer.customerdata == undefined ? JSON.parse(localStorageCustomer)  : JSON.parse(this.getdataservice.customer.customerdata);
       this.checkout.patchValue({
         custname: cust.custname,
         address: cust.address,
@@ -57,14 +62,16 @@ export class CheckoutComponent implements OnInit {
 
   ordercheckout() {
 
-
+debugger
     this.submitted = true;
-    this.loader.start();
+    
     if (this.checkout.valid) {
+      this.loader.start();
       let orderobj = this.getdataservice.ordercheckoutmodel;
 
       let customer = this.checkout.value;
-      this.getdataservice.ordercheckoutmodel.custno = this.getdataservice.customer.customerdata.custno,
+      let serviceobj = JSON.parse(this.getdataservice.customer.customerdata) ;
+      this.getdataservice.ordercheckoutmodel.custno = serviceobj.custno;
         this.getdataservice.ordercheckoutmodel.custname = customer.custname,
         this.getdataservice.ordercheckoutmodel.contact = customer.contact,
         this.getdataservice.ordercheckoutmodel.address = customer.address,
@@ -75,13 +82,23 @@ export class CheckoutComponent implements OnInit {
         this.getdataservice.ordercheckoutmodel.custtype = customer.custtype,
         this.getdataservice.ordercheckoutmodel.email = customer.email;
       this.getdataservice.ordercheckoutmodel.sldsaleorderdtls = this.getdataservice.cartdata.items;
+      orderobj.deliverylocation = customer.address + customer.address2;
+      orderobj.userno = serviceobj.userno;
       console.log(orderobj);
       this.dataService.createorder(orderobj).subscribe((res: any) => {
+        console.log('result',res)
+       
         this.loader.stop();
         this.router.navigate(["shop"]);
-        this.toastr.success('Order Sccessfully Done')
         this.reset();
+        this.displaybox.successtwobuttons(res.docno).then((result)=>{
+          if(result.isConfirmed)
+          {
+            this.generatepdf(res.docno);
+          }
 
+
+        })
       })
     }
 
@@ -96,5 +113,23 @@ export class CheckoutComponent implements OnInit {
     localStorage.removeItem('total')
     localStorage.removeItem('cart-data')
     this.checkout.reset();
+  }
+  
+  generatepdf(orderno)
+  {
+    const doc = new jsPDF();
+    const pdfTable = this.cartbill.nativeElement;
+    const specialElementHandlers = {
+      '#editor': function (element, renderer) {
+        return true;
+      }
+    };
+    doc.fromHTML(pdfTable.innerHTML, 15, 15, {
+      width: 190,
+      'elementHandlers': specialElementHandlers
+    });
+
+    doc.save("Order-"+orderno+'.pdf');
+
   }
 }

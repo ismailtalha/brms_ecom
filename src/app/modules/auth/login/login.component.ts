@@ -44,10 +44,11 @@ export class LoginComponent implements OnInit {
        this.loader.stop();
        if(cust.userno != null)
        {
+         debugger
         if(cust.password == this.loginform.value.password)
         {
-          this.getdataservice.customer.customerdata = cust;
-          localStorage.setItem('customer',cust)
+          this.getdataservice.customer.customerdata = JSON.stringify(cust);
+          localStorage.setItem('customer',JSON.stringify(cust))
           this.router.navigate(["shop"]);
           this.toastr.success("Login Successfully")
         }

@@ -16,6 +16,7 @@ export class ordercheckoutmodel{
     password: string;
     strnno: string;
     errortext: any;
+    deliverylocation:string;
     sldsaleorderdtls:any=[];
 }
     

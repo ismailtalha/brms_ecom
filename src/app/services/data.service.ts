@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import autoTable from 'jspdf-autotable';
 import * as jsPDF from 'jspdf';
 const url = environment.url;
 @Injectable({
@@ -65,19 +64,19 @@ export class DataService {
   
 
   createCustomer(data) {
-    return this.http.post(url + 'custinfo', data);
+    return this.http.post(url + 'custinfo/post', data);
   }
   createUser(data) {
-    return this.http.post(url + 'cobuserhdr', data);
+    return this.http.post(url + 'cobuserhdr/get', data);
   }
 
   getsingleuser(id)
   {
-    return this.http.get(url +`cobuserhdr?no=${id}`);
+    return this.http.get(url +`cobuserhdr/get?no=${id}`);
   }
   getsinglecustomer(id)
   {
-    return this.http.get(url +`custinfo?no=${id}`);
+    return this.http.get(url +`custinfo/get?no=${id}`);
   }
 
 
@@ -86,31 +85,31 @@ export class DataService {
   // }
 
    getProducts() {
-    return this.http.get(url + `iteminfo/getiteminfo`);
+    return this.http.get(url + `iteminfo/get`);
   }
 
   getsingleProduct(id) {
     console.log(id)
-    return this.http.get(url + `iteminfo/getiteminfo?no=${id}`);
+    return this.http.get(url + `iteminfo/get?no=${id}`);
   }
   getcompany()
   {
-    return this.http.get(url + 'companyinfo/getcompanyinfo');
+    return this.http.get(url + 'companyinfo/get');
   }
   getcategory()
   {
-    return this.http.get(url + 'productinfo');
+    return this.http.get(url + 'productinfo/get');
   }
   getitemgroup()
   {
-    return this.http.get(url + 'itemgroupinfo');
+    return this.http.get(url + 'itemgroupinfo/get');
   }
   getbrands()
   {
-    return this.http.get(url + 'makeinfo');
+    return this.http.get(url + 'makeinfo/get');
   }
   createorder(data)
   {
-    return this.http.post(url + "sldsaleorderhdr" , data);
+    return this.http.post(url + "sldsaleorderhdr/post" , data);
   }
 }

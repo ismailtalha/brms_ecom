@@ -61,7 +61,7 @@
     <!-- checkout-area start -->
     <div class="checkout-area pt-30  pb-60">
         <div class="container">
-            <form [formGroup]="checkout" (ngSubmit)="loginuser()">
+            <form [formGroup]="checkout" >
 
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
@@ -131,7 +131,7 @@
                                         <input type="email" formControlName="email" placeholder="" />
                                         <div *ngIf="submitted == true && order.email.errors" >
                                             <small class="error-text" *ngIf="order.email.errors.required">Email is required</small>
-                                            <small class="error-text" *ngIf="order.email.errors.is-invalid">Email format is invalid</small>
+                                            <small class="error-text" *ngIf="order.email.errors.email">Email format is invalid</small>
                                         </div>
                                     </div>
                                    
@@ -139,7 +139,7 @@
                                 <div class="col-md-6">
                                     <div class="checkout-form-list mb-30">
                                         <label>Phone  <span class="required">*</span></label>
-                                        <input type="text" formControlName="phone" placeholder="" />
+                                        <input type="number" formControlName="phone" placeholder="" />
                                         <div *ngIf="submitted == true && order.phone.errors" >
                                             <small class="error-text" *ngIf="order.phone.errors.required">Phone is required</small>
                                         </div>
@@ -176,7 +176,8 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6">
-                        <div class="your-order">
+                        <div class="your-order" >
+                            <div id="cartbill" #cartbill>
                             <h3>Your order</h3>
                             <div class="your-order-table table-responsive">
                                 <table>
@@ -189,10 +190,10 @@
                                     <tbody>
                                         <tr class="cart_item" *ngFor="let item of getdataservice?.cartdata?.items">
                                             <td class="product-name">
-                                                {{item.Name}} <strong class="product-quantity"> × {{item.Qty}}</strong>
+                                                {{item.itemname}} <strong class="product-quantity"> × {{item.quantity}}</strong>
                                             </td>
                                             <td class="product-total">
-                                                <span class="amount">${{item.Total}}</span>
+                                                <span class="amount">${{item.amount}}</span>
                                             </td>
                                         </tr>
 
@@ -210,6 +211,7 @@
                                     </tfoot>
                                 </table>
                             </div>
+                        </div>
                             <div class="payment-method">
                                 <div class="payment-accordion">
                                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">

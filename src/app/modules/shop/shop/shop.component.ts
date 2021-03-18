@@ -137,27 +137,27 @@ export class ShopComponent implements OnInit {
     var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno);
     let obj = {
       ID: data.rowno,
-      Name: data.itemname,
-      Price: data.saleprice,
-      ItemName: data.itemname,
-      Qty: 1,
-      Total: data.saleprice * 1
+      itemname: data.itemname,
+      itemno:data.itemno,
+      price: data.saleprice,
+      quantity: 1,
+      amount:data.saleprice * 1
     }
     if (index < 0) {
       this.cartservice.cartdata.items.push(obj)
     }
     else {
-      this.cartservice.cartdata.items[index].Total = 0;
-      this.cartservice.cartdata.items[index].Qty = this.cartservice.cartdata.items[index].Qty + 1;
+      this.cartservice.cartdata.items[index].amount = 0;
+      this.cartservice.cartdata.items[index].quantity = this.cartservice.cartdata.items[index].quantity + 1;
 
-      this.cartservice.cartdata.items[index].Total = this.cartservice.cartdata.items[index].Qty * this.cartservice.cartdata.items[index].Price;
+      this.cartservice.cartdata.items[index].amount = this.cartservice.cartdata.items[index].quantity * this.cartservice.cartdata.items[index].price;
     }
     this.cartservice.cartdata.count = this.cartservice.cartdata.count + 1;
     // this.cartservice.cartdata.items = items;
     this.cartservice.cartdata.total = 0;
     for (let index = 0; index < this.cartservice.cartdata.items.length; index++) {
       const element = this.cartservice.cartdata.items[index];
-      this.cartservice.cartdata.total = this.cartservice.cartdata.total + element.Total;
+      this.cartservice.cartdata.total = this.cartservice.cartdata.total + element.amount;
     }
     localStorage.setItem('cart-data', JSON.stringify(this.cartservice.cartdata))
   }
