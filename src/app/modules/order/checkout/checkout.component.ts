@@ -28,15 +28,20 @@ export class CheckoutComponent implements OnInit {
   loginform: FormGroup;
   submitted = false;
   ngOnInit(): void {
+    debugger
+    if(localStorage.getItem("isLogin") != "true")
+    {
+       this.router.navigate(["/auth/login"])
+    }
     this.checkout = this.fb.group({
 
-      custname: [null, [Validators.required]],
+      custname: [{value:null,disabled:true}, [Validators.required]],
       address: [null, [Validators.required]],
       address2: [null, null],
-      email: [null, [Validators.email,Validators.required]],
-      password: [null, [Validators.required]],
-      userno: [null, [Validators.required]],
-      phone: [null, [Validators.required]],
+      email: [{value:null,disabled:true}, [Validators.email]],
+      password: [{value:null,disabled:true}, [Validators.required]],
+      userno: [{value:null,disabled:true}, [Validators.required]],
+      phone: [{value:null,disabled:false}],
     })
 
     let localStorageCustomer = localStorage.getItem('customer');
@@ -64,7 +69,7 @@ export class CheckoutComponent implements OnInit {
 
 debugger
     this.submitted = true;
-    
+    this.getdataservice.customer.isLogin = true;
     if (this.checkout.valid) {
       this.loader.start();
       let orderobj = this.getdataservice.ordercheckoutmodel;
@@ -89,21 +94,50 @@ debugger
         console.log('result',res)
        
         this.loader.stop();
-        this.router.navigate(["shop"]);
-        this.reset();
+        
         this.displaybox.successtwobuttons(res.docno).then((result)=>{
+          console.log('aqwasdasdas',result)
           if(result.isConfirmed)
           {
-            this.generatepdf(res.docno);
+             this.generatepdf(res.docno);
           }
-
+          if(result.isDenied)
+          {
+            this.PrintPartOfPage("cartbill")
+          }
+          this.router.navigate(["shop"]);
+          this.reset();
 
         })
       })
     }
 
   }
+   PrintPartOfPage(dvprintid)
+  {
+    debugger
+       var html = '<h1 style="color:blue">hello</h1><div id="printhtml"></div>'
+       var prtContent = document.getElementById(dvprintid);
+       
+      //  console.log('prtContent',prtContent)
+      //  var printhtml = prtContent.append(html);
+      //  var WinPrint = window.open('', '', 'letf=100,top=100,width=600,height=600');
+      //  WinPrint.document.write(printhtml);
+      //  WinPrint.document.close();
+      //  WinPrint.focus();
+      //  WinPrint.print();
 
+       var mywindow = window.open('', '', 'letf=100,top=100,width=600,height=600');
+       mywindow.document.write('<html><head><title></title>');
+       mywindow.document.write('<link rel="stylesheet" href="css/midday_receipt.css" type="text/css" />');
+       mywindow.document.write('</head><body >');
+       mywindow.document.write('<h1 style="color:blue">hello</h1><div id="printhtml"></div>');
+       mywindow.document.write(prtContent.innerHTML);
+       mywindow.document.write('</body></html>');
+       mywindow.document.close();
+       mywindow.focus();
+       mywindow.print();  
+  }
   reset() {
     this.getdataservice.cartdata.items = [];
     this.getdataservice.cartdata.count = 0;
@@ -114,7 +148,15 @@ debugger
     localStorage.removeItem('cart-data')
     this.checkout.reset();
   }
-  
+   getText(divID) {
+    var w = window.open("test.html");
+    w.addEventListener("load", function() {
+        var body = w.document.body;
+        var div = document.getElementById(divID);
+        var textContent = body.textContent || body.innerText;
+        console.log(textContent);
+    });
+}
   generatepdf(orderno)
   {
     const doc = new jsPDF();

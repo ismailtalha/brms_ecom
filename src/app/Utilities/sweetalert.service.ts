@@ -18,9 +18,11 @@ export class SweetalertService {
           showCloseButton: true,
           showCancelButton: true,
           focusConfirm: false,
+          showDenyButton: true,
+          denyButtonText: `Direct Print Order`,
           confirmButtonText:
             '<i class="fa fa-print"></i> Print Order',
-          confirmButtonAriaLabel: 'Print Order',
+          confirmButtonAriaLabel: 'Export PDF',
           cancelButtonText:
             'OK',
           cancelButtonAriaLabel: 'OK'

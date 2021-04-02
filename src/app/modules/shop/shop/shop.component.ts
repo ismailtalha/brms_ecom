@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { forkJoin, Observable } from 'rxjs';
@@ -6,7 +6,7 @@ import { itemgroup } from 'src/app/models/itemgroup';
 import { DataService } from 'src/app/services/data.service';
 import { EmitterService } from 'src/app/services/emitter.service';
 import { GetDataService } from 'src/app/services/getdata.service';
-
+import {OwlCarousel} from 'ngx-owl-carousel';
 
 @Component({
   selector: 'app-shop',
@@ -28,6 +28,12 @@ export class ShopComponent implements OnInit {
   groupsearch;
   brandsearch;
   p;
+  totalitemscount = 0;
+  sortby = "saleprice";
+  sortup = false;
+  sortdown = true;
+  images=['src/assets/ItemImages/Devices/3.jpg','src/assets/ItemImages/Devices/4.jpg'];
+  @ViewChild('owlElement') owlElement: OwlCarousel
   constructor(private dataService: DataService, public eventemitter: EmitterService, public cartservice: GetDataService, private toastr: ToastrService, private loader: NgxUiLoaderService) { }
 
   items: any = [];
@@ -37,6 +43,7 @@ export class ShopComponent implements OnInit {
     this.eventemitter.listen('searchproduct', data => {
       this.filter(data, 'productsearch')
     })
+    
   } cards = [
     {
       title: 'Card Title 1',
@@ -96,9 +103,14 @@ export class ShopComponent implements OnInit {
   perpageitems(num) {
     this.itemsPerPage = num;
   }
+  fun() {
+    this.owlElement.next([200])
+    //duration 200ms
+  }
   public getmultiplerequests() {
     this.loader.start();
     let items = this.dataService.getProducts();
+   
     let category = this.dataService.getcategory();
     let itemgroups = this.dataService.getitemgroup();
     let brands = this.dataService.getbrands();
@@ -106,6 +118,7 @@ export class ShopComponent implements OnInit {
       
       this.items = itemres;
       this.cartservice.allitems.items = this.items;
+      this.totalitemscount = this.items.length;
       this.categories = catres;
       this.getitemscount(this.categories,'productno');
       this.cartservice.category.items = this.categories;
@@ -116,6 +129,7 @@ export class ShopComponent implements OnInit {
       this.getitemscount(this.resbrands,'makeno');
       this.cartservice.brands.items = this.resbrands;
       console.log('items', this.items, 'categories', this.categories, 'groups', this.itemgroups);
+      this.applysort('up');
       this.loader.stop();
     }), (error) => {
       console.log(error);
@@ -292,4 +306,31 @@ export class ShopComponent implements OnInit {
     }
 
   }
+
+  changesortby(event)
+  {
+    this.sortby = event.target.value;
+  }
+
+ 
+
+  applysort(direction)
+  {
+    debugger
+   let sortby = this.sortby;
+    if(direction == "up")
+    {
+      this.sortup = false;
+      this.sortdown = true;
+      this.items.sort((a, b) => a[sortby] - b[sortby]);
+    }
+    else
+    {
+      this.sortup = true;
+      this.sortdown = false;
+      this.items.sort((a, b) => b[sortby] - a[sortby]);
+    }
+    
+  }
+  
 }

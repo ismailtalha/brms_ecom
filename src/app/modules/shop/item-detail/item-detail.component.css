@@ -1,0 +1,14 @@
+.add-cart {
+    background: #1970b6 none repeat scroll 0 0;
+    border-color: #1970b6;
+    border-radius: 3px;
+    color: #fff;
+    display: inline-block;
+    height: 35px;
+    line-height: 36px;
+    padding: 0 10px;
+    text-align: center;
+    text-transform: capitalize;
+    width: 117px;
+    color: white !important;
+}

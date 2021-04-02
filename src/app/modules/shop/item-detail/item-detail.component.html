@@ -3,7 +3,6 @@
     <div class="container">
         <div class="breadcrumb">
             <ul>
-                <li><a routerLink ="/dashboard" href="javascript:void(0)">Dashboard</a></li>
                 <li><a routerLink ="/shop" href="javascript:void(0)">Shop</a></li>
                 <li class="active"><a >Product</a></li>
             </ul>
@@ -21,16 +20,16 @@
                 <!-- Thumbnail Large Image start -->
                 <div class="tab-content">
                     <div id="thumb1" class="tab-pane active">
-                        <a data-fancybox="images" href="img/products/1.jpg"><img src="../../../../assets/img/products/10.jpg" alt="product-view"></a>
+                        <a data-fancybox="images" href="../../../../assets/{{singleitem?.itemimagepath}}"><img src=" ../../../../assets/{{singleitem?.itemimagepath}}" alt="product-view"></a>
                     </div>
                     <div id="thumb2" class="tab-pane">
-                        <a data-fancybox="images" href="img/products/2.jpg"><img src="../../../../assets/img/products/2.jpg" alt="product-view"></a>
+                        <a data-fancybox="images" href="../../../../assets/{{singleitem?.itemimagepath}}"><img src=" ../../../../assets/{{singleitem?.itemimagepath}}" alt="product-view"></a>
                     </div>
                     <div id="thumb3" class="tab-pane">
-                        <a data-fancybox="images" href="img/products/3.jpg"><img src="../../../../assets/img/products/3.jpg" alt="product-view"></a>
+                        <a data-fancybox="images" href="../../../../assets/{{singleitem?.itemimagepath}}"><img src="../../../../assets/{{singleitem?.itemimagepath}}" alt="product-view"></a>
                     </div>
                     <div id="thumb4" class="tab-pane">
-                        <a data-fancybox="images" href="img/products/4.jpg"><img src="../../../../assets/img/products/4.jpg" alt="product-view"></a>
+                        <a data-fancybox="images" href="../../../../assets/{{singleitem?.itemimagepath}}"><img src="../../../../assets/{{singleitem?.itemimagepath}}" alt="product-view"></a>
                     </div>
                 </div>
                 <!-- Thumbnail Large Image End -->
@@ -38,10 +37,10 @@
                 <!-- Thumbnail Image End -->
                 <div class="product-thumbnail">
                     <div class="thumb-menu nav">
-                            <a class="active" data-toggle="tab" href="#thumb1"> <img src="../../../../assets/img/products/10.jpg" alt="product-thumbnail"></a>
-                            <a data-toggle="tab" href="#thumb2"> <img src="../../../../assets/img/products/10.jpg" alt="product-thumbnail"></a>
-                            <a data-toggle="tab" href="#thumb3"> <img src="../../../../assets/img/products/10.jpg" alt="product-thumbnail"></a>
-                            <a data-toggle="tab" href="#thumb4"> <img src="../../../../assets/img/products/10.jpg" alt="product-thumbnail"></a>
+                            <a class="active" data-toggle="tab" href="#thumb1"> <img src="../../../../assets/{{singleitem?.itemimagepath}}" alt="product-thumbnail"></a>
+                            <a data-toggle="tab" href="#thumb2"> <img src="../../../../assets/{{singleitem?.itemimagepath}}" alt="product-thumbnail"></a>
+                            <a data-toggle="tab" href="#thumb3"> <img src="../../../../assets/{{singleitem?.itemimagepath}}" alt="product-thumbnail"></a>
+                            <a data-toggle="tab" href="#thumb4"> <img src="../../../../assets/{{singleitem?.itemimagepath}}" alt="product-thumbnail"></a>
                     </div>
                 </div>
                 <!-- Thumbnail image end -->
@@ -65,7 +64,7 @@
                         </div>
                     </div>
                     <div class="pro-price mb-10">
-                        <p><span class="price">{{cartservice?.companydata?.currency}} {{singleitem?.saleprice}}</span></p>
+                        <p><span class="price">{{cartservice?.companydata[0]?.currency}} {{singleitem?.saleprice}}</span></p>
                     </div>
                     <div class="pro-ref mb-15">
                         <p><span class="in-stock">IN STOCK</span><span class="sku">50</span></p>

@@ -15,14 +15,14 @@
 <div class="about-main-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-7 col-md-12">
+            <div class="col-lg-6 col-md-12">
                 <div class="about-img">
-                    <img class="img" src="../../../../assets/img/banner/about.jpg" alt="about-us">
+                    <img class="img" [src]="service?.companydata?.logo"  alt="about-us">
                 </div>
             </div>
             <div class="col-lg-5 col-md-12">
                 <div class="about-content">
-                    <h3>Why We are?</h3>
+                    <h3>Company Description</h3>
                     <p>{{service?.companydata[0]?.companydescription}}</p> <br>
                     <!-- <p>dapibus ac nunc. Cras bibendum mauris et sapien feugiat. scelerisque accumsan nibh gravida. Quisque aliquet justo elementum lectus ultrices bibendum.</p>
                     <ul class="mt-20 about-content-list">
@@ -45,9 +45,9 @@
             <div class="col-lg-6 col-md-6">
                 <div class="ht-single-about pb-sm-40">
                     <h3>OUR EXPERIENCES</h3>
-                    <h5>fusce fringilla porttitor iaculi sed quam libero, adipiscing sed erat id praesent eu nis.</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu nisi ac mi malesuada vestibulum. Phasellus tempor nunc eleifend cursus molestie. Mauris lectus arcu, pellentesque at sodales sit amet, Phasellus tempor nunc eleifend cursus molestie. Mauris lectus arcu, pellentesque at sodales sit amet,</p>
-                    <p>Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit nulla, sagittis non erat id, dictum vestibulum ligula. Maecenas sed enim sem.</p>
+                   <!-- // <h5>fusce fringilla porttitor iaculi sed quam libero, adipiscing sed erat id praesent eu nis.</h5> -->
+                    <p>{{service?.companydata[0]?.ourexperience}}</p>
+                   <!-- // <p>Donec ornare mattis suscipit. Praesent fermentum accumsan vulputate. Sed velit nulla, sagittis non erat id, dictum vestibulum ligula. Maecenas sed enim sem.</p> -->
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">
@@ -56,11 +56,11 @@
                     <div class="ht-about-work">
                         <span>1</span>
                         <div class="ht-work-text">
-                            <h5><a href="#">LOREM IPSUM DOLOR SIT AMET</a></h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu nisi ac mi</p>
+                           <!-- // <h5><a href="#">LOREM IPSUM DOLOR SIT AMET</a></h5> -->
+                            <p>{{service?.companydata[0]?.ourworks}}</p>
                         </div>
                     </div>
-                    <div class="ht-about-work">
+                    <!-- <div class="ht-about-work">
                         <span>2</span>
                         <div class="ht-work-text">
                             <h5><a href="#">DONEC FERMENTUM EROS</a></h5>
@@ -73,9 +73,43 @@
                             <h5><a href="#">LOREM IPSUM DOLOR SIT AMET</a></h5>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu nisi ac mi</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="my-account white-bg pb-60">
+    <div class="container">
+        <div class="account-dashboard">
+           <div class="dashboard-upper-info">
+               <div class="row no-gutters align-items-center">
+                   <div class="col-lg-3 col-md-6">
+                       <div class="d-single-info">
+                           <p><span style="font-weight: 600;">Address</span> : {{service?.companydata[0]?.adres}}</p>
+                       </div>
+                   </div>
+                   <div class="col-lg-3 col-md-6">
+                       <div class="d-single-info">
+                           <p><span style="font-weight: 600;">Phone</span> : {{service?.companydata[0]?.contact}}</p>
+                           <p><span style="font-weight: 600;">Fax</span> : {{service?.companydata[0]?.fax}}</p>
+                       </div>
+                   </div>
+                   <div class="col-lg-3 col-md-6">
+                       <div class="d-single-info">
+                           <p><span style="font-weight: 600;">E-mail</span> : {{service?.companydata[0]?.email}}</p>
+                           <p><span style="font-weight: 600;">Website</span> : {{service?.companydata[0]?.website}}</p>
+                       </div>
+                   </div>
+                   <div class="col-lg-3 col-md-6">
+                       <div class="d-single-info text-center">
+                           <a class="view-cart"routerLink ="/dashboard" href="javascript:void(0)">Contact Us</a>
+                       </div>
+                   </div>
+               </div>
+           </div>
+          
         </div>
     </div>
 </div>

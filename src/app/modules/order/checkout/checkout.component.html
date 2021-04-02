@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="checkbox-form">
-                            <h3>Billing Details</h3>
+                            <h3>Customer Registration</h3>
                             <div class="row">
                                 <!-- <div class="col-md-12">
                                     <div class="country-select mb-30">
@@ -101,7 +101,7 @@
 
                                 <div class="col-md-12 mtb-10">
                                     <div class="checkout-form-list mb-30">
-                                        <label>User No<span class="required">*</span></label>
+                                        <label>User Id<span class="required">*</span></label>
                                         <input type="text" formControlName="userno" placeholder="" />
                                         <div *ngIf="submitted == true && order.userno.errors" >
                                             <small class="error-text" *ngIf="order.userno.errors.required">User No is required</small>
@@ -127,7 +127,7 @@
                                 </div> -->
                                 <div class="col-md-6">
                                     <div class="checkout-form-list mb-30">
-                                        <label>Email Address <span class="required">*</span></label>
+                                        <label>Email Address</label>
                                         <input type="email" formControlName="email" placeholder="" />
                                         <div *ngIf="submitted == true && order.email.errors" >
                                             <small class="error-text" *ngIf="order.email.errors.required">Email is required</small>
@@ -138,7 +138,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list mb-30">
-                                        <label>Phone  <span class="required">*</span></label>
+                                        <label>Phone  </label>
                                         <input type="number" formControlName="phone" placeholder="" />
                                         <div *ngIf="submitted == true && order.phone.errors" >
                                             <small class="error-text" *ngIf="order.phone.errors.required">Phone is required</small>
@@ -193,7 +193,7 @@
                                                 {{item.itemname}} <strong class="product-quantity"> × {{item.quantity}}</strong>
                                             </td>
                                             <td class="product-total">
-                                                <span class="amount">${{item.amount}}</span>
+                                                <span class="amount"><small>{{getdataservice?.companydata[0]?.currency}}</small>{{item.amount}}</span>
                                             </td>
                                         </tr>
 
@@ -201,11 +201,11 @@
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount">${{getdataservice?.cartdata?.total}}</span></td>
+                                            <td><span class="amount"><small>{{getdataservice?.companydata[0]?.currency}}</small>{{getdataservice?.cartdata?.total}}</span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount">${{getdataservice?.cartdata?.total}}</span></strong>
+                                            <td><strong><span class="amount"><small>{{getdataservice?.companydata[0]?.currency}}</small>{{getdataservice?.cartdata?.total}}</span></strong>
                                             </td>
                                         </tr>
                                     </tfoot>

@@ -11,6 +11,9 @@ export class AboutComponent implements OnInit {
   constructor(public service:GetDataService) { }
 
   ngOnInit(): void {
+    console.log('company' , this.service);
   }
+
+  
 
 }

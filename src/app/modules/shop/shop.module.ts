@@ -8,10 +8,12 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import { MDBBootstrapModule  } from 'mdbootstrap'
 import {NgxPaginationModule} from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { FeaturedComponent } from './featured/featured.component';
+import { NewarivalComponent } from './newarival/newarival.component';
+import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({
-  declarations: [ShopComponent, ItemDetailComponent],
+  declarations: [ShopComponent, ItemDetailComponent, FeaturedComponent, NewarivalComponent],
   imports: [
     CommonModule,
     ShopRoutingModule,
@@ -19,7 +21,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ReactiveFormsModule,
     NgImageSliderModule,
     NgxPaginationModule,
-    NgbModule
+    NgbModule,
+    OwlModule
     
   ]
 })

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { GetDataService } from 'src/app/services/getdata.service';
 
 @Component({
@@ -9,10 +10,13 @@ import { GetDataService } from 'src/app/services/getdata.service';
 export class FooterComponent implements OnInit {
   test: Date = new Date();
 
-  constructor(public companyservice : GetDataService) { }
+  constructor(public companyservice : GetDataService,private toastr: ToastrService) { }
 
   ngOnInit() {
   console.log('footer' , this.companyservice)
   }
-
+  subscribe()
+  {
+    this.toastr.error("This feature is temporariliy unavailable")
+  }
 }

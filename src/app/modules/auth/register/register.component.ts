@@ -21,9 +21,9 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.customer = this.fb.group({
       fname: [null, [Validators.required]],
-       lname:[null, [Validators.required]],
-       phone:[null, [Validators.required]],
-       email:[null, [Validators.email,Validators.required]],
+       lname:[null],
+       phone:[null],
+       email:[null, [Validators.email]],
        password:[null,[Validators.required]],
        userno:[null,[Validators.required]]
     });
@@ -89,10 +89,11 @@ export class RegisterComponent implements OnInit {
           customerobj.contact =  this.customer.value.phone;
           customerobj.password  = this.customer.value.password;
           this.dataService.createCustomer(customerobj).subscribe((customer: any) => {
-            this.getdataservice.customer.customerdata = customer;
+            this.getdataservice.customer.customerdata = JSON.stringify(customer) ;
             localStorage.setItem('customer', customer);
             this.loader.stop();
             this.router.navigate(['shop']);
+            localStorage.setItem('isLogin',"true");
             this.toastr.success("Register Successfully")
   
   

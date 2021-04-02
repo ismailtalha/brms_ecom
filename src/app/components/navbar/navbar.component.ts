@@ -48,7 +48,7 @@ export class NavbarComponent implements OnChanges {
      // this.imageurl = this.domSanitizer.bypassSecurityTrustUrl('data:image/jpg;base64,'+base64String);
       this.cartservice.companydata = this.companydata;
       this.cartservice.companydata.logo = this.imageurl;
-      console.log(this.cartservice.companydata)
+      console.log('companylogo',this.cartservice.companydata)
    }),(error) => {
     console.log(error);
   }
@@ -64,11 +64,14 @@ export class NavbarComponent implements OnChanges {
     this.cookies.deleteAll();
     this.cartservice.customer.customerdata = [];
     localStorage.removeItem('customer');
+    this.cartservice.customer.isLogin = false;
+    localStorage.removeItem('isLogin');
   // this.reload();
     
   }
   search(pname)
   {
+    debugger
     this.eventemitter.emit('searchproduct',pname)
   }
   reload()
@@ -79,7 +82,7 @@ export class NavbarComponent implements OnChanges {
     this.router.navigate([currentUrl]);
   }
   ngOnInit() {
-    
+   
     if(this.cartservice.customer.customerdata.length == 0)
     {
       if(localStorage.getItem('customer'))

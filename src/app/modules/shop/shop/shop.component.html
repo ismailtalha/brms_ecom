@@ -205,22 +205,22 @@
                 <div class="grid-list-top border-default universal-padding fix mb-30">
                     <div class="grid-list-view f-left">
                         <ul class="list-inline nav">
-                            <li><a data-toggle="tab" href="#grid-view"><i class="fa fa-th"></i></a></li>
-                            <li><a class="active" data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a>
+                            <li><a data-toggle="tab"class="active" href="#grid-view"><i class="fa fa-th"></i></a></li>
+                            <li><a  data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a>
                             </li>
-                            <li><span class="grid-item-list"> Items 1-12 of 13</span></li>
+                            <li><span class="grid-item-list"> Items {{items.length}} of {{totalitemscount}}</span></li>
                         </ul>
                     </div>
                     <!-- Toolbar Short Area Start -->
                     <div class="main-toolbar-sorter f-right">
                         <div class="toolbar-sorter">
                             <label>sort by</label>
-                            <select class="sorter" name="sorter">
-                                <option value="Position" selected="selected">position</option>
-                                <option value="Product Name">Product Name</option>
-                                <option value="Price">Price</option>
+                            <select class="sorter" name="sorter" (change)="changesortby($event)">
+                                <option value="saleprice">Price</option>
+                                
                             </select>
-                            <span><a href="#"><i class="fa fa-arrow-up"></i></a></span>
+                            <span *ngIf="sortup"><span href="#"><i class="fa fa-arrow-up" (click)="applysort('up')"></i></span></span>
+                            <span *ngIf="sortdown"><span href="#"><i class="fa fa-arrow-down" (click)="applysort('down')"></i></span></span>
                         </div>
                     </div>
                     <!-- Toolbar Short Area End -->
@@ -229,7 +229,7 @@
                 <div class="main-categorie">
                     <!-- Grid & List Main Area End -->
                     <div class="tab-content fix">
-                        <div id="grid-view" class="tab-pane ">
+                        <div id="grid-view" class="tab-pane active">
                             <div class="row">
 
                                 <div class="col-lg-4 col-sm-6"
@@ -237,23 +237,23 @@
                                     <div class="single-product">
                                         <!-- Product Image Start -->
                                         <div class="pro-img">
-                                            <a routerLink="/shop/itemdetail/{{item.rowno}}" href="javascript:void(0)">
-                                                <img class="primary-img" src="../../../../assets/img/products/10.jpg"
+                                            <a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
+                                                <img class="primary-img" src="../../../../assets/{{item.itemimagepath}}"
                                                     alt="single-product">
-                                                <img class="secondary-img" src="../../../../assets/img/products/10.jpg"
+                                                <img class="secondary-img" src="../../../../assets/{{item.itemimagepath}}"
                                                     alt="single-product">
                                             </a>
                                         </div>
                                         <!-- Product Image End -->
                                         <!-- Product Content Start -->
                                         <div class="pro-content">
-                                            <div class="product-rating">
+                                            <!-- <div class="product-rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
-                                            </div>
+                                            </div> -->
                                             <h4><a a routerLink="/shop/itemdetail/{{item.rowno}}"
                                                     href="javascript:void(0)">{{item.itemname}}</a></h4>
                                             <p><span class="price">{{cartservice?.companydata[0]?.currency}}
@@ -271,40 +271,40 @@
                                             </div>
                                         </div>
                                         <!-- Product Content End -->
-                                        <span class="sticker-new">-20%</span>
+                                        <!-- <span class="sticker-new">-20%</span> -->
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                         <!-- #grid view End -->
-                        <div id="list-view" class="tab-pane active">
+                        <div id="list-view" class="tab-pane">
                             <!-- Single Product Start -->
                             <div *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
                                 <div class="single-product">
                                     <!-- Product Image Start -->
                                     <div class="pro-img">
                                         <a a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
-                                            <img class="primary-img" src=" ../../../../assets/img/products/10.jpg"
+                                            <img class="primary-img" src=" ../../../../assets/{{item.itemimagepath}}"
                                                 alt="single-product">
-                                            <img class="secondary-img" src="../../../../assets/img/products/10.jpg"
+                                            <img class="secondary-img" src="../../../../assets/{{item.itemimagepath}}"
                                                 alt="single-product">
                                         </a>
                                     </div>
                                     <!-- Product Image End -->
                                     <!-- Product Content Start -->
                                     <div class="pro-content">
-                                        <div class="product-rating">
+                                        <!-- <div class="product-rating">
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
                                             <i class="fa fa-star"></i>
-                                        </div>
+                                        </div> -->
                                         <h4><a routerLink="/shop/itemdetail/{{item.itemno}}"
                                                 href="javascript:void(0)">{{item.itemname}}</a></h4>
                                         <p><span
-                                                class="price">{{cartservice?.companydata[0]?.currency}}{{item.saleprice}}</span>
+                                                class="price">{{cartservice?.companydata[0]?.currency}} {{item.saleprice}}</span>
                                         </p>
                                         <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati velit, similique voluptas doloribus assumenda quis libero animi cumque dignissimos quisquam, quaerat ea laboriosam incidunt ullam.</p> -->
                                         <p>{{item.itemdetails}}</p>
@@ -353,6 +353,13 @@
 
         </div>
         <div class="pt-10">
+            <!-- <owl-carousel #owlElement
+            [options]="{items: 3, dots: false, navigation: false}" 
+            [carouselClasses]="['owl-theme', 'row', 'sliding']">
+            <div class="item" *ngFor="let image of images;let i = index">
+                <div class="thumbnail-image" ></div>
+            </div>
+        </owl-carousel> -->
             <!-- <mdb-carousel [isControls]="true" class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'"
             [animation]="'slide'">
 <mdb-carousel-item *ngFor="let item of slides; let i = index">

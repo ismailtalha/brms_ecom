@@ -47,9 +47,12 @@ export class LoginComponent implements OnInit {
          debugger
         if(cust.password == this.loginform.value.password)
         {
+          debugger
           this.getdataservice.customer.customerdata = JSON.stringify(cust);
           localStorage.setItem('customer',JSON.stringify(cust))
-          this.router.navigate(["shop"]);
+          localStorage.setItem('isLogin',"true");
+          this.getdataservice.customer.isLogin ?  this.router.navigate(["checkout"]) : this.router.navigate(["shop"]);
+         
           this.toastr.success("Login Successfully")
         }
         else{
