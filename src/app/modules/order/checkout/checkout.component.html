@@ -184,16 +184,16 @@
                                     <thead>
                                         <tr>
                                             <th class="product-name">Product</th>
-                                            <th class="product-total">Total</th>
+                                            <th class="product-total">Total ({{getdataservice?.companydata[0]?.currency}})</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr class="cart_item" *ngFor="let item of getdataservice?.cartdata?.items">
                                             <td class="product-name">
-                                                {{item.itemname}} <strong class="product-quantity"> × {{item.quantity}}</strong>
+                                                <h4>{{item.itemname}}</h4> <strong *ngIf="item.factorunitname">{{item.factorunitname}}<small>({{item.factorunit}})</small></strong> <strong class="product-quantity"> × {{item.quantity}}</strong>
                                             </td>
                                             <td class="product-total">
-                                                <span class="amount"><small>{{getdataservice?.companydata[0]?.currency}}</small>{{item.amount}}</span>
+                                                <span class="amount">{{item.amount}}</span>
                                             </td>
                                         </tr>
 
@@ -201,11 +201,11 @@
                                     <tfoot>
                                         <tr class="cart-subtotal">
                                             <th>Cart Subtotal</th>
-                                            <td><span class="amount"><small>{{getdataservice?.companydata[0]?.currency}}</small>{{getdataservice?.cartdata?.total}}</span></td>
+                                            <td><span class="amount"><strong>{{getdataservice?.cartdata?.total | number : '1.2-2'}}</strong></span></td>
                                         </tr>
                                         <tr class="order-total">
                                             <th>Order Total</th>
-                                            <td><strong><span class="amount"><small>{{getdataservice?.companydata[0]?.currency}}</small>{{getdataservice?.cartdata?.total}}</span></strong>
+                                            <td><strong><span class="amount">{{getdataservice?.cartdata?.total | number : '1.2-2'}}</span></strong>
                                             </td>
                                         </tr>
                                     </tfoot>

@@ -120,7 +120,7 @@ export class NavbarComponent implements OnChanges {
   remove(item)
   {
     
-    var index = this.cartservice.cartdata.items.findIndex(x => x.ID === item.ID);
+    var index = this.cartservice.cartdata.items.findIndex(x => x.ID === item.ID && x.itemno == item.itemno);
     if(index >= 0)
     {
       

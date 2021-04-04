@@ -7,6 +7,7 @@ import { DataService } from 'src/app/services/data.service';
 import { EmitterService } from 'src/app/services/emitter.service';
 import { GetDataService } from 'src/app/services/getdata.service';
 import {OwlCarousel} from 'ngx-owl-carousel';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-shop',
@@ -32,9 +33,16 @@ export class ShopComponent implements OnInit {
   sortby = "saleprice";
   sortup = false;
   sortdown = true;
+  units = [];
+  selectedunits = [];
   images=['src/assets/ItemImages/Devices/3.jpg','src/assets/ItemImages/Devices/4.jpg'];
   @ViewChild('owlElement') owlElement: OwlCarousel
-  constructor(private dataService: DataService, public eventemitter: EmitterService, public cartservice: GetDataService, private toastr: ToastrService, private loader: NgxUiLoaderService) { }
+  constructor(private dataService: DataService,
+     public eventemitter: EmitterService,
+      public cartservice: GetDataService,
+       private toastr: ToastrService,
+        private loader: NgxUiLoaderService,
+        private modalService: NgbModal) { }
 
   items: any = [];
   ngOnInit(): void {
@@ -146,32 +154,37 @@ export class ShopComponent implements OnInit {
       element.itemcount = result.length ;
     });
   }
+  
   addtocart(data) {
+    debugger
     let items = [];
-    var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno);
+    var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno && x.itemno == data.itemno);
     let obj = {
       ID: data.rowno,
       itemname: data.itemname,
       itemno:data.itemno,
       price: data.saleprice,
-      quantity: 1,
-      amount:data.saleprice * 1
+      factorunitname:data.factorunitname,
+      factorunit:data.factorunit,
+      quantity: data.quantity ? data.quantity : 1,
+      amount:data.quantity ? data.saleprice * data.quantity :data.saleprice * 1
     }
     if (index < 0) {
       this.cartservice.cartdata.items.push(obj)
+      this.cartservice.cartdata.count = data.quantity ? this.cartservice.cartdata.count + data.quantity : this.cartservice.cartdata.count + 1;
     }
     else {
       this.cartservice.cartdata.items[index].amount = 0;
-      this.cartservice.cartdata.items[index].quantity = this.cartservice.cartdata.items[index].quantity + 1;
+      this.cartservice.cartdata.items[index].quantity = data.quantity ? this.cartservice.cartdata.count + data.quantity : this.cartservice.cartdata.count + 1;
 
       this.cartservice.cartdata.items[index].amount = this.cartservice.cartdata.items[index].quantity * this.cartservice.cartdata.items[index].price;
     }
-    this.cartservice.cartdata.count = this.cartservice.cartdata.count + 1;
+    // this.cartservice.cartdata.count = this.cartservice.cartdata.count + 1;
     // this.cartservice.cartdata.items = items;
     this.cartservice.cartdata.total = 0;
     for (let index = 0; index < this.cartservice.cartdata.items.length; index++) {
       const element = this.cartservice.cartdata.items[index];
-      this.cartservice.cartdata.total = this.cartservice.cartdata.total + element.amount;
+      this.cartservice.cartdata.total = (this.cartservice.cartdata.total + element.amount);
     }
     localStorage.setItem('cart-data', JSON.stringify(this.cartservice.cartdata))
   }
@@ -333,4 +346,57 @@ export class ShopComponent implements OnInit {
     
   }
   
+  checkitemunits(modalid,item)
+  {
+     if(item.itemunitsdetails.length > 0)
+     {
+       let units = item;
+        this.open(modalid,units);
+     }
+     else
+     {
+       this.addtocart(item);
+     }
+  }
+
+  open(modalid,data) {
+    console.log(modalid);
+    this.units = data;
+    this.modalService.open(modalid, {size: 'lg' }).result.then((result) => {
+        
+    }, (reason) => {
+      
+    });
+  }
+  selctunit(unit,item)
+  {
+    let index = this.selectedunits.findIndex(u => u.factorunit === unit.factorunit);
+    if(index != -1)
+    {
+      this.selectedunits.splice(index,1);
+    }
+    this.selectedunits.push({ 
+      ID: unit.factorunit,
+      itemname: item.itemname,
+      itemno:item.itemno,
+      factorunit:unit.factorunit,
+      factorunitname:unit.factorunitname,
+      saleprice: unit.dsaleprice,
+      quantity: unit.qty,
+      amount:unit.dsaleprice * unit.qty,
+      rowno :unit.factorunit
+    });
+      
+  }
+  calctotal(unit)
+  {
+     unit.total =  unit.qty * unit.dsaleprice;
+  }
+  saveunit()
+  {
+    this.selectedunits.forEach(element => {
+      this.addtocart(element)
+    });
+    this.modalService.dismissAll();
+  }
 }

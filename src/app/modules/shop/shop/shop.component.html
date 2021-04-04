@@ -263,8 +263,9 @@
                                                 <div class="actions-secondary">
                                                     <a href="wishlist.html" data-toggle="tooltip"
                                                         title="Add to Wishlist"><i class="fa fa-heart"></i></a>
-                                                    <a class="add-cart" (click)="addtocart(item)" data-toggle="tooltip"
+                                                    <a class="add-cart" (click)="checkitemunits(content,item)" data-toggle="tooltip"
                                                         title="Add to Cart">Add To Cart</a>
+                                                        
                                                     <a href="compare.html" data-toggle="tooltip"
                                                         title="Add to Compare"><i class="fa fa-signal"></i></a>
                                                 </div>
@@ -312,7 +313,7 @@
                                             <div class="actions-secondary">
                                                 <a href="wishlist.html" data-toggle="tooltip" title="Add to Wishlist"><i
                                                         class="fa fa-heart"></i></a>
-                                                <a class="add-cart" (click)="addtocart(item)" data-toggle="tooltip"
+                                                <a class="add-cart" (click)="checkitemunits(item)" data-toggle="tooltip"
                                                     title="Add to Cart">Add To Cart</a>
                                                 <a href="compare.html" data-toggle="tooltip" title="Add to Compare"><i
                                                         class="fa fa-signal"></i></a>
@@ -385,3 +386,48 @@
 </div>
 
 <!-- Shop Page End -->
+
+<!-- Template for modal unit selection -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Unit Selection of <span><strong>{{units.itemname}}</strong></span></h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                       <tr>
+                           <td></td>
+                           <td>Unit no</td>
+                           <td>Unit name</td>
+                           <td>Price</td>
+                           <td>Quanity</td>
+                           <td>Total</td>
+                       </tr>
+                    </thead>
+                   <tbody>
+                       <tr *ngFor="let unit of units.itemunitsdetails">
+                           <td><input type="checkbox" [disabled]="unit.qty == 0 || unit.qty == null" (change)="selctunit(unit,units)"></td>
+                           <td>{{unit.factorunit}}</td>
+                          <td>{{unit.factorunitname}}</td>
+                          <td>{{unit.dsaleprice}}</td>
+                          <td><input type="number" name="qty" (change)="calctotal(unit)" [(ngModel)]="unit.qty"></td>
+                          <td><input type="number" name="total{{unit.factorunit}}" [(ngModel)]="unit.total"></td>
+                      </tr>
+                   </tbody>
+       
+                </table>
+            </div>
+        
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="saveunit()">Save</button>
+    </div>
+  </ng-template>

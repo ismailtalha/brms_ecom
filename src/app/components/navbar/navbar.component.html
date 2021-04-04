@@ -172,6 +172,7 @@
                                             </div>
                                             <div class="cart-content">
                                                 <h6><a href="product.html">{{item.itemname}}</a></h6>
+                                                <h6 *ngIf="item.factorunitname">{{item.factorunitname}}<small>({{item.factorunit}})</small></h6>
                                                 <span>{{item.quantity}} ×{{item.price}}</span>
                                             </div>
                                             <a  class="del-icone" (click)="remove(item)"><i class="fa fa-window-close-o"></i></a>
@@ -181,7 +182,7 @@
                                         <!-- Cart Box End -->
                                         <!-- Cart Footer Inner Start -->
                                         <div class="cart-footer fix">
-                                            <h5>total :<span class="f-right">{{cartservice.cartdata.total}}</span></h5>
+                                            <h5>total :<span class="f-right">{{cartservice.cartdata.total | number : '1.2-2'}}</span></h5>
                                             <div class="cart-actions" *ngIf="cartservice?.cartdata?.count != 0">
                                                 <a class="checkout" routerLink ="/order/checkout" href="javascript:void(0)">Checkout</a>
                                             </div>
@@ -190,7 +191,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="javascript:void(0)" *ngIf="cartservice?.cartdata?.count == 0" ><i class="fa fa-money"></i><span class="cart-counter">{{cartservice.cartdata.total}}</span></a></li>
+                            <li><a href="javascript:void(0)" *ngIf="cartservice?.cartdata?.count == 0" ><i class="fa fa-money"></i><span class="cart-counter">{{cartservice.cartdata.total | number : '1.2-2'}}</span></a></li>
                             
                             <li><a   *ngIf="cartservice?.cartdata?.count != 0" routerLink ="/order/checkout"  href="javascript:void(0)"><i class="fa fa-money"></i><span class="cart-counter">{{cartservice.cartdata.total}}</span></a></li>
                         </ul>
