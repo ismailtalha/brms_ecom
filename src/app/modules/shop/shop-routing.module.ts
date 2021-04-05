@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FeaturedComponent } from './featured/featured.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { NewarivalComponent } from './newarival/newarival.component';
 import { ShopComponent } from './shop/shop.component';
 
 
@@ -11,6 +13,16 @@ const routes: Routes = [
       {
         path: '',
         component: ShopComponent,
+        
+      } ,
+      {
+        path: 'featured',
+        component: FeaturedComponent,
+        
+      } ,
+      {
+        path: 'newarrival',
+        component: NewarivalComponent,
         
       } ,
       {

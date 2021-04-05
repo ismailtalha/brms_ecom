@@ -177,7 +177,7 @@
 
                     <div class="col-lg-6 col-md-6">
                         <div class="your-order" >
-                            <div id="cartbill" #cartbill>
+                            <div >
                             <h3>Your order</h3>
                             <div class="your-order-table table-responsive">
                                 <table>
@@ -187,7 +187,7 @@
                                             <th class="product-total">Total ({{getdataservice?.companydata[0]?.currency}})</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody >
                                         <tr class="cart_item" *ngFor="let item of getdataservice?.cartdata?.items">
                                             <td class="product-name">
                                                 <h4>{{item.itemname}}</h4> <strong *ngIf="item.factorunitname">{{item.factorunitname}}<small>({{item.factorunit}})</small></strong> <strong class="product-quantity"> × {{item.quantity}}</strong>
@@ -209,7 +209,36 @@
                                             </td>
                                         </tr>
                                     </tfoot>
+
                                 </table>
+                                    <table [style.display]="'none'">
+                                        <img [src]="companydata" id="getlogo" name="logoimg">
+                                        <tbody id="cartbill" #cartbill>
+                                            <tr *ngFor="let item of getdataservice?.cartdata?.items">
+                                                <td>{{item.itemname}}</td>
+                                                <td>{{item.factorunitname}}</td>
+                                                <td>{{item.price}}</td>
+                                                <td>{{item.quantity}}</td>
+                                                <td>{{item.amount}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>SubTotal</td>
+                                                <td>{{getdataservice?.cartdata?.total | number : '1.2-2'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td>Total</td>
+                                                <td>{{getdataservice?.cartdata?.total | number : '1.2-2'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                 
+                              
                             </div>
                         </div>
                             <div class="payment-method">

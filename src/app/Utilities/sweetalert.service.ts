@@ -7,21 +7,21 @@ export class SweetalertService {
 
   constructor() { }
 
-  successtwobuttons(text)
+  successtwobuttons(text,compname)
   {
     return  Swal.fire({
-          title: '<strong>Order Status</strong>',
+          title: '<strong> Order # <b>' + text + '</b>, `</strong>',
           icon: 'success',
           html:
-          'Order has been Placed,</b>, '+
-            `Order #<b>${text}</b>, `,
+          'Thank you for shopping at' + compname  + ', your order has been received. You can view the order details from the my orders option located on the top right. ,</b>, '
+           ,
           showCloseButton: true,
           showCancelButton: true,
           focusConfirm: false,
           showDenyButton: true,
-          denyButtonText: `Direct Print Order`,
+          denyButtonText: `Print Order`,
           confirmButtonText:
-            '<i class="fa fa-print"></i> Print Order',
+            '<i class="fa fa-print"></i>Export PDF',
           confirmButtonAriaLabel: 'Export PDF',
           cancelButtonText:
             'OK',

@@ -11,9 +11,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FeaturedComponent } from './featured/featured.component';
 import { NewarivalComponent } from './newarival/newarival.component';
 import { OwlModule } from 'ngx-owl-carousel';
+import { BaseshopComponent } from './baseshop/baseshop.component';
 
 @NgModule({
-  declarations: [ShopComponent, ItemDetailComponent, FeaturedComponent, NewarivalComponent],
+  declarations: [ShopComponent, ItemDetailComponent, FeaturedComponent, NewarivalComponent, BaseshopComponent],
   imports: [
     CommonModule,
     ShopRoutingModule,
