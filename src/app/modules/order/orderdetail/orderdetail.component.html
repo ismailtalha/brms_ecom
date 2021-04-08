@@ -1,0 +1,92 @@
+<div class="wrapper">
+    <div class="log-in pb-60">
+        <div class="container">
+<h3>Order Information</h3>
+            <div class="row mt-5">
+                        <div class="dashboard-upper-info">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Order No</span></p>
+                                        {{singleitem?.docno}}
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Order Date</span></p>
+                                        {{singleitem?.docdate | date: 'fullDate'}}
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Order Total</span></p>
+                                        {{singleitem?.totalamount}}
+                                    </div>
+                                </div>
+                               
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <span style="font-weight: 600;">Order Status</span> :
+                                        {{singleitem?.orderstatusname}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Order Status</span></p>
+                                        {{singleitem?.orderstatusname}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-1"></div>
+                              
+                            </div>
+                        </div>
+
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Item no</th>
+                                <th>Item Name</th>
+                                <th>Unit Name</th>
+                                <th>Category Name</th>
+                                <th>Brand Name</th>
+                                <th>Group Name</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let order of itemslist | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                                <td>{{order.itemno}}</td>
+                                <td>{{order.itemname}}</td>
+                                <td>{{order.unitname}}</td>
+                                <td>{{order.productname}}</td>
+                                <td>{{order.makename}}</td>
+                                <td>{{order.itemgroupname}}</td>
+                                <td>{{order.quantity}}</td>
+                                <td>{{order.price}}</td>
+                                <td>{{order.amount}}</td>
+
+
+                            </tr>
+
+                            <!-- <tr>
+                <td>2</td>
+                <td>May 10, 2018</td>
+                <td>Processing</td>
+                <td>$17.00 for 1 item </td>
+                <td><a class="view" href="cart.html">view</a></td>
+            </tr> -->
+                        </tbody>
+                    </table>
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

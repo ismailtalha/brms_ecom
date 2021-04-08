@@ -112,4 +112,11 @@ export class DataService {
   {
     return this.http.post(url + "sldsaleorderhdr/post" , data);
   }
+  getOrders() {
+    return this.http.get(url + 'sldsaleorderhdr/get');
+  }
+  getsingleorder(id) {
+    console.log(id)
+    return this.http.get(url + `sldsaleorderhdr/get?no=${id}`);
+  }
 }

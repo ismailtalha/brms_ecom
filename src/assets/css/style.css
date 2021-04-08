@@ -1081,8 +1081,13 @@ ul.ht-dropdown.dropdown-style-two li {
 .pro-img {
     position: relative;
     margin-bottom: 20px;
+    height: 270px;
+    object-fit: contain;
 }
-
+img.primary-img {
+    height: 100%; 
+    width: 100%;
+}
 .pro-img img {
     width: 100%;
     -webkit-backface-visibility: hidden;
@@ -1101,6 +1106,8 @@ ul.ht-dropdown.dropdown-style-two li {
 
 .single-product:hover .pro-img .secondary-img {
     opacity: 1;
+    width: 100%;
+    height: 100%;
 }
 
 .pro-content {

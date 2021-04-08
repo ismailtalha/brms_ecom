@@ -1,0 +1,10 @@
+.dashboard-upper-info [class*="col-"]:not(:last-child) .d-single-info {
+    border-right: 1px solid #ebebeb;
+    border-left: 1px solid #ebebeb;
+}
+.dashboard-upper-info {
+     border-bottom: none; 
+     border-top:none; 
+    margin-bottom: 50px;
+    width: 100%;
+}

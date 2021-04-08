@@ -9,105 +9,32 @@
             <tr>
                 <th>Order</th>
                 <th>Date</th>
-                <th>Status</th>
                 <th>Total</th>
-                <th>Actions</th>	 	 	 	
+                <th>Status</th>
+                <th>Detail</th>	 	 	 	
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$25.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
+            <tr *ngFor="let order of orders | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                <td>{{order.docno}}</td>
+                <td>{{order.docdate | date: 'fullDate'}}</td>
+                <td>{{order.totalamount}}</td>
+                <td>{{order.orderstatusname}}</td>
+                <td><a routerLink="/order/orderdetail/{{order.docno}}">Detail</a></td>
+
+               
             </tr>
-            <tr>
+          
+            <!-- <tr>
                 <td>2</td>
                 <td>May 10, 2018</td>
                 <td>Processing</td>
                 <td>$17.00 for 1 item </td>
                 <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr>
+            </tr> -->
         </tbody>
     </table>
+    <pagination-controls (pageChange)="p = $event"></pagination-controls>
 </div>
             </div>
         </div>
