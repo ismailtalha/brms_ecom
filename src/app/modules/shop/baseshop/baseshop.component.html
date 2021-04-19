@@ -48,7 +48,8 @@
                                                     value={{group.itemgroupno}}
                                                     (change)="filter(group.itemgroupno,'itemgroup')">&nbsp;<label
                                                     style="color: black;"
-                                                    for="{{group.itemgroupno}}">{{group.itemgroupname}} ({{group.itemcount}})</label></li>
+                                                    for="{{group.itemgroupno}}">{{group.itemgroupname}}
+                                                    ({{group.itemcount}})</label></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -82,7 +83,7 @@
                                                 <input type="checkbox" id="{{cat.productno}}" value={{cat.productno}}
                                                     (change)="filter(cat.productno,'category')">&nbsp;<label
                                                     style="color:black" for="{{cat.productno}}">
-                                                    {{cat.productname}}  ({{cat.itemcount}})</label>
+                                                    {{cat.productname}} ({{cat.itemcount}})</label>
                                             </li>
                                         </ul>
                                     </div>
@@ -125,7 +126,7 @@
                     </div>
 
 
-                  
+
                     <!-- <div class="single-sidebar">
                         <div class="group-title">
                             <h2>color</h2>
@@ -187,7 +188,7 @@
                         </div>
                     </div> -->
 
-                  
+
 
 
 
@@ -205,8 +206,8 @@
                 <div class="grid-list-top border-default universal-padding fix mb-30">
                     <div class="grid-list-view f-left">
                         <ul class="list-inline nav">
-                            <li><a data-toggle="tab"class="active" href="#grid-view"><i class="fa fa-th"></i></a></li>
-                            <li><a  data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a>
+                            <li><a data-toggle="tab" class="active" href="#grid-view"><i class="fa fa-th"></i></a></li>
+                            <li><a data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a>
                             </li>
                             <li><span class="grid-item-list"> Items {{items.length}} of {{totalitemscount}}</span></li>
                         </ul>
@@ -217,10 +218,12 @@
                             <label>sort by</label>
                             <select class="sorter" name="sorter" (change)="changesortby($event)">
                                 <option value="saleprice">Price</option>
-                                
+
                             </select>
-                            <span *ngIf="sortup"><span href="#"><i class="fa fa-arrow-up" (click)="applysort('up')"></i></span></span>
-                            <span *ngIf="sortdown"><span href="#"><i class="fa fa-arrow-down" (click)="applysort('down')"></i></span></span>
+                            <span *ngIf="sortup"><span href="#"><i class="fa fa-arrow-up"
+                                        (click)="applysort('up')"></i></span></span>
+                            <span *ngIf="sortdown"><span href="#"><i class="fa fa-arrow-down"
+                                        (click)="applysort('down')"></i></span></span>
                         </div>
                     </div>
                     <!-- Toolbar Short Area End -->
@@ -238,11 +241,22 @@
                                         <!-- Product Image Start -->
                                         <div class="pro-img">
                                             <a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
-                                                <img class="primary-img" src="data:image/jpeg;base64,{{item.itemimagelogo}}"
-                                               
-                                                    alt="single-product">
-                                                <img class="secondary-img" src="data:image/jpeg;base64,{{item.itemimagelogo}}"
-                                                    alt="single-product">
+                                                <div *ngIf="item?.itemimagelogo; else noImage">
+                                                    <img class="primary-img"
+                                                    src="data:image/jpeg;base64,{{item.itemimagelogo}}"
+                                                    alt="">
+                                                <img class="secondary-img"
+                                                    src="data:image/jpeg;base64,{{item.itemimagelogo}}"
+                                                    alt="">
+                                                </div>
+                                                    <ng-template #noImage>
+                                                        <img class="primary-img"
+                                                        src="../../../../assets/ItemImages/default-product-image.png"
+                                                        alt="">
+                                                    <img class="secondary-img"
+                                                        src="../../../../assets/ItemImages/default-product-image.png"
+                                                        alt="">
+                                                    </ng-template>
                                             </a>
                                         </div>
                                         <!-- Product Image End -->
@@ -259,14 +273,14 @@
                                                     href="javascript:void(0)">{{item.itemname}}</a></h4>
                                             <p><span class="price">{{cartservice?.companydata[0]?.currency}}
                                                     {{item.saleprice}}</span> </p>
-                                                    <p>{{item.itemdetails}}</p>
+                                            <p>{{item.itemdetails}}</p>
                                             <div class="pro-actions">
                                                 <div class="actions-secondary">
                                                     <a href="wishlist.html" data-toggle="tooltip"
                                                         title="Add to Wishlist"><i class="fa fa-heart"></i></a>
-                                                    <a class="add-cart" (click)="checkitemunits(content,item)" data-toggle="tooltip"
-                                                        title="Add to Cart">Add To Cart</a>
-                                                        
+                                                    <a class="add-cart" (click)="checkitemunits(content,item)"
+                                                        data-toggle="tooltip" title="Add to Cart">Add To Cart</a>
+
                                                     <a href="compare.html" data-toggle="tooltip"
                                                         title="Add to Compare"><i class="fa fa-signal"></i></a>
                                                 </div>
@@ -287,10 +301,28 @@
                                     <!-- Product Image Start -->
                                     <div class="pro-img">
                                         <a a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
-                                            <img class="primary-img" src="data:image/jpeg;base64,{{item.itemimagelogo}}"
-                                                alt="single-product">
-                                            <img class="secondary-img" src="data:image/jpeg;base64,{{item.itemimagelogo}}"
-                                                alt="single-product">
+                                            <div *ngIf="item?.itemimagelogo; else noImage">
+                                                <img class="primary-img"
+                                                src="data:image/jpeg;base64,{{item.itemimagelogo}}"
+                                                alt="">
+                                            <img class="secondary-img"
+                                                src="data:image/jpeg;base64,{{item.itemimagelogo}}"
+                                                alt="">
+                                            </div>
+                                                <ng-template #noImage>
+                                                    <img class="primary-img"
+                                                    src="../../../../assets/ItemImages/default-product-image.png"
+                                                    alt="">
+                                                <img class="secondary-img"
+                                                    src="../../../../assets/ItemImages/default-product-image.png"
+                                                    alt="">
+                                                </ng-template>
+                                            
+
+                                               
+                                               
+                                           
+                                         
                                         </a>
                                     </div>
                                     <!-- Product Image End -->
@@ -305,8 +337,8 @@
                                         </div> -->
                                         <h4><a routerLink="/shop/itemdetail/{{item.itemno}}"
                                                 href="javascript:void(0)">{{item.itemname}}</a></h4>
-                                        <p><span
-                                                class="price">{{cartservice?.companydata[0]?.currency}} {{item.saleprice}}</span>
+                                        <p><span class="price">{{cartservice?.companydata[0]?.currency}}
+                                                {{item.saleprice}}</span>
                                         </p>
                                         <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati velit, similique voluptas doloribus assumenda quis libero animi cumque dignissimos quisquam, quaerat ea laboriosam incidunt ullam.</p> -->
                                         <p>{{item.itemdetails}}</p>
@@ -391,44 +423,47 @@
 <!-- Template for modal unit selection -->
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Unit Selection of <span><strong>{{units.itemname}}</strong></span></h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title" id="modal-basic-title">Unit Selection of
+            <span><strong>{{units.itemname}}</strong></span></h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body">
-      <form>
-        <div class="form-group">
-            <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                       <tr>
-                           <td></td>
-                           <td>Unit no</td>
-                           <td>Unit name</td>
-                           <td>Price</td>
-                           <td>Quanity</td>
-                           <td>Total</td>
-                       </tr>
-                    </thead>
-                   <tbody>
-                       <tr *ngFor="let unit of units.itemunitsdetails">
-                           <td><input type="checkbox" [disabled]="unit.qty == 0 || unit.qty == null" (change)="selectunit(unit,units)"></td>
-                           <td>{{unit.factorunit}}</td>
-                          <td>{{unit.factorunitname}}</td>
-                          <td>{{unit.dsaleprice}}</td>
-                          <td><input type="number" name="qty" (change)="calctotal(unit)" [(ngModel)]="unit.qty"></td>
-                          <td><input type="number" name="total{{unit.factorunit}}" [(ngModel)]="unit.total"></td>
-                      </tr>
-                   </tbody>
-       
-                </table>
+        <form>
+            <div class="form-group">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td>Unit no</td>
+                                <td>Unit name</td>
+                                <td>Price</td>
+                                <td>Quanity</td>
+                                <td>Total</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let unit of units.itemunitsdetails">
+                                <td><input type="checkbox" [disabled]="unit.qty == 0 || unit.qty == null"
+                                        (change)="selectunit(unit,units)"></td>
+                                <td>{{unit.factorunit}}</td>
+                                <td>{{unit.factorunitname}}</td>
+                                <td>{{unit.dsaleprice}}</td>
+                                <td><input type="number" name="qty" (change)="calctotal(unit)" [(ngModel)]="unit.qty">
+                                </td>
+                                <td><input type="number" name="total{{unit.factorunit}}" [(ngModel)]="unit.total"></td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+
             </div>
-        
-        </div>
-      </form>
+        </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark"  (click)="saveunit()">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="saveunit()">Save</button>
     </div>
-  </ng-template>
+</ng-template>

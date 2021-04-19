@@ -151,5 +151,14 @@ export class NavbarComponent implements OnChanges {
       this.route.navigate(["shop"])
     }
 
-
+    clearcart()
+    {
+      this.cartservice.cartdata.count = 0;
+      this.cartservice.cartdata.total = 0;
+      this.cartservice.cartdata.items = [];
+      if(localStorage.getItem('cart-data'))
+      {
+        localStorage.removeItem('cart-data')
+      }
+    }
 }

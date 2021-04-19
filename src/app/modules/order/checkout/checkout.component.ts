@@ -97,11 +97,11 @@ export class CheckoutComponent implements OnInit {
 
         this.displaybox.successtwobuttons(res.docno,this.getdataservice.companydata[0].companyname).then((result) => {
           console.log('aqwasdasdas', result)
+          // if (result.isConfirmed) {
+          //   this.orderresponse = res.docno;
+          //   this.generatepdf(this.orderresponse)
+          // }
           if (result.isConfirmed) {
-            this.orderresponse = res.docno;
-            this.generatepdf(this.orderresponse)
-          }
-          if (result.isDenied) {
             this.orderresponse = res;
             this.print.directprint(this.orderresponse,this.getdataservice.companydata[0],'cartbill','getlogo')
           }

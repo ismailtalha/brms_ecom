@@ -66,7 +66,7 @@
             <div class="row">
                 <div class="col-xl-3 col-lg-2 col-sm-5 col-5">
                     <div class="logo">
-                        <a routerLink ="/shop" href="javascript:void(0)"><img  [src]="cartservice?.companydata?.logo" alt="logo-image" style="width:36%;"></a>
+                        <a routerLink ="/shop" href="javascript:void(0)"><img  [src]="cartservice?.companydata?.logo" alt="logo-image"></a>
                     </div>
                 </div>
                 <!-- Primary Vertical-Menu End -->
@@ -162,9 +162,13 @@
                             </li>                                    
                             
                             <li><a href="#"><i class="fa fa-shopping-basket"></i><span class="cart-counter">{{cartservice.cartdata.count}}</span></a>
+                               
                                 <ul class="ht-dropdown main-cart-box">
                                    
                                     <li >
+                                        <div class="cart-actions mb-5" *ngIf="cartservice?.cartdata?.count != 0">
+                                            <a class="clearcart" (click)="clearcart()" href="javascript:void(0)">Clear Cart</a>
+                                        </div>
                                         <!-- Cart Box Start -->
                                         <div class="single-cart-box" *ngFor="let item of cartservice?.cartdata?.items">
                                             <div class="cart-img">

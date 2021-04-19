@@ -15,14 +15,15 @@ export class SweetalertService {
           html:
           'Thank you for shopping at' + compname  + ', your order has been received. You can view the order details from the my orders option located on the top right. ,</b>, '
            ,
-          showCloseButton: true,
+          showCloseButton: false,
           showCancelButton: true,
           focusConfirm: false,
           showDenyButton: false,
-          denyButtonText: `Print Order`,
+
+          denyButtonText: `Print`,
           confirmButtonText:
-            '<i class="fa fa-print"></i>Export PDF',
-          confirmButtonAriaLabel: 'Export PDF',
+            '<i class="fa fa-print"></i>Order',
+          confirmButtonAriaLabel: 'Order',
           cancelButtonText:
             'OK',
           cancelButtonAriaLabel: 'OK'
