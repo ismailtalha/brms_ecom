@@ -44,10 +44,10 @@ export class LoginComponent implements OnInit {
        this.loader.stop();
        if(cust.userno != null)
        {
-         debugger
+         
         if(cust.password == this.loginform.value.password)
         {
-          debugger
+          
           this.getdataservice.customer.customerdata = JSON.stringify(cust);
           localStorage.setItem('customer',JSON.stringify(cust))
           localStorage.setItem('isLogin',"true");

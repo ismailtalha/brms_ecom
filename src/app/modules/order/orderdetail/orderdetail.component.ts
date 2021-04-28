@@ -14,7 +14,8 @@ import { GetDataService } from 'src/app/services/getdata.service';
 export class OrderdetailComponent implements OnInit {
   singleitem: {};
    itemslist: any = [];
-   itemsPerPage=5
+   itemsPerPage=5;
+   selected:any;
 
   constructor(public cartservice:GetDataService,private dataService: DataService, private loader: NgxUiLoaderService,
     private router: Router,
@@ -24,6 +25,11 @@ export class OrderdetailComponent implements OnInit {
   ngOnInit(): void {
     this.getsingleorder()
   }
+  statusarr = [{'orderstatusno':'01' , 'orderstatusname' : "Pending"},
+  {'orderstatusno':'02' , 'orderstatusname' : "Dispatched"},
+  {'orderstatusno':'03' , 'orderstatusname' : "Delivered"},
+  {'orderstatusno':'04' , 'orderstatusname' : "Invoiced"},
+  {'orderstatusno':'05' , 'orderstatusname' : "Closed"}]
 
   getsingleorder() {
 
@@ -31,14 +37,33 @@ export class OrderdetailComponent implements OnInit {
       let id = this.route.snapshot.params.id;
       this.loader.start();
       this.dataService.getsingleorder(id).subscribe((res:any) => {
-debugger
+
         this.singleitem = {};
         this.itemslist = [];
         this.singleitem = res ;
+        this.selected = this.getstatus(res.orderstatusno)
         this.itemslist = this.singleitem["sldsaleorderdtls"];
         console.log(res?.data)
         this.loader.stop();
       })
     }
+    }
+getstatus(no)
+{
+ let value = this.statusarr.filter((sttaus) => sttaus.orderstatusno == no)
+ return value[0];
+}
+    changestatus()
+    {
+      
+      this.loader.start();
+      this.singleitem["orderstatusno"] = this.selected.orderstatusno;
+      this.singleitem["orderstatusname"] = this.selected.orderstatusname;
+      this.dataService.createorder(this.singleitem).subscribe((res:any) => {
+        this.loader.stop();
+        this.selected.orderstatusno = res.orderstatusno
+        alert('done')
+      })
+     
     }
 }

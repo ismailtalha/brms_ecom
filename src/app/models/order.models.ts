@@ -18,5 +18,10 @@ export class ordercheckoutmodel{
     errortext: any;
     deliverylocation:string;
     sldsaleorderdtls:any=[];
+    docno:any;
+    totalamount:any;
+    currency:any;
+    docdate:any;
+    companyname:any;
 }
     

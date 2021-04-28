@@ -11,12 +11,14 @@ import { GetDataService } from 'src/app/services/getdata.service';
 import { SweetalertService } from '../../../Utilities/sweetalert.service';
 import {htmlToPdfmake} from "html-to-pdfmake"
 import { PrintService } from 'src/app/Utilities/print.service';
+import { DatePipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.css']
+  styleUrls: ['./checkout.component.css'],
+  providers: [DatePipe]
 })
 export class CheckoutComponent implements OnInit {
   enableprint: boolean = false;
@@ -24,15 +26,21 @@ export class CheckoutComponent implements OnInit {
   constructor(private router: Router, private cookies: CookieService, public displaybox: SweetalertService, public getdataservice: GetDataService,
     private dataService: DataService,
     private loader: NgxUiLoaderService,
-    private toastr: ToastrService, private fb: FormBuilder , private print : PrintService) { }
+    private toastr: ToastrService, private fb: FormBuilder , private print : PrintService,private datePipe: DatePipe) { }
 
   @ViewChild('cartbill', { static: false }) cartbill: ElementRef;
   checkout: FormGroup;
   loginform: FormGroup;
   submitted = false;
   orderresponse :any;
+  getcurrentdate()
+  {
+    let currdate : any= new Date();
+    currdate = this.datePipe.transform(currdate, 'yyyy-MM-dd');
+    return currdate;
+  }
   ngOnInit(): void {
-    debugger
+    
     this.companydata = this.getdataservice.companydata.logo;
     if (localStorage.getItem("isLogin") != "true") {
       this.router.navigate(["/auth/login"])
@@ -49,7 +57,7 @@ export class CheckoutComponent implements OnInit {
     })
 
     let localStorageCustomer = localStorage.getItem('customer');
-    debugger
+    
     if (this.getdataservice.customer.customerdata || localStorageCustomer) {
       let cust = this.getdataservice.customer.customerdata == undefined ? JSON.parse(localStorageCustomer) : JSON.parse(this.getdataservice.customer.customerdata);
       this.checkout.patchValue({
@@ -67,7 +75,7 @@ export class CheckoutComponent implements OnInit {
 
   ordercheckout() {
 
-    debugger
+    
     this.submitted = true;
     this.getdataservice.customer.isLogin = true;
     if (this.checkout.valid) {
@@ -76,6 +84,7 @@ export class CheckoutComponent implements OnInit {
 
       let customer = this.checkout.value;
       let serviceobj = JSON.parse(this.getdataservice.customer.customerdata);
+      let companyobj = this.getdataservice.companydata;
       this.getdataservice.ordercheckoutmodel.custno = serviceobj.custno;
       this.getdataservice.ordercheckoutmodel.custname = customer.custname,
         this.getdataservice.ordercheckoutmodel.contact = customer.contact,
@@ -86,6 +95,10 @@ export class CheckoutComponent implements OnInit {
         this.getdataservice.ordercheckoutmodel.manualcustno = "",
         this.getdataservice.ordercheckoutmodel.custtype = customer.custtype,
         this.getdataservice.ordercheckoutmodel.email = customer.email;
+        this.getdataservice.ordercheckoutmodel.docdate = this.getcurrentdate();
+        this.getdataservice.ordercheckoutmodel.currency = companyobj[0].currency;
+        this.getdataservice.ordercheckoutmodel.companyname = companyobj[0].companyname;
+        this.getdataservice.ordercheckoutmodel.totalamount = this.getdataservice.cartdata.total;
       this.getdataservice.ordercheckoutmodel.sldsaleorderdtls = this.getdataservice.cartdata.items;
       orderobj.deliverylocation = customer.address + customer.address2;
       orderobj.userno = serviceobj.userno;
@@ -179,7 +192,7 @@ export class CheckoutComponent implements OnInit {
 //   }
 
   PrintPartOfPage() {
-    debugger
+    
     this.enableprint = true
 
     var html = '<h1 style="color:blue">hello</h1><div id="printhtml"></div>'
@@ -266,7 +279,7 @@ export class CheckoutComponent implements OnInit {
     });
   }
   generatepdf(orderno) {
-    debugger
+    
     const doc = new jsPDF();
     // const pdfTable = this.creatpdfhtml();
     const specialElementHandlers = {

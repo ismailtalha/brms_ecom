@@ -61,7 +61,7 @@ export class BaseshopComponent implements OnInit {
        }
       public getfiltereditems()
       {
-        debugger
+        
         if(this.pagetype == "isfeatured")
         {
           return this.items.filter(i => i.isfeatured == true && i.isnewarrival == false) 
@@ -114,7 +114,7 @@ export class BaseshopComponent implements OnInit {
        }
        
        addtocart(data) {
-         debugger
+         
          let items = [];
          var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno && x.itemno == data.itemno);
          let obj = {
@@ -129,14 +129,15 @@ export class BaseshopComponent implements OnInit {
          }
          if (index < 0) {
            this.cartservice.cartdata.items.push(obj)
-           this.cartservice.cartdata.count = data.quantity ? this.cartservice.cartdata.count + data.quantity : this.cartservice.cartdata.count + 1;
+           this.cartservice.cartdata.count = data.quantity ? (this.cartservice.cartdata.count + data.quantity) : (this.cartservice.cartdata.count + 1);
          }
          else {
            this.cartservice.cartdata.items[index].amount = 0;
            this.cartservice.cartdata.items[index].quantity = data.quantity ? this.cartservice.cartdata.count + data.quantity : this.cartservice.cartdata.count + 1;
      
            this.cartservice.cartdata.items[index].amount = this.cartservice.cartdata.items[index].quantity * this.cartservice.cartdata.items[index].price;
-         }
+           this.cartservice.cartdata.count = data.quantity ? (this.cartservice.cartdata.count + data.quantity) : (this.cartservice.cartdata.count + 1);
+          }
          // this.cartservice.cartdata.count = this.cartservice.cartdata.count + 1;
          // this.cartservice.cartdata.items = items;
          this.cartservice.cartdata.total = 0;
@@ -287,7 +288,7 @@ export class BaseshopComponent implements OnInit {
      
        applysort(direction)
        {
-         debugger
+         
         let sortby = this.sortby;
          if(direction == "up")
          {
@@ -328,9 +329,9 @@ export class BaseshopComponent implements OnInit {
        }
        selectunit(unit,item)
        {
-         debugger
+         
        
-          
+         this.selectedunits = [];
           let index = this.selectedunits.findIndex(u => u.factorunit === unit.factorunit);
           if(index != -1)
           {

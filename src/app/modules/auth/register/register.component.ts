@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
   // }
   get register() { return this.customer.controls; }
   create() {
-    debugger
+    
     this.submitted = true;
     if (this.customer.valid) {
       let userobj = {

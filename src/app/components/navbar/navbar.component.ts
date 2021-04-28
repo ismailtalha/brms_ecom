@@ -71,7 +71,7 @@ export class NavbarComponent implements OnChanges {
   }
   search(pname)
   {
-    debugger
+    
     this.eventemitter.emit('searchproduct',pname)
   }
   reload()
@@ -153,6 +153,7 @@ export class NavbarComponent implements OnChanges {
 
     clearcart()
     {
+      
       this.cartservice.cartdata.count = 0;
       this.cartservice.cartdata.total = 0;
       this.cartservice.cartdata.items = [];

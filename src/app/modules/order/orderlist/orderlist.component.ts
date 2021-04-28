@@ -26,7 +26,7 @@ export class OrderlistComponent implements OnInit {
   getorders() {
       this.loader.start();
       this.dataService.getOrders().subscribe((res:any) => {
-debugger
+
         
         this.orders = res ;
         this.loader.stop();

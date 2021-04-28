@@ -1,8 +1,24 @@
 <div class="wrapper">
     <div class="log-in pb-60">
         <div class="container">
-<h3>Order Information</h3>
+           <div class="row">
+               <div class="col-lg-2">
+                <div class="mt-5">
+                 
+                        <h5>Change Status</h5>
+                        <select [(ngModel)]="selected" (change)="changestatus()" class="form-select" aria-label="Default select example">
+                            <option *ngFor="let status of statusarr"  [ngValue]="status">{{status.orderstatusname}}</option>
+                            
+                          </select>
+                   
+                </div>      
+               </div>
+           </div>
             <div class="row mt-5">
+              
+                    
+    <h3>Order Information</h3>
+
                         <div class="dashboard-upper-info">
                             <div class="row no-gutters align-items-center">
                                 <div class="col-lg-1"></div>
@@ -35,57 +51,92 @@
                                 </div>
                                 <div class="col-lg-2 col-md-6">
                                     <div class="d-single-info text-center">
-                                        <p><span style="font-weight: 600;">Order Status</span></p>
-                                        {{singleitem?.orderstatusname}}
+                                        <p><span style="font-weight: 600;">Currency</span></p>
+                                        {{singleitem?.currency}}
                                     </div>
                                 </div>
-                                <div class="col-lg-1"></div>
                               
                             </div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-lg-1"></div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Customer Name</span></p>
+                                        {{singleitem?.custname}}
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Delivery Address</span></p>
+                                        {{singleitem?.deliverylocation}}
+                                        
+                                    </div>
+                                </div>
+                              
+                               
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Discount</span></p>
+                                        {{singleitem?.totaldiscount}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Total GST</span></p>
+                                        {{singleitem?.totalgst}}
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6">
+                                    <div class="d-single-info text-center">
+                                        <p><span style="font-weight: 600;">Free Charges</span></p>
+                                        {{singleitem?.freightcharges }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Item no</th>
-                                <th>Item Name</th>
-                                <th>Unit Name</th>
-                                <th>Category Name</th>
-                                <th>Brand Name</th>
-                                <th>Group Name</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let order of itemslist | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
-                                <td>{{order.itemno}}</td>
-                                <td>{{order.itemname}}</td>
-                                <td>{{order.unitname}}</td>
-                                <td>{{order.productname}}</td>
-                                <td>{{order.makename}}</td>
-                                <td>{{order.itemgroupname}}</td>
-                                <td>{{order.quantity}}</td>
-                                <td>{{order.price}}</td>
-                                <td>{{order.amount}}</td>
-
-
-                            </tr>
-
-                            <!-- <tr>
-                <td>2</td>
-                <td>May 10, 2018</td>
-                <td>Processing</td>
-                <td>$17.00 for 1 item </td>
-                <td><a class="view" href="cart.html">view</a></td>
-            </tr> -->
-                        </tbody>
-                    </table>
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                </div>
+                        <div class="col-lg-12">
+                            <!-- Tab panes -->
+                            <div class="tab-content dashboard-content mt-all-40">
+                              
+                                <div id="orders" class="tab-pane fade active show">
+                                    <h3>Order Detail</h3>
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Item no</th>
+                                                    <th>Item Name</th>
+                                                    <th>Unit Name</th>
+                                                    <th>Category Name</th>
+                                                    <th>Brand Name</th>
+                                                    <th>Group Name</th>
+                                                    <th>Qty</th>
+                                                    <th>Price</th>
+                                                    <th>Total</th> 	 	 	
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let order of itemslist | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                                                    <td>{{order.itemno}}</td>
+                                                    <td>{{order.itemname}}</td>
+                                                    <td>{{order.unitname}}</td>
+                                                    <td>{{order.productname}}</td>
+                                                    <td>{{order.makename}}</td>
+                                                    <td>{{order.itemgroupname}}</td>
+                                                    <td>{{order.quantity}}</td>
+                                                    <td>{{order.price}}</td>
+                                                    <td>{{order.amount}}</td>
+                    
+                    
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+             
             </div>
         </div>
     </div>

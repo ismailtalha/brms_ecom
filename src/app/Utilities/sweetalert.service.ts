@@ -22,7 +22,7 @@ export class SweetalertService {
 
           denyButtonText: `Print`,
           confirmButtonText:
-            '<i class="fa fa-print"></i>Order',
+            '<i class="fa fa-print"></i>Print',
           confirmButtonAriaLabel: 'Order',
           cancelButtonText:
             'OK',

@@ -35,7 +35,7 @@ export class ItemDetailComponent implements OnInit {
     }
   }
   addtocart(data) {
-    debugger
+    
     let items = [];
     var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno && x.itemno == data.itemno);
     let obj = {
@@ -136,7 +136,7 @@ export class ItemDetailComponent implements OnInit {
      console.log('idddddddddd' , id)
       this.loader.start();
       this.dataService.getsingleProduct(id).subscribe((res:any) => {
-debugger
+
         this.singleitem = {};
         this.singleitem = res ;
         console.log(res?.data)
@@ -146,7 +146,7 @@ debugger
     }
     checkitemunits(modalid,item)
     {
-      debugger
+      
 
       if(item.itemunitsdetails != null)
       {

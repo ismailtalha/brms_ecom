@@ -1,14 +1,19 @@
 import { Injectable } from '@angular/core';
+import { formatDate} from '@angular/common';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
+  
 })
+
 export class PrintService {
 
   constructor() { }
-
+  
   directprint(order,company,id,imgid)
   {
+   
+   let formateddate = formatDate( order.docdate, 'yyyy-mm-dd', 'en-US');
     var html = '<h1 style="color:blue">hello</h1><div id="printhtml"></div>'
     var prtContent = document.getElementById(id);
     let logo = document.getElementById(imgid);
@@ -35,15 +40,15 @@ export class PrintService {
                     <div class="billed"><span class="info-labels">Location:</span><span class="ml-1">${order.deliverylocation}</span></div>
                     <div class="billed"><span class="info-labels">Description:</span><span class="ml-1">${order.description}</span></div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 text-center">
                      <h4 class="text-primary font-weight-bold mb-0">${company.companyname}</h4>
                     </div>
                 <div class="col-md-4 text-right mt-3">
                    
-                     <div ><span class="info-labels">Company Address:</span><span class="ml-1">${company.address}</span></div>
+                     <div ><span class="info-labels">Company Address:</span><span class="ml-1">${company.adres}</span></div>
                     <div class="billed"><span class="info-labels">Order no:</span><span class="ml-1">${order.docno}</span></div>
-                    <div class="billed"><span class="info-labels">Order Date:</span><span class="ml-1">${order.docdate}</span></div>
-                    <div class="billed"><span class="info-labels">Currency:</span><span class="ml-1">${order.paymentterm}</span></div>
+                    <div class="billed"><span class="info-labels">Order Date:</span><span class="ml-1">${formateddate}</span></div>
+                    <div class="billed"><span class="info-labels">Currency:</span><span class="ml-1">${company.currency}</span></div>
                     <div class="billed"><span class="info-labels">Term:</span><span class="ml-1">${order.paymentterm}</span></div>
                 </div>
             </div>
@@ -54,9 +59,9 @@ export class PrintService {
                             <tr>
                             <th>Sno</th>
                                 <th>Item Description</th>
-                                <th>UnitName</th>
                                 <th>Unit</th>
-                                <th>Price</th>
+                                <th>Rate</th>
+                                <th>Qty</th>
                                 <th>Total</th>
                             </tr>
                         </thead>

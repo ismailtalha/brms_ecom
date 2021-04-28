@@ -214,7 +214,8 @@
                                     <table [style.display]="'none'">
                                         <img [src]="companydata" id="getlogo" name="logoimg">
                                         <tbody id="cartbill" #cartbill>
-                                            <tr *ngFor="let item of getdataservice?.cartdata?.items">
+                                            <tr *ngFor="let item of getdataservice?.cartdata?.items let i = index">
+                                               <td >{{i+1}}</td>
                                                 <td>{{item.itemname}}</td>
                                                 <td>{{item.factorunitname}}</td>
                                                 <td>{{item.price}}</td>
@@ -225,10 +226,12 @@
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
+                                                <td></td>
                                                 <td>SubTotal</td>
                                                 <td>{{getdataservice?.cartdata?.total | number : '1.2-2'}}</td>
                                             </tr>
                                             <tr>
+                                                <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
