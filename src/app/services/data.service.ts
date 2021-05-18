@@ -7,7 +7,7 @@ const url = environment.url;
   providedIn: 'root'
 })
 export class DataService {
-
+  authtoken = localStorage.getItem('authtoken');
   constructor(private http: HttpClient) { }
 
  
@@ -76,7 +76,7 @@ export class DataService {
   }
   getsinglecustomer(id)
   {
-    return this.http.get(url +`custinfo/get?no=${id}`);
+    return this.http.get(url +`custinfo/get?no=${id}&authenticationtoken=${this.authtoken}`);
   }
 
 
@@ -113,10 +113,10 @@ export class DataService {
     return this.http.post(url + "sldsaleorderhdr/post" , data);
   }
   getOrders() {
-    return this.http.get(url + 'sldsaleorderhdr/get');
+    return this.http.get(url + `sldsaleorderhdr/get?authenticationtoken=${this.authtoken}`);
   }
   getsingleorder(id) {
     console.log(id)
-    return this.http.get(url + `sldsaleorderhdr/get?no=${id}`);
+    return this.http.get(url + `sldsaleorderhdr/get?no=${id}?authenticationtoken=${this.authtoken}`);
   }
 }

@@ -330,14 +330,14 @@ export class BaseshopComponent implements OnInit {
        selectunit(unit,item)
        {
          
-       
-         this.selectedunits = [];
-          let index = this.selectedunits.findIndex(u => u.factorunit === unit.factorunit);
+       debugger
+          let index = this.cartservice.units.units.findIndex(u => u.factorunit === unit.factorunit && u.itemname == unit.itemno);
           if(index != -1)
           {
-            this.selectedunits.splice(index,1);
+            this.cartservice.units.units.splice(index,1);
+            return;
           }
-          this.selectedunits.push({ 
+          this.cartservice.units.units.push({ 
             ID: unit.factorunit,
             itemname: item.itemname,
             itemno:item.itemno,
@@ -352,12 +352,13 @@ export class BaseshopComponent implements OnInit {
        }
        calctotal(unit)
        {
+         debugger
          if(unit.qty == 0 || unit.qty == null)
          {
-          let index = this.selectedunits.findIndex(u => u.factorunit === unit.factorunit);
+          let index = this.cartservice.units.units.findIndex(u => u.factorunit === unit.factorunit);
           if(index != -1)
           {
-            this.selectedunits.splice(index,1)
+            this.cartservice.units.units.splice(index,1)
           }
         
             return;
@@ -366,9 +367,10 @@ export class BaseshopComponent implements OnInit {
        }
        saveunit()
        {
-         if(this.selectedunits.length != 0)
+         debugger
+         if(this.cartservice.units.units.length != 0)
          {
-          this.selectedunits.forEach(element => {
+          this.cartservice.units.units.forEach(element => {
             this.addtocart(element)
           });
           this.modalService.dismissAll();

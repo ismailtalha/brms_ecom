@@ -5,12 +5,18 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginLayoutComponent } from './layouts/login-layout/login-layout.component';
 import { FullLayoutComponent } from './layouts/full-layout/full-layout.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'shop',
+    redirectTo: 'age',
     pathMatch: 'full',
+  },
+  {
+    path: '', component: BlankLayoutComponent, children: [
+      { path: 'age', loadChildren: './modules/ageverification/ageverification.module#AgeverificationModule', canActivate: [AuthGuardService] }
+    ]
   },
   {
     path: '',
@@ -32,7 +38,7 @@ const routes: Routes = [
         path: 'company',
         loadChildren: './modules/company/company.module#CompanyModule', canActivate: [AuthGuardService]
       },
-       {
+      {
         path: 'order',
         loadChildren: './modules/order/order.module#OrderModule', canActivate: [AuthGuardService]
       },

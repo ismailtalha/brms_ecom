@@ -81,10 +81,7 @@ export class RegisterComponent implements OnInit {
         usertype: "normal",
       }
       this.loader.start();
-      this.dataService.getsinglecustomer(this.customer.value.userno).subscribe((custinfo: any) => {
-        if(custinfo.userno == null)
-        {
-          let customerobj = this.customer.value;
+      let customerobj = this.customer.value;
           customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
           customerobj.contact =  this.customer.value.phone;
           customerobj.password  = this.customer.value.password;
@@ -103,19 +100,41 @@ export class RegisterComponent implements OnInit {
             this.toastr.error("error", "Database Connectivity")
             this.loader.stop();
           })
-        }
-        else
-        {
-          this.toastr.error("error", "Customer ALready Exist")
-          this.loader.stop();
-        }
-        }
-        , (error) => {
-          console.log(error);
-          this.toastr.show(error, "Error Messege");
-          this.toastr.error("error", "Database Connectivity")
-          this.loader.stop();
-        })
+      // this.dataService.getsinglecustomer(this.customer.value.userno).subscribe((custinfo: any) => {
+      //   if(custinfo.userno == null)
+      //   {
+      //     let customerobj = this.customer.value;
+      //     customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
+      //     customerobj.contact =  this.customer.value.phone;
+      //     customerobj.password  = this.customer.value.password;
+      //     this.dataService.createCustomer(customerobj).subscribe((customer: any) => {
+      //       this.getdataservice.customer.customerdata = JSON.stringify(customer) ;
+      //       localStorage.setItem('customer', customer);
+      //       this.loader.stop();
+      //       this.router.navigate(['shop']);
+      //       localStorage.setItem('isLogin',"true");
+      //       this.toastr.success("Register Successfully")
+  
+  
+      //     }, (error) => {
+      //       console.log(error);
+      //       this.toastr.show(error, "Error Messege");
+      //       this.toastr.error("error", "Database Connectivity")
+      //       this.loader.stop();
+      //     })
+      //   }
+      //   else
+      //   {
+      //     this.toastr.error("error", "Customer ALready Exist")
+      //     this.loader.stop();
+      //   }
+      //   }
+      //   , (error) => {
+      //     console.log(error);
+      //     this.toastr.show(error, "Error Messege");
+      //     this.toastr.error("error", "Database Connectivity")
+      //     this.loader.stop();
+      //   })
 
 
 

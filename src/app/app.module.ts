@@ -16,6 +16,7 @@ import {CookieService} from 'ngx-cookie-service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { NgxUiLoaderModule } from 'ngx-ui-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { ToastrModule } from 'ngx-toastr';
   declarations: [
     AppComponent,
     FullLayoutComponent,
-    LoginLayoutComponent
+    LoginLayoutComponent,
+    BlankLayoutComponent
   ],
   providers: [
     {

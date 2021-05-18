@@ -23,5 +23,6 @@ export class ordercheckoutmodel{
     currency:any;
     docdate:any;
     companyname:any;
+    authenticationtoken:any;
 }
     

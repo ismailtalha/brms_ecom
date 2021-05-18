@@ -8,6 +8,7 @@ import { customer } from "../models/customer.model";
 import { user } from "../models/user.model";
 import { brands } from "../models/brands.models";
 import { ordercheckoutmodel } from "../models/order.models";
+import { unit } from "../models/unit.models";
 
 
 
@@ -23,6 +24,7 @@ import { ordercheckoutmodel } from "../models/order.models";
     customer : customer;
     user:user;
     brands:brands;
+    units:unit;
     ordercheckoutmodel:ordercheckoutmodel;
     constructor() {
          this.cartdata = new cart();
@@ -34,6 +36,7 @@ import { ordercheckoutmodel } from "../models/order.models";
          this.user = new user();
          this.brands = new brands();
          this.ordercheckoutmodel = new ordercheckoutmodel();
+         this.units = new unit();
      }
 
    

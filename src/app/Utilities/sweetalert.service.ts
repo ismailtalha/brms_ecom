@@ -13,7 +13,7 @@ export class SweetalertService {
           title: '<strong> Order # <b>' + text + '</b>, `</strong>',
           icon: 'success',
           html:
-          'Thank you for shopping at' + compname  + ', your order has been received. You can view the order details from the my orders option located on the top right. ,</b>, '
+          'Thank you for shopping at ' + compname  + ', your order has been received. You can view the order details from the my orders option located on the top right. ,</b>, '
            ,
           showCloseButton: false,
           showCancelButton: true,

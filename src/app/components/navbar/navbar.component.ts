@@ -119,7 +119,7 @@ export class NavbarComponent implements OnChanges {
   }
   remove(item)
   {
-    
+    debugger
     var index = this.cartservice.cartdata.items.findIndex(x => x.ID === item.ID && x.itemno == item.itemno);
     if(index >= 0)
     {
@@ -130,6 +130,7 @@ export class NavbarComponent implements OnChanges {
       localStorage.removeItem('cart-data');
       localStorage.setItem('cart-data',JSON.stringify(this.cartservice.cartdata) )
     }
+    let unitindex = this.cartservice.units.units.findIndex(u => u.factorunit === item.factorunit && u.itemname == item.itemno);
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -153,7 +154,7 @@ export class NavbarComponent implements OnChanges {
 
     clearcart()
     {
-      
+      let index = this.cartservice.units.units=[];
       this.cartservice.cartdata.count = 0;
       this.cartservice.cartdata.total = 0;
       this.cartservice.cartdata.items = [];

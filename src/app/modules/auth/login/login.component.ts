@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
           this.getdataservice.customer.customerdata = JSON.stringify(cust);
           localStorage.setItem('customer',JSON.stringify(cust))
           localStorage.setItem('isLogin',"true");
+          localStorage.setItem('authtoken',cust.authenticationtoken);
           this.getdataservice.customer.isLogin ?  this.router.navigate(["checkout"]) : this.router.navigate(["shop"]);
          
           this.toastr.success("Login Successfully")
