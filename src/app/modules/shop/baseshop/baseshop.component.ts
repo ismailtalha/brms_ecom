@@ -114,7 +114,7 @@ export class BaseshopComponent implements OnInit {
        }
        
        addtocart(data) {
-         
+         debugger
          let items = [];
          var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno && x.itemno == data.itemno);
          let obj = {
@@ -124,6 +124,8 @@ export class BaseshopComponent implements OnInit {
            price: data.saleprice,
            factorunitname:data.factorunitname,
            factorunit:data.factorunit,
+           factorno:data.factorunit,
+           baseunitno:data.factorunit,
            quantity: data.quantity ? data.quantity : 1,
            amount:data.quantity ? data.saleprice * data.quantity :data.saleprice * 1
          }
@@ -131,13 +133,13 @@ export class BaseshopComponent implements OnInit {
            this.cartservice.cartdata.items.push(obj)
            this.cartservice.cartdata.count = data.quantity ? (this.cartservice.cartdata.count + data.quantity) : (this.cartservice.cartdata.count + 1);
          }
-         else {
-           this.cartservice.cartdata.items[index].amount = 0;
-           this.cartservice.cartdata.items[index].quantity = data.quantity ? this.cartservice.cartdata.count + data.quantity : this.cartservice.cartdata.count + 1;
+        //  else {
+        //    this.cartservice.cartdata.items[index].amount = 0;
+        //    this.cartservice.cartdata.items[index].quantity = data.quantity ? this.cartservice.cartdata.count + data.quantity : this.cartservice.cartdata.count + 1;
      
-           this.cartservice.cartdata.items[index].amount = this.cartservice.cartdata.items[index].quantity * this.cartservice.cartdata.items[index].price;
-           this.cartservice.cartdata.count = data.quantity ? (this.cartservice.cartdata.count + data.quantity) : (this.cartservice.cartdata.count + 1);
-          }
+        //    this.cartservice.cartdata.items[index].amount = this.cartservice.cartdata.items[index].quantity * this.cartservice.cartdata.items[index].price;
+        //    this.cartservice.cartdata.count = data.quantity ? (this.cartservice.cartdata.count + data.quantity) : (this.cartservice.cartdata.count + 1);
+        //   }
          // this.cartservice.cartdata.count = this.cartservice.cartdata.count + 1;
          // this.cartservice.cartdata.items = items;
          this.cartservice.cartdata.total = 0;
@@ -343,6 +345,8 @@ export class BaseshopComponent implements OnInit {
             itemno:item.itemno,
             factorunit:unit.factorunit,
             factorunitname:unit.factorunitname,
+            factorno:unit.factorunit,
+            baseunitno:unit.factorunit,
             saleprice: unit.dsaleprice,
             quantity: unit.qty,
             amount:unit.dsaleprice * unit.qty,

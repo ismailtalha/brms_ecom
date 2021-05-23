@@ -45,6 +45,8 @@ export class ItemDetailComponent implements OnInit {
       price: data.saleprice,
       factorunitname:data.factorunitname,
       factorunit:data.factorunit,
+      factorno:data.factorunit,
+      baseunitno:data.factorunit,
       quantity: data.quantity ? data.quantity : + this.itemdetail.value.numpad,
       amount:data.quantity ? data.saleprice * data.quantity :data.saleprice * + this.itemdetail.value.numpad
     }
@@ -189,6 +191,9 @@ export class ItemDetailComponent implements OnInit {
         itemno:item.itemno,
         factorunit:unit.factorunit,
         factorunitname:unit.factorunitname,
+        factorno:unit.factorunit,
+        baseunitno:unit.factorunit,
+        unitname:unit.factorunitname,
         saleprice: unit.dsaleprice,
         quantity: unit.qty,
         amount:unit.dsaleprice * unit.qty,

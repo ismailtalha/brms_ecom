@@ -117,6 +117,6 @@ export class DataService {
   }
   getsingleorder(id) {
     console.log(id)
-    return this.http.get(url + `sldsaleorderhdr/get?no=${id}?authenticationtoken=${this.authtoken}`);
+    return this.http.get(url + `sldsaleorderhdr/get?no=${id}&authenticationtoken=${this.authtoken}`);
   }
 }

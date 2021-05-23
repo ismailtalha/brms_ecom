@@ -7,19 +7,31 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Order</th>
+                <th>Sno</th>
+                <th>Order #</th>
                 <th>Date</th>
-                <th>Total</th>
+                <th>Customer Name</th>
+                <th>Total Amount</th>
+                <th>Discount</th>
+                <th>Delivery Charges</th>
+                <th>Net Amount</th>
                 <th>Status</th>
-                <th>Detail</th>	 	 	 	
+                <th>Delivery Location</th>
+                <th>Action</th>	 	 	 	
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let order of orders | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+            <tr *ngFor="let order of orders | paginate: { itemsPerPage: itemsPerPage, currentPage: p } ; let i = index">
+               <td>{{i+1}}</td>
                 <td>{{order.docno}}</td>
                 <td>{{order.docdate | date: 'fullDate'}}</td>
+                <td>{{order.custname}}</td>
                 <td>{{order.totalamount}}</td>
+                <td>{{order.totaldiscount}}</td>
+                <td>{{order.freightcharges}}</td>
+                <td>{{order.totalnetamount}}</td>
                 <td>{{order.orderstatusname}}</td>
+                <td>{{deliverylocation}}</td>
                 <td><a routerLink="/order/orderdetail/{{order.docno}}">Detail</a></td>
 
                

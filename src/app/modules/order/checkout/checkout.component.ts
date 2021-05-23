@@ -9,7 +9,7 @@ import { ordercheckoutmodel } from 'src/app/models/order.models';
 import { DataService } from 'src/app/services/data.service';
 import { GetDataService } from 'src/app/services/getdata.service';
 import { SweetalertService } from '../../../Utilities/sweetalert.service';
-import {htmlToPdfmake} from "html-to-pdfmake"
+import { htmlToPdfmake } from "html-to-pdfmake"
 import { PrintService } from 'src/app/Utilities/print.service';
 import { DatePipe } from '@angular/common';
 
@@ -26,21 +26,20 @@ export class CheckoutComponent implements OnInit {
   constructor(private router: Router, private cookies: CookieService, public displaybox: SweetalertService, public getdataservice: GetDataService,
     private dataService: DataService,
     private loader: NgxUiLoaderService,
-    private toastr: ToastrService, private fb: FormBuilder , private print : PrintService,private datePipe: DatePipe) { }
+    private toastr: ToastrService, private fb: FormBuilder, private print: PrintService, private datePipe: DatePipe) { }
 
   @ViewChild('cartbill', { static: false }) cartbill: ElementRef;
   checkout: FormGroup;
   loginform: FormGroup;
   submitted = false;
-  orderresponse :any;
-  getcurrentdate()
-  {
-    let currdate : any= new Date();
+  orderresponse: any;
+  getcurrentdate() {
+    let currdate: any = new Date();
     currdate = this.datePipe.transform(currdate, 'yyyy-MM-dd');
     return currdate;
   }
   ngOnInit(): void {
-    
+
     this.companydata = this.getdataservice.companydata.logo;
     if (localStorage.getItem("isLogin") != "true") {
       this.router.navigate(["/auth/login"])
@@ -54,11 +53,11 @@ export class CheckoutComponent implements OnInit {
       password: [{ value: null, disabled: true }, [Validators.required]],
       userno: [{ value: null, disabled: true }, [Validators.required]],
       phone: [{ value: null, disabled: false }],
-      authenticationtoken:[null]
+      authenticationtoken: [null]
     })
 
     let localStorageCustomer = localStorage.getItem('customer');
-    
+
     if (this.getdataservice.customer.customerdata || localStorageCustomer) {
       let cust = this.getdataservice.customer.customerdata == undefined ? JSON.parse(localStorageCustomer) : JSON.parse(this.getdataservice.customer.customerdata);
       this.checkout.patchValue({
@@ -76,11 +75,11 @@ export class CheckoutComponent implements OnInit {
 
   ordercheckout() {
 
-    
+
     this.submitted = true;
     this.getdataservice.customer.isLogin = true;
     if (this.checkout.valid) {
-     
+
       this.loader.start();
       let orderobj = this.getdataservice.ordercheckoutmodel;
 
@@ -97,21 +96,23 @@ export class CheckoutComponent implements OnInit {
         this.getdataservice.ordercheckoutmodel.manualcustno = "",
         this.getdataservice.ordercheckoutmodel.custtype = customer.custtype,
         this.getdataservice.ordercheckoutmodel.email = customer.email;
-        this.getdataservice.ordercheckoutmodel.docdate = this.getcurrentdate();
-        this.getdataservice.ordercheckoutmodel.currency = companyobj[0].currency;
-        this.getdataservice.ordercheckoutmodel.companyname = companyobj[0].companyname;
-        this.getdataservice.ordercheckoutmodel.totalamount = this.getdataservice.cartdata.total;
+      this.getdataservice.ordercheckoutmodel.docdate = this.getcurrentdate();
+      this.getdataservice.ordercheckoutmodel.currency = companyobj[0].currency;
+      this.getdataservice.ordercheckoutmodel.companyname = companyobj[0].companyname;
+      this.getdataservice.ordercheckoutmodel.totalamount = this.getdataservice.cartdata.total;
       this.getdataservice.ordercheckoutmodel.sldsaleorderdtls = this.getdataservice.cartdata.items;
       orderobj.deliverylocation = customer.address + customer.address2;
       orderobj.userno = serviceobj.userno;
-     orderobj.authenticationtoken = localStorage.getItem('authtoken')
+      orderobj.authenticationtoken = localStorage.getItem('authtoken')
+      // orderobj.authenticationtoken = "ismailadminlogtime:5/23/20215:12:39AM";
       console.log(orderobj);
       this.dataService.createorder(orderobj).subscribe((res: any) => {
         console.log('result', res)
 
         this.loader.stop();
 
-        this.displaybox.successtwobuttons(res.docno,this.getdataservice.companydata[0].companyname).then((result) => {
+
+        this.displaybox.successtwobuttons(res.docno, this.getdataservice.companydata[0].companyname).then((result) => {
           console.log('aqwasdasdas', result)
           // if (result.isConfirmed) {
           //   this.orderresponse = res.docno;
@@ -119,7 +120,7 @@ export class CheckoutComponent implements OnInit {
           // }
           if (result.isConfirmed) {
             this.orderresponse = res;
-            this.print.directprint(this.orderresponse,this.getdataservice.companydata[0],'cartbill','getlogo')
+            this.print.directprint(this.orderresponse, this.getdataservice.companydata[0], 'cartbill', 'getlogo')
           }
           this.router.navigate(["shop"]);
           this.reset();
@@ -129,89 +130,89 @@ export class CheckoutComponent implements OnInit {
     }
 
   }
-//   creatpdfhtmltoprint(order,company,html)
-//   {
-//     var html = '<h1 style="color:blue">hello</h1><div id="printhtml"></div>'
-//     var prtContent = document.getElementById('cartbill');
-//     let logo = document.getElementById('getlogo');
-//     var img = document.createElement("img");
-//     img.src = logo["src"];
-//     let logoimg = img; 
-//     let mywindow = window.open('', '', 'left=100,top=100,width=2000,height=600');
-//     mywindow.document.write('<html><head><title></title>');
-//    mywindow.document.write('</head><body >');
-//     mywindow.document.write(`
-//     <style>
+  //   creatpdfhtmltoprint(order,company,html)
+  //   {
+  //     var html = '<h1 style="color:blue">hello</h1><div id="printhtml"></div>'
+  //     var prtContent = document.getElementById('cartbill');
+  //     let logo = document.getElementById('getlogo');
+  //     var img = document.createElement("img");
+  //     img.src = logo["src"];
+  //     let logoimg = img; 
+  //     let mywindow = window.open('', '', 'left=100,top=100,width=2000,height=600');
+  //     mywindow.document.write('<html><head><title></title>');
+  //    mywindow.document.write('</head><body >');
+  //     mywindow.document.write(`
+  //     <style>
 
 
-//   PrintPartOfPage() {
-    
-//     this.enableprint = true
+  //   PrintPartOfPage() {
 
-//     var html = '<h1 style="color:blue">hello</h1><div id="printhtml"></div>'
-//     var prtContent = document.getElementById('cartbill');
-//     let logo = document.getElementById('getlogo');
-//     var img = document.createElement("img");
-//     img.src = logo["src"];
-//     let logoimg = img; 
-//     var mywindow = window.open('', '', 'letf=100,top=100,width=2000,height=600');
-//     mywindow.document.write('<html><head><title></title>');
-//    mywindow.document.write('</head><body >');
-//     mywindow.document.write(`
-//     <style>
- 
-// /*# sourceMappingURL=bootstrap.min.css.map */
-// </style>
-//        <div class="container mt-1">
-//        <div class="d-flex justify-content-center row">
-//            <div class="col-md-12">
-//                <div class="p-3 bg-white rounded">
-//                    <div class="row">
-//                        <div class="col-md-6">
-//                        <img src=${logoimg.currentSrc} style="width:75px !important ; height:50px !importnt">
-//                            <div class="billed"><span class="info-labels">Customer:</span><span class="ml-1">${this.orderresponse.custname}</span></div>
-//                            <div class="billed"><span class="info-labels">Location:</span><span class="ml-1">${this.orderresponse.deliverylocation}</span></div>
-//                            <div class="billed"><span class="info-labels">Cust Type:</span><span class="ml-1">${this.orderresponse.custtype}</span></div>
-//                            <div class="billed"><span class="info-labels">Description:</span><span class="ml-1">${this.orderresponse.description}</span></div>
-//                            </div>
-//                        <div class="col-md-6 text-right mt-3">
-//                            <h4 class="text-primary font-weight-bold mb-0">${this.getdataservice.companydata[0].companyname}</h4>
-                           
-//                            <div class="billed"><span class="info-labels">Order no:</span><span class="ml-1">${this.orderresponse.docno}</span></div>
-//                            <div class="billed"><span class="info-labels">Order Date:</span><span class="ml-1">${this.orderresponse.docdate}</span></div>
-//                            <div class="billed"><span class="info-labels">Term:</span><span class="ml-1">${this.orderresponse.paymentterm}</span></div>
-//                        </div>
-//                    </div>
-//                    <div class="mt-3">
-//                        <div class="table-responsive">
-//                            <table class="table">
-//                                <thead>
-//                                    <tr>
-//                                        <th>Product</th>
-//                                        <th>UnitName</th>
-//                                        <th>Unit</th>
-//                                        <th>Price</th>
-//                                        <th>Total</th>
-//                                    </tr>
-//                                </thead>
-//                                ${prtContent.innerHTML}
-//                            </table>
-//                        </div>
-//                    </div>
-                  
-//                </div>
-//            </div>
-//        </div>
-//    </div>
-  
-//        `);
-//     mywindow.document.write('</body></html>');
-//     console.log('mywindow' , mywindow)
-//     mywindow.document.close();
-//     mywindow.focus();
-//     mywindow.print();
-//     console.log(mywindow)
-//   }
+  //     this.enableprint = true
+
+  //     var html = '<h1 style="color:blue">hello</h1><div id="printhtml"></div>'
+  //     var prtContent = document.getElementById('cartbill');
+  //     let logo = document.getElementById('getlogo');
+  //     var img = document.createElement("img");
+  //     img.src = logo["src"];
+  //     let logoimg = img; 
+  //     var mywindow = window.open('', '', 'letf=100,top=100,width=2000,height=600');
+  //     mywindow.document.write('<html><head><title></title>');
+  //    mywindow.document.write('</head><body >');
+  //     mywindow.document.write(`
+  //     <style>
+
+  // /*# sourceMappingURL=bootstrap.min.css.map */
+  // </style>
+  //        <div class="container mt-1">
+  //        <div class="d-flex justify-content-center row">
+  //            <div class="col-md-12">
+  //                <div class="p-3 bg-white rounded">
+  //                    <div class="row">
+  //                        <div class="col-md-6">
+  //                        <img src=${logoimg.currentSrc} style="width:75px !important ; height:50px !importnt">
+  //                            <div class="billed"><span class="info-labels">Customer:</span><span class="ml-1">${this.orderresponse.custname}</span></div>
+  //                            <div class="billed"><span class="info-labels">Location:</span><span class="ml-1">${this.orderresponse.deliverylocation}</span></div>
+  //                            <div class="billed"><span class="info-labels">Cust Type:</span><span class="ml-1">${this.orderresponse.custtype}</span></div>
+  //                            <div class="billed"><span class="info-labels">Description:</span><span class="ml-1">${this.orderresponse.description}</span></div>
+  //                            </div>
+  //                        <div class="col-md-6 text-right mt-3">
+  //                            <h4 class="text-primary font-weight-bold mb-0">${this.getdataservice.companydata[0].companyname}</h4>
+
+  //                            <div class="billed"><span class="info-labels">Order no:</span><span class="ml-1">${this.orderresponse.docno}</span></div>
+  //                            <div class="billed"><span class="info-labels">Order Date:</span><span class="ml-1">${this.orderresponse.docdate}</span></div>
+  //                            <div class="billed"><span class="info-labels">Term:</span><span class="ml-1">${this.orderresponse.paymentterm}</span></div>
+  //                        </div>
+  //                    </div>
+  //                    <div class="mt-3">
+  //                        <div class="table-responsive">
+  //                            <table class="table">
+  //                                <thead>
+  //                                    <tr>
+  //                                        <th>Product</th>
+  //                                        <th>UnitName</th>
+  //                                        <th>Unit</th>
+  //                                        <th>Price</th>
+  //                                        <th>Total</th>
+  //                                    </tr>
+  //                                </thead>
+  //                                ${prtContent.innerHTML}
+  //                            </table>
+  //                        </div>
+  //                    </div>
+
+  //                </div>
+  //            </div>
+  //        </div>
+  //    </div>
+
+  //        `);
+  //     mywindow.document.write('</body></html>');
+  //     console.log('mywindow' , mywindow)
+  //     mywindow.document.close();
+  //     mywindow.focus();
+  //     mywindow.print();
+  //     console.log(mywindow)
+  //   }
   reset() {
     this.getdataservice.cartdata.items = [];
     this.getdataservice.cartdata.count = 0;
@@ -232,7 +233,7 @@ export class CheckoutComponent implements OnInit {
   //   });
   // }
   generatepdf(orderno) {
-    
+
     const doc = new jsPDF();
     // const pdfTable = this.creatpdfhtml();
     const specialElementHandlers = {
@@ -246,8 +247,8 @@ export class CheckoutComponent implements OnInit {
     // });
 
     doc.save("Order-" + orderno + '.pdf');
-   // var val = htmlToPdfmake(pdfTable);
-   // var dd = {content:val};
-  //  htmlToPdfmake.pdfMake.createPdf(dd).download();
+    // var val = htmlToPdfmake(pdfTable);
+    // var dd = {content:val};
+    //  htmlToPdfmake.pdfMake.createPdf(dd).download();
   }
 }
