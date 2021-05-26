@@ -25,7 +25,8 @@ export class OrderlistComponent implements OnInit {
 
   getorders() {
       this.loader.start();
-      this.dataService.getOrders().subscribe((res:any) => {
+      let custinfo:any = localStorage.getItem('customer')
+      this.dataService.getcustomerorders(custinfo.userno).subscribe((res:any) => {
 
         
         this.orders = res ;

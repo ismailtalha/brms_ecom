@@ -119,4 +119,8 @@ export class DataService {
     console.log(id)
     return this.http.get(url + `sldsaleorderhdr/get?no=${id}&authenticationtoken=${this.authtoken}`);
   }
+  getcustomerorders(id) {
+    console.log(id)
+    return this.http.get(url + `sldsaleorderhdr/getbyuser?userno=${id}&authenticationtoken=${this.authtoken}`);
+  }
 }
