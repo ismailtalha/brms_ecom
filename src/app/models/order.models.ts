@@ -20,9 +20,14 @@ export class ordercheckoutmodel{
     sldsaleorderdtls:any=[];
     docno:any;
     totalamount:any;
+    totalnetamount:any;
+    totaldiscount:any;
+    paymentmethode:string;
+    //paymentmethodename:string;
     currency:any;
     docdate:any;
     companyname:any;
+    rowno:any;
     authenticationtoken:any;
 }
     

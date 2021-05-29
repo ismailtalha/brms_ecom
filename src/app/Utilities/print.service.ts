@@ -36,8 +36,8 @@ export class PrintService {
                 <div class="col-md-4">
                 <img src=${logoimg.currentSrc} style="width:75px !important ; height:50px !importnt">
                     <div class="billed"><span class="info-labels">Customer:</span><span class="ml-1">${order.custname}</span></div>
-                    <div class="billed"><span class="info-labels">Contact:</span><span class="ml-1">${order.deliverylocation}</span></div>
-                    <div class="billed"><span class="info-labels">Location:</span><span class="ml-1">${order.deliverylocation}</span></div>
+                    <div class="billed"><span class="info-labels">Contact:</span><span class="ml-1">${order.mobileno}</span></div>
+                    <div class="billed"><span class="info-labels">Delivery Location:</span><span class="ml-1">${order.deliverylocation}</span></div>
                     <div class="billed"><span class="info-labels">Description:</span><span class="ml-1">${order.description}</span></div>
                     </div>
                     <div class="col-md-4 text-center">
@@ -48,8 +48,8 @@ export class PrintService {
                      <div ><span class="info-labels">Company Address:</span><span class="ml-1">${company.adres}</span></div>
                     <div class="billed"><span class="info-labels">Order no:</span><span class="ml-1">${order.docno}</span></div>
                     <div class="billed"><span class="info-labels">Order Date:</span><span class="ml-1">${formateddate}</span></div>
-                    <div class="billed"><span class="info-labels">Currency:</span><span class="ml-1">${company.currency}</span></div>
-                    <div class="billed"><span class="info-labels">Term:</span><span class="ml-1">${order.paymentterm}</span></div>
+                    <div class="billed"><span class="info-labels">Currency:</span><span class="ml-1">${order.currency}</span></div>
+                    <div class="billed"><span class="info-labels">Payment Mode:</span><span class="ml-1">${order.paymentmethode}</span></div>
                 </div>
             </div>
             <div class="mt-3">
@@ -57,12 +57,14 @@ export class PrintService {
                     <table class="table">
                         <thead>
                             <tr>
-                            <th>Sno</th>
+                            <th>S.No</th>
                                 <th>Item Description</th>
                                 <th>Unit</th>
                                 <th>Rate</th>
                                 <th>Qty</th>
-                                <th>Total</th>
+                                <th>Amount</th>
+                                <th>Discount</th>
+                                <th>Net Amount</th>
                             </tr>
                         </thead>
                         ${prtContent.innerHTML}

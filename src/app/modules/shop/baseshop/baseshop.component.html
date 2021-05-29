@@ -273,7 +273,11 @@
                                                     href="javascript:void(0)">{{item.itemname}}</a></h4>
                                             <p><span class="price">{{cartservice?.companydata[0]?.currency}}
                                                     {{item.saleprice}}</span> </p>
-                                            <p>{{item.itemdetails}}</p>
+                                                    <!-- <p><span class="price">{In Stock : {{item.itemstockportaldisplay}}}
+                                                        {Discount % : {{item.discountpercentagePortalDisplay}}}</span> </p>                                                     -->
+                                                    <p>In Stock : {{item.itemstockportaldisplay}}</p>
+                                                    <p>Discount % : {{item.discountpercentagePortalDisplay}}</p>                                                    
+                                                    <p>{{item.itemdetails}}</p>
                                             <div class="pro-actions">
                                                 <div class="actions-secondary">
                                                     <a href="wishlist.html" data-toggle="tooltip"
@@ -338,9 +342,13 @@
                                         <h4><a routerLink="/shop/itemdetail/{{item.itemno}}"
                                                 href="javascript:void(0)">{{item.itemname}}</a></h4>
                                         <p><span class="price">{{cartservice?.companydata[0]?.currency}}
-                                                {{item.saleprice}}</span>
+                                                {{item.saleprice}} &nbsp In Stock : {{item.itemstockportaldisplay}} </span>
                                         </p>
+                                        <!-- <p><span class="price">{In Stock : {{item.itemstockportaldisplay}}}
+                                            {Discount % : {{item.discountpercentagePortalDisplay}}}</span> </p>  -->
                                         <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati velit, similique voluptas doloribus assumenda quis libero animi cumque dignissimos quisquam, quaerat ea laboriosam incidunt ullam.</p> -->
+                                        <p>In Stock : {{item.itemstockportaldisplay}}</p>
+                                        <p>Discount % : {{item.discountpercentagePortalDisplay}}</p>                                        
                                         <p>{{item.itemdetails}}</p>
                                         <div class="pro-actions">
                                             <div class="actions-secondary">
@@ -441,7 +449,10 @@
                                 <td>Unit name</td>
                                 <td>Price</td>
                                 <td>Quanity</td>
-                                <td>Total</td>
+                                <td>Amount</td>
+                                <td>Discount</td>
+                                <td>Net Amount</td>
+                                <td>Stock</td>
                             </tr>
                         </thead>
                         <tbody>
@@ -450,10 +461,15 @@
                                         (change)="selectunit(unit,units)"></td>
                                 <td>{{unit.factorunit}}</td>
                                 <td>{{unit.factorunitname}}</td>
-                                <td>{{unit.dsaleprice}}</td>
+                                <td>{{unit.dsaleprice}}</td>                                                                
                                 <td><input type="number" name="qty" (change)="calctotal(unit)" [(ngModel)]="unit.qty">
                                 </td>
                                 <td><input type="number" name="total{{unit.factorunit}}" [(ngModel)]="unit.total"></td>
+                                <td><input type="number" name="discount{unit.factorunit}}" [(ngModel)]="unit.discount"></td>
+                                <td><input type="number" name="netamount{{unit.factorunit}}" [(ngModel)]="unit.netamount"></td>
+                                <!-- <td><input type="number" name="discount{{unit.factorunit}}" [(ngModel)]="unit.discount"></td>
+                                <td><input type="number" name="netamount{{unit.factorunit}}" [(ngModel)]="unit.netamount"></td> -->
+                                <td>{{unit.itemunitstock}}</td>
                             </tr>
                         </tbody>
 

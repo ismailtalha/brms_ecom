@@ -117,6 +117,12 @@ export class BaseshopComponent implements OnInit {
          debugger
          let items = [];
          var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno && x.itemno == data.itemno);
+         var qty = data.quantity ? data.quantity : 1;
+         var price = data.saleprice;
+         var amount = qty*price;
+         var discountamount = (data.discountpercentagePortalDisplay/100)*amount;
+         var netamount = amount - discountamount;
+
          let obj = {
            ID: data.rowno,
            itemname: data.itemname,
@@ -125,9 +131,13 @@ export class BaseshopComponent implements OnInit {
            factorunitname:data.factorunitname,
            factorunit:data.factorunit,
            factorno:data.factorunit,
-           baseunitno:data.factorunit,
-           quantity: data.quantity ? data.quantity : 1,
-           amount:data.quantity ? data.saleprice * data.quantity :data.saleprice * 1
+           baseunitno:data.baseunitno,
+           discount:data.discountpercentagePortalDisplay,
+           quantity:qty,
+           amount:amount,
+           //quantity: data.quantity ? data.quantity : 1,
+           //amount:data.quantity ? data.saleprice * data.quantity :data.saleprice * 1,
+           netamount: netamount
          }
          if (index < 0) {
            this.cartservice.cartdata.items.push(obj)
@@ -143,9 +153,13 @@ export class BaseshopComponent implements OnInit {
          // this.cartservice.cartdata.count = this.cartservice.cartdata.count + 1;
          // this.cartservice.cartdata.items = items;
          this.cartservice.cartdata.total = 0;
+         this.cartservice.cartdata.totaldiscount = 0;
+         this.cartservice.cartdata.totalnetamount = 0;
          for (let index = 0; index < this.cartservice.cartdata.items.length; index++) {
            const element = this.cartservice.cartdata.items[index];
            this.cartservice.cartdata.total = (this.cartservice.cartdata.total + element.amount);
+           this.cartservice.cartdata.totalnetamount = (this.cartservice.cartdata.totalnetamount + element.netamount);
+           this.cartservice.cartdata.totaldiscount = (this.cartservice.cartdata.totaldiscount + (element.netamount - element.amount));
          }
          localStorage.setItem('cart-data', JSON.stringify(this.cartservice.cartdata))
        }
@@ -309,6 +323,7 @@ export class BaseshopComponent implements OnInit {
        
        checkitemunits(modalid,item)
        {
+         debugger
           if(item.itemunitsdetails.length > 0)
           {
             let units = item;
@@ -350,6 +365,8 @@ export class BaseshopComponent implements OnInit {
             saleprice: unit.dsaleprice,
             quantity: unit.qty,
             amount:unit.dsaleprice * unit.qty,
+            discount:unit.discount,
+            netamount:unit.netamount,
             rowno :unit.factorunit
           });
           
@@ -367,7 +384,11 @@ export class BaseshopComponent implements OnInit {
         
             return;
          }
-          unit.total =  unit.qty * unit.dsaleprice;
+         var amount = unit.qty * unit.dsaleprice;
+         var discountamount = (unit.discount/100)*amount;
+         var netamount = amount - discountamount;
+          unit.total =  amount;//unit.qty * unit.dsaleprice;
+          unit.netamount =  netamount;
        }
        saveunit()
        {

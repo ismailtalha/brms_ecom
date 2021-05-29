@@ -13,7 +13,6 @@ import { htmlToPdfmake } from "html-to-pdfmake"
 import { PrintService } from 'src/app/Utilities/print.service';
 import { DatePipe } from '@angular/common';
 
-
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -23,6 +22,7 @@ import { DatePipe } from '@angular/common';
 export class CheckoutComponent implements OnInit {
   enableprint: boolean = false;
   companydata;
+  paymentmethods:any=[];
   constructor(private router: Router, private cookies: CookieService, public displaybox: SweetalertService, public getdataservice: GetDataService,
     private dataService: DataService,
     private loader: NgxUiLoaderService,
@@ -33,13 +33,14 @@ export class CheckoutComponent implements OnInit {
   loginform: FormGroup;
   submitted = false;
   orderresponse: any;
+  paymentmethod:string;
   getcurrentdate() {
     let currdate: any = new Date();
     currdate = this.datePipe.transform(currdate, 'yyyy-MM-dd');
     return currdate;
   }
   ngOnInit(): void {
-
+debugger;
     this.companydata = this.getdataservice.companydata.logo;
     if (localStorage.getItem("isLogin") != "true") {
       this.router.navigate(["/auth/login"])
@@ -70,12 +71,30 @@ export class CheckoutComponent implements OnInit {
         phone: cust.phone
       })
     }
+
+    this.paymentmethods = this.dataService.getPaymentMethods().subscribe(), (error) => {
+      console.log(error);
+      this.toastr.show(error, "Error Messege");
+      this.toastr.error("error", "Database Connectivity")
+      this.loader.stop();
+    };
+    
+    
+
   }
   get order() { return this.checkout.controls; }
 
+  onPaymentMethodChange(value)
+  {
+    this.paymentmethod = value?.paymentmethod;
+    // this.checkout.patchValue({
+    //   productno : value?.productno
+    // })
+  }
   ordercheckout() {
 
 
+    debugger;
     this.submitted = true;
     this.getdataservice.customer.isLogin = true;
     if (this.checkout.valid) {
@@ -95,12 +114,16 @@ export class CheckoutComponent implements OnInit {
         this.getdataservice.ordercheckoutmodel.contactperson = customer.custno,
         this.getdataservice.ordercheckoutmodel.manualcustno = "",
         this.getdataservice.ordercheckoutmodel.custtype = customer.custtype,
-        this.getdataservice.ordercheckoutmodel.email = customer.email;
+        this.getdataservice.ordercheckoutmodel.email = customer.email,
+        this.getdataservice.ordercheckoutmodel.paymentmethode = customer.paymentmethod;
       this.getdataservice.ordercheckoutmodel.docdate = this.getcurrentdate();
       this.getdataservice.ordercheckoutmodel.currency = companyobj[0].currency;
       this.getdataservice.ordercheckoutmodel.companyname = companyobj[0].companyname;
       this.getdataservice.ordercheckoutmodel.totalamount = this.getdataservice.cartdata.total;
+      this.getdataservice.ordercheckoutmodel.totalnetamount = this.getdataservice.cartdata.totalnetamount;
+      this.getdataservice.ordercheckoutmodel.totaldiscount = this.getdataservice.cartdata.totaldiscount;
       this.getdataservice.ordercheckoutmodel.sldsaleorderdtls = this.getdataservice.cartdata.items;
+      
       orderobj.deliverylocation = customer.address + customer.address2;
       orderobj.userno = serviceobj.userno;
       orderobj.authenticationtoken = localStorage.getItem('authtoken')

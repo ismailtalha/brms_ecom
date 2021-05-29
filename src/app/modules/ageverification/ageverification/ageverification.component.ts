@@ -11,6 +11,7 @@ export class AgeverificationComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit(): void {
+    debugger;    
   }
 
   gotoshop()

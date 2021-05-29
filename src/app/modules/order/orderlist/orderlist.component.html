@@ -7,7 +7,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Sno</th>
+                <th>S.No</th>
                 <th>Order #</th>
                 <th>Date</th>
                 <th>Customer Name</th>
@@ -15,6 +15,7 @@
                 <th>Discount</th>
                 <th>Delivery Charges</th>
                 <th>Net Amount</th>
+                <th>Currency</th>
                 <th>Status</th>
                 <th>Delivery Location</th>
                 <th>Action</th>	 	 	 	
@@ -30,6 +31,7 @@
                 <td>{{order.totaldiscount}}</td>
                 <td>{{order.freightcharges}}</td>
                 <td>{{order.totalnetamount}}</td>
+                <td>{{order.currency}}</td>
                 <td>{{order.orderstatusname}}</td>
                 <td>{{deliverylocation}}</td>
                 <td><a routerLink="/order/orderdetail/{{order.docno}}">Detail</a></td>

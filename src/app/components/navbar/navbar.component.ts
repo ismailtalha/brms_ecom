@@ -157,6 +157,8 @@ export class NavbarComponent implements OnChanges {
       let index = this.cartservice.units.units=[];
       this.cartservice.cartdata.count = 0;
       this.cartservice.cartdata.total = 0;
+      this.cartservice.cartdata.totaldiscount = 0;
+      this.cartservice.cartdata.totalnetamount = 0;
       this.cartservice.cartdata.items = [];
       if(localStorage.getItem('cart-data'))
       {

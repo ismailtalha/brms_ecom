@@ -84,6 +84,10 @@ export class DataService {
   //   return this.http.get(url + '/api/item');
   // }
 
+  getPaymentMethods()
+  {
+    return this.http.get(url + `cobgeneraltypes/get?no=fipaymentinfo`);
+  }
    getProducts() {
     return this.http.get(url + `iteminfo/get`);
   }

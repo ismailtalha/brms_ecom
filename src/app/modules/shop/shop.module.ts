@@ -12,6 +12,8 @@ import { FeaturedComponent } from './featured/featured.component';
 import { NewarivalComponent } from './newarival/newarival.component';
 import { OwlModule } from 'ngx-owl-carousel';
 import { BaseshopComponent } from './baseshop/baseshop.component';
+import { TableModule } from 'primeng/table';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [ShopComponent, ItemDetailComponent, FeaturedComponent, NewarivalComponent, BaseshopComponent],
