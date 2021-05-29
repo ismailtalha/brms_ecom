@@ -22,7 +22,8 @@ import { DatePipe } from '@angular/common';
 export class CheckoutComponent implements OnInit {
   enableprint: boolean = false;
   companydata;
-  paymentmethods:any=[];
+  paymentmethods: any = [];
+  handler: any;
   constructor(private router: Router, private cookies: CookieService, public displaybox: SweetalertService, public getdataservice: GetDataService,
     private dataService: DataService,
     private loader: NgxUiLoaderService,
@@ -33,14 +34,14 @@ export class CheckoutComponent implements OnInit {
   loginform: FormGroup;
   submitted = false;
   orderresponse: any;
-  paymentmethod:string;
+  paymentmethod: string;
   getcurrentdate() {
     let currdate: any = new Date();
     currdate = this.datePipe.transform(currdate, 'yyyy-MM-dd');
     return currdate;
   }
   ngOnInit(): void {
-debugger;
+    debugger;
     this.companydata = this.getdataservice.companydata.logo;
     if (localStorage.getItem("isLogin") != "true") {
       this.router.navigate(["/auth/login"])
@@ -54,7 +55,8 @@ debugger;
       password: [{ value: null, disabled: true }, [Validators.required]],
       userno: [{ value: null, disabled: true }, [Validators.required]],
       phone: [{ value: null, disabled: false }],
-      authenticationtoken: [null]
+      authenticationtoken: [null],
+      paymentmethode: ['', Validators.required]
     })
 
     let localStorageCustomer = localStorage.getItem('customer');
@@ -72,21 +74,32 @@ debugger;
       })
     }
 
-    this.paymentmethods = this.dataService.getPaymentMethods().subscribe(), (error) => {
+
+
+
+    this.getPayments();
+
+
+
+  }
+  getPayments() {
+    this.dataService.getPaymentMethods().subscribe((data: any) => {
+      debugger
+      this.paymentmethods = data
+
+    }), (error) => {
       console.log(error);
       this.toastr.show(error, "Error Messege");
       this.toastr.error("error", "Database Connectivity")
       this.loader.stop();
     };
-    
-    
-
   }
   get order() { return this.checkout.controls; }
 
-  onPaymentMethodChange(value)
-  {
-    this.paymentmethod = value?.paymentmethod;
+  onPaymentMethodChange(value) {
+    debugger
+   
+    this.paymentmethod = value.gentypeno;
     // this.checkout.patchValue({
     //   productno : value?.productno
     // })
@@ -115,7 +128,7 @@ debugger;
         this.getdataservice.ordercheckoutmodel.manualcustno = "",
         this.getdataservice.ordercheckoutmodel.custtype = customer.custtype,
         this.getdataservice.ordercheckoutmodel.email = customer.email,
-        this.getdataservice.ordercheckoutmodel.paymentmethode = customer.paymentmethod;
+        this.getdataservice.ordercheckoutmodel.paymentmethode = this.checkout.value.paymentmethode;
       this.getdataservice.ordercheckoutmodel.docdate = this.getcurrentdate();
       this.getdataservice.ordercheckoutmodel.currency = companyobj[0].currency;
       this.getdataservice.ordercheckoutmodel.companyname = companyobj[0].companyname;
@@ -123,33 +136,24 @@ debugger;
       this.getdataservice.ordercheckoutmodel.totalnetamount = this.getdataservice.cartdata.totalnetamount;
       this.getdataservice.ordercheckoutmodel.totaldiscount = this.getdataservice.cartdata.totaldiscount;
       this.getdataservice.ordercheckoutmodel.sldsaleorderdtls = this.getdataservice.cartdata.items;
-      
+
       orderobj.deliverylocation = customer.address + customer.address2;
       orderobj.userno = serviceobj.userno;
+
       orderobj.authenticationtoken = localStorage.getItem('authtoken')
       // orderobj.authenticationtoken = "ismailadminlogtime:5/23/20215:12:39AM";
       console.log(orderobj);
-      this.dataService.createorder(orderobj).subscribe((res: any) => {
-        console.log('result', res)
+      debugger
 
-        this.loader.stop();
-
-
-        this.displaybox.successtwobuttons(res.docno, this.getdataservice.companydata[0].companyname).then((result) => {
-          console.log('aqwasdasdas', result)
-          // if (result.isConfirmed) {
-          //   this.orderresponse = res.docno;
-          //   this.generatepdf(this.orderresponse)
-          // }
-          if (result.isConfirmed) {
-            this.orderresponse = res;
-            this.print.directprint(this.orderresponse, this.getdataservice.companydata[0], 'cartbill', 'getlogo')
-          }
-          this.router.navigate(["shop"]);
-          this.reset();
-
-        })
-      })
+      if(this.paymentmethod == '03')
+      {
+        this.pay(orderobj);
+      }
+      else
+      {
+        this.createOrder(orderobj);
+      }
+      
     }
 
   }
@@ -236,10 +240,38 @@ debugger;
   //     mywindow.print();
   //     console.log(mywindow)
   //   }
+
+  createOrder(orderobj)
+  {
+    let appthis = this;
+    appthis.dataService.createorder(orderobj).subscribe((res: any) => {
+      debugger
+      console.log('result', res)
+
+      appthis.loader.stop();
+
+
+      appthis.displaybox.successtwobuttons(res.docno, appthis.getdataservice.companydata[0].companyname).then((result) => {
+        console.log('aqwasdasdas', result)
+        // if (result.isConfirmed) {
+        //   this.orderresponse = res.docno;
+        //   this.generatepdf(this.orderresponse)
+        // }
+        if (result.isConfirmed) {
+          appthis.orderresponse = res;
+          appthis.print.directprint(appthis.orderresponse, appthis.getdataservice.companydata[0], 'cartbill', 'getlogo')
+        }
+        appthis.router.navigate(["shop"]);
+        appthis.reset();
+
+      })
+    })
+  }
   reset() {
     this.getdataservice.cartdata.items = [];
     this.getdataservice.cartdata.count = 0;
     this.getdataservice.cartdata.total = 0;
+    this.getdataservice.cartdata.totalnetamount = 0;
     localStorage.removeItem('items')
     localStorage.removeItem('count')
     localStorage.removeItem('total')
@@ -273,5 +305,55 @@ debugger;
     // var val = htmlToPdfmake(pdfTable);
     // var dd = {content:val};
     //  htmlToPdfmake.pdfMake.createPdf(dd).download();
+  }
+  pay(orderobj: any) {
+
+    debugger 
+    let appthis = this;
+    var handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51IwOgWDtddSzXJzjlqZNu9Ep32kTpK5Dn23AqkP94f1Chdb8EgGyI6nLEvJ0o7JcVqvhmJQuy4NjjiZ40jF5sdct00n4Lpiwe4',
+      locale: 'auto',
+      token: function (token: any) {
+        // You can access the token ID with `token.id`.
+        // Get the token ID to your server-side code for use.
+        console.log(token)
+        debugger
+        orderobj.paymenttoken  = token.id;
+        console.log(handler)
+        appthis.createOrder(orderobj);
+   
+      }
+    });
+
+    handler.open({
+      name: 'Demo Site',
+      description: '2 widgets',
+      amount: orderobj.totalnetamount * 100
+    });
+
+  }
+
+  loadStripe() {
+
+    if (!window.document.getElementById('stripe-script')) {
+      var s = window.document.createElement("script");
+      s.id = "stripe-script";
+      s.type = "text/javascript";
+      s.src = "https://checkout.stripe.com/checkout.js";
+      s.onload = () => {
+        this.handler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51IwOgWDtddSzXJzjlqZNu9Ep32kTpK5Dn23AqkP94f1Chdb8EgGyI6nLEvJ0o7JcVqvhmJQuy4NjjiZ40jF5sdct00n4Lpiwe4',
+          locale: 'auto',
+          token: function (token: any) {
+            // You can access the token ID with `token.id`.
+            // Get the token ID to your server-side code for use.
+            console.log(token)
+            alert('Payment Success!!');
+          }
+        });
+      }
+
+      window.document.body.appendChild(s);
+    }
   }
 }

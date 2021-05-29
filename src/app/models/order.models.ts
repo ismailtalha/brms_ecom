@@ -29,5 +29,10 @@ export class ordercheckoutmodel{
     companyname:any;
     rowno:any;
     authenticationtoken:any;
+    paymenttoken:any;
+    cardnumber:any;
+    cardemail:any;
+    cvc:any
+
 }
     

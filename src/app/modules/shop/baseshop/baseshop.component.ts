@@ -120,7 +120,7 @@ export class BaseshopComponent implements OnInit {
          var qty = data.quantity ? data.quantity : 1;
          var price = data.saleprice;
          var amount = qty*price;
-         var discountamount = (data.discountpercentagePortalDisplay/100)*amount;
+         var discountamount = (data.discount/100)*amount;
          var netamount = amount - discountamount;
 
          let obj = {
@@ -132,12 +132,12 @@ export class BaseshopComponent implements OnInit {
            factorunit:data.factorunit,
            factorno:data.factorunit,
            baseunitno:data.baseunitno,
-           discount:data.discountpercentagePortalDisplay,
+           discount:data.discount,
            quantity:qty,
            amount:amount,
            //quantity: data.quantity ? data.quantity : 1,
            //amount:data.quantity ? data.saleprice * data.quantity :data.saleprice * 1,
-           netamount: netamount
+           netamount: netamount,
          }
          if (index < 0) {
            this.cartservice.cartdata.items.push(obj)
@@ -159,7 +159,7 @@ export class BaseshopComponent implements OnInit {
            const element = this.cartservice.cartdata.items[index];
            this.cartservice.cartdata.total = (this.cartservice.cartdata.total + element.amount);
            this.cartservice.cartdata.totalnetamount = (this.cartservice.cartdata.totalnetamount + element.netamount);
-           this.cartservice.cartdata.totaldiscount = (this.cartservice.cartdata.totaldiscount + (element.netamount - element.amount));
+           this.cartservice.cartdata.totaldiscount = this.cartservice.cartdata.totaldiscount + (element.amount-element.netamount);
          }
          localStorage.setItem('cart-data', JSON.stringify(this.cartservice.cartdata))
        }
@@ -354,6 +354,7 @@ export class BaseshopComponent implements OnInit {
             this.cartservice.units.units.splice(index,1);
             return;
           }
+          
           this.cartservice.units.units.push({ 
             ID: unit.factorunit,
             itemname: item.itemname,
@@ -365,13 +366,14 @@ export class BaseshopComponent implements OnInit {
             saleprice: unit.dsaleprice,
             quantity: unit.qty,
             amount:unit.dsaleprice * unit.qty,
-            discount:unit.discount,
+            discount:item.discountpercentage,
+            discountamount:(unit.dsaleprice * unit.qty)*(item.discountpercentage / 100),
             netamount:unit.netamount,
             rowno :unit.factorunit
           });
           
        }
-       calctotal(unit)
+       calctotal(unit,discount)
        {
          debugger
          if(unit.qty == 0 || unit.qty == null)
@@ -385,7 +387,7 @@ export class BaseshopComponent implements OnInit {
             return;
          }
          var amount = unit.qty * unit.dsaleprice;
-         var discountamount = (unit.discount/100)*amount;
+         var discountamount = (discount/100)*amount;
          var netamount = amount - discountamount;
           unit.total =  amount;//unit.qty * unit.dsaleprice;
           unit.netamount =  netamount;

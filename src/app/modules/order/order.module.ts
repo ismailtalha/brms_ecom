@@ -7,6 +7,7 @@ import { OrderlistComponent } from './orderlist/orderlist.component';
 import { PrinthtmlComponent } from './printhtml/printhtml.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { OrderdetailComponent } from './orderdetail/orderdetail.component';
     OrderRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgSelectModule
   ]
 })
 export class OrderModule { }

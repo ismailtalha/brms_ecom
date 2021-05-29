@@ -3,7 +3,7 @@
     <!-- coupon-area start -->
     <div class="coupon-area">
         <div class="container">
-           <!-- Section Title Start -->
+            <!-- Section Title Start -->
             <div class="section-title mb-20">
                 <h2>checkout</h2>
             </div>
@@ -15,22 +15,23 @@
                         <!-- <h3>Returning customer? <span id="showlogin">Click here to login</span></h3> -->
                         <div id="checkout-login" class="coupon-content">
                             <div class="coupon-info">
-                                <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed est sit amet ipsum luctus.</p>
+                                <p class="coupon-text">Quisque gravida turpis sit amet nulla posuere lacinia. Cras sed
+                                    est sit amet ipsum luctus.</p>
                                 <form action="#">
                                     <p class="form-row-first">
                                         <label>Username or email <span class="required">*</span></label>
                                         <input type="text" />
                                     </p>
                                     <p class="form-row-last">
-                                        <label>Password  <span class="required">*</span></label>
+                                        <label>Password <span class="required">*</span></label>
                                         <input type="text" />
                                     </p>
                                     <p class="form-row">
                                         <input type="submit" value="Login" />
                                         <label>
-                                        <input type="checkbox" />
-                                         Remember me
-                                    </label>
+                                            <input type="checkbox" />
+                                            Remember me
+                                        </label>
                                     </p>
                                     <p class="lost-password">
                                         <a href="#">Lost your password?</a>
@@ -61,7 +62,7 @@
     <!-- checkout-area start -->
     <div class="checkout-area pt-30  pb-60">
         <div class="container">
-            <form [formGroup]="checkout" >
+            <form [formGroup]="checkout">
 
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
@@ -84,40 +85,43 @@
                                     </div>
                                 </div> -->
 
-                                    <div class="col-md-12">
-                                        <div class="checkout-form-list">
-                                            <label>Customer Name <span class="required">*</span></label>
-                                            <input type="text" formControlName="custname" placeholder="" />
-                                            <div *ngIf="submitted == true && order.custname.errors" >
-                                                <small class="error-text" *ngIf="order.custname.errors.required">Customer Name is required</small>
-                                            </div>
+                                <div class="col-md-12">
+                                    <div class="checkout-form-list">
+                                        <label>Customer Name <span class="required">*</span></label>
+                                        <input type="text" formControlName="custname" placeholder="" />
+                                        <div *ngIf="submitted == true && order.custname.errors">
+                                            <small class="error-text" *ngIf="order.custname.errors.required">Customer
+                                                Name is required</small>
                                         </div>
-                                       
                                     </div>
 
+                                </div>
 
-                                  
+
+
 
 
                                 <div class="col-md-12 mtb-10">
                                     <div class="checkout-form-list mb-30">
                                         <label>User Id<span class="required">*</span></label>
                                         <input type="text" formControlName="userno" placeholder="" />
-                                        <div *ngIf="submitted == true && order.userno.errors" >
-                                            <small class="error-text" *ngIf="order.userno.errors.required">User Id is required</small>
+                                        <div *ngIf="submitted == true && order.userno.errors">
+                                            <small class="error-text" *ngIf="order.userno.errors.required">User Id is
+                                                required</small>
                                         </div>
                                     </div>
-                                  
+
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list mb-30">
                                         <label>Password</label>
                                         <input type="text" formControlName="password" placeholder="" />
-                                        <div *ngIf="submitted == true && order.password.errors" >
-                                            <small class="error-text" *ngIf="order.password.errors.required">Password is required</small>
+                                        <div *ngIf="submitted == true && order.password.errors">
+                                            <small class="error-text" *ngIf="order.password.errors.required">Password is
+                                                required</small>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                 <!-- <div class="col-md-6">
                                     <div class="checkout-form-list mb-30">
@@ -129,36 +133,41 @@
                                     <div class="checkout-form-list mb-30">
                                         <label>Email Address</label>
                                         <input type="email" formControlName="email" placeholder="" />
-                                        <div *ngIf="submitted == true && order.email.errors" >
-                                            <small class="error-text" *ngIf="order.email.errors.required">Email is required</small>
-                                            <small class="error-text" *ngIf="order.email.errors.email">Email format is invalid</small>
+                                        <div *ngIf="submitted == true && order.email.errors">
+                                            <small class="error-text" *ngIf="order.email.errors.required">Email is
+                                                required</small>
+                                            <small class="error-text" *ngIf="order.email.errors.email">Email format is
+                                                invalid</small>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                 <div class="col-md-6">
                                     <div class="checkout-form-list mb-30">
-                                        <label>Phone  </label>
+                                        <label>Phone </label>
                                         <input type="number" formControlName="phone" placeholder="" />
-                                        <div *ngIf="submitted == true && order.phone.errors" >
-                                            <small class="error-text" *ngIf="order.phone.errors.required">Phone is required</small>
+                                        <div *ngIf="submitted == true && order.phone.errors">
+                                            <small class="error-text" *ngIf="order.phone.errors.required">Phone is
+                                                required</small>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list">
                                         <label>Address <span class="required">*</span></label>
                                         <input type="text" formControlName="address" placeholder="Street address" />
-                                        <div *ngIf="submitted == true && order.address.errors" >
-                                            <small class="error-text" *ngIf="order.address.errors.required">Address is required</small>
+                                        <div *ngIf="submitted == true && order.address.errors">
+                                            <small class="error-text" *ngIf="order.address.errors.required">Address is
+                                                required</small>
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                                 <div class="col-md-12">
                                     <div class="checkout-form-list mtb-30">
-                                        <input type="text" formControlName="address2" placeholder="Apartment, suite, unit etc. (optional)" />
+                                        <input type="text" formControlName="address2"
+                                            placeholder="Apartment, suite, unit etc. (optional)" />
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-12">
@@ -176,50 +185,58 @@
                     </div>
 
                     <div class="col-lg-6 col-md-6">
-                        <div class="your-order" >
-                            <div >
-                            <h3>Your order</h3>
-                            <div class="your-order-table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th class="product-name">Product</th>
-                                            <th class="product-total">Total ({{getdataservice?.companydata[0]?.currency}})</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody >
-                                        <tr class="cart_item" *ngFor="let item of getdataservice?.cartdata?.items">
-                                            <td class="product-name">
-                                                <h4>{{item.itemname}}</h4> <strong *ngIf="item.factorunitname">{{item.factorunitname}}<small>({{item.factorunit}})</small></strong> <strong class="product-quantity"> × {{item.quantity}}</strong>
-                                            </td>
-                                            <td class="product-total">
-                                                <span class="amount">{{item.amount}}</span>
-                                            </td>
-                                        </tr>
+                        <div class="your-order">
+                            <div>
+                                <h3>Your order</h3>
+                                <div class="your-order-table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="product-name">Product</th>
+                                                <th class="product-total">Total
+                                                    ({{getdataservice?.companydata[0]?.currency}})</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="cart_item" *ngFor="let item of getdataservice?.cartdata?.items">
+                                                <td class="product-name">
+                                                    <h4>{{item.itemname}}</h4> <strong
+                                                        *ngIf="item.factorunitname">{{item.factorunitname}}<small>({{item.factorunit}})</small></strong>
+                                                    <strong class="product-quantity"> × {{item.quantity}}</strong>
+                                                </td>
+                                                <td class="product-total">
+                                                    <span class="amount">{{item.amount}}</span>
+                                                </td>
+                                            </tr>
 
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="cart-subtotal">
-                                            <th>Cart Subtotal</th>
-                                            <td><span class="amount"><strong>{{getdataservice?.cartdata?.total | number : '1.2-2'}}</strong></span></td>
-                                            <td><span class="totaldiscount"><strong>{{getdataservice?.cartdata?.totaldiscount | number : '1.2-2'}}</strong></span></td>
-                                            <td><span class="totalnetamount"><strong>{{getdataservice?.cartdata?.totalnetamount | number : '1.2-2'}}</strong></span></td>
-                                        </tr>
-                                        <tr class="order-total">
-                                            <th>Order Total</th>
-                                            <td><strong><span class="amount">{{getdataservice?.cartdata?.total | number : '1.2-2'}}</span></strong></td>
-                                            <td><strong><span class="totaldiscount">{{getdataservice?.cartdata?.totaldiscount | number : '1.2-2'}}</span></strong></td>
-                                            <td><strong><span class="totalnetamount">{{getdataservice?.cartdata?.totalnetamount | number : '1.2-2'}}</span></strong></td>
-                                            
-                                        </tr>
-                                    </tfoot>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr class="cart-subtotal">
+                                                <th>Cart Subtotal</th>
+                                                <td><span class="amount"><strong>{{getdataservice?.cartdata?.total |
+                                                            number : '1.2-2'}}</strong></span></td>
 
-                                </table>
+                                            </tr>
+                                            <tr class="cart-subtotal">
+                                                <th>Total Discount Amount</th>
+                                                <td><span class="totaldiscount"><strong>{{getdataservice?.cartdata?.totaldiscount
+                                                            | number : '1.2-2'}}</strong></span></td>
+                                            </tr>
+                                            <tr class="order-total">
+                                                <th>Order Net Total</th>
+                                                <td><strong><span
+                                                            class="totalnetamount">{{getdataservice?.cartdata?.totalnetamount
+                                                            | number : '1.2-2'}}</span></strong></td>
+
+                                            </tr>
+                                        </tfoot>
+
+                                    </table>
                                     <table [style.display]="'none'">
                                         <img [src]="companydata" id="getlogo" name="logoimg">
                                         <tbody id="cartbill" #cartbill>
                                             <tr *ngFor="let item of getdataservice?.cartdata?.items let i = index">
-                                               <td >{{i+1}}</td>
+                                                <td>{{i+1}}</td>
                                                 <td>{{item.itemname}}</td>
                                                 <td>{{item.factorunitname}}</td>
                                                 <td>{{item.price}}</td>
@@ -228,105 +245,115 @@
                                                 <td>{{item.discount}}</td>
                                                 <td>{{item.netamount}}</td>
                                             </tr>
-                                            <tr>
+                                            <tr style="border: none !important;">
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td>Total Amount</td>
-                                                <td>{{getdataservice?.cartdata?.total | number : '1.2-2'}}</td>
+                                                <td></td>
+                                                <td ></td>
+                                                <td class="bodgrey">Total Amount</td>
+                                                <td class="bodgrey">{{getdataservice?.cartdata?.total | number : '1.2-2'}}</td>
                                             </tr>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td>Total Discount</td>
-                                                <td>{{getdataservice?.cartdata?.totaldiscount | number : '1.2-2'}}</td>
-                                            </tr>                                            
+                                                <td></td>
+                                                <td></td>
+                                                <td class="bodgrey">Total Discount</td>
+                                                <td class="bodgrey">{{getdataservice?.cartdata?.totaldiscount | number : '1.2-2'}}</td>
+                                            </tr>
                                             <tr>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
                                                 <td></td>
-                                                <td>Net Amount</td>
-                                                <td>{{getdataservice?.cartdata?.totalnetamount | number : '1.2-2'}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td class="bodgrey">Net Amount</td>
+                                                <td class="bodgrey">{{getdataservice?.cartdata?.totalnetamount | number : '1.2-2'}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                 
-                              
+
+
+                                </div>
                             </div>
-                        </div>
                             <div class="payment-method">
                                 <div class="payment-accordion">
-                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+<!--                                        
+                                        <select class="form-select mr-sm-2" formControlName="CategoryID"
+                                        (change)="filterSubCategory($event.target.value,i)" required>
+                                        <option *ngFor="let category of model?.testdata?.categoryarr" [value]="category.ID">{{category.Name}}
+                                        </option>
+                                      </select> -->
+                                       <!-- <select formControlName="paymentmethode" (change)="onPaymentMethodChange(method)">
+                                        <option value="Seelct Payment Method" disabled></option>
+                                           <option *ngFor="let method of paymentmethods" [value]="method.gentypeno">
+                                               {{method.gentypename}}
+                                           </option>
+                                       </select>
+                                        -->
+                                        <ng-select [items]="paymentmethods"
+                                        bindLabel="gentypename" bindValue="gentypeno"
+                                        placeholder="Select Payment Method" formControlName="paymentmethode" (change)="onPaymentMethodChange($event)">
+                                       
+                                    </ng-select>
+
+                                       <!-- <div *ngFor="let method of paymentmethods">
+
+                                      
                                         <div class="panel panel-default">
                                             <div class="panel-heading" role="tab" id="headingOne">
                                                 <h4 class="panel-title">
-                                                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                Direct Bank Transfer
-                                                </a>
+                                                    <input type="radio" formControlName="paymentmethode" value="{{method.gentypeno}}"  id="paymnet"  name="paymnet">
+                                                    <a role="button" for="paymnet" data-toggle="collapse" data-parent="#accordion"
+                                                        href="#collapseOne{{method.gentypeno}}" aria-expanded="fasle"
+                                                        aria-controls="collapseOne">
+                                                        {{method.gentypename}}
+                                                    </a>
                                                 </h4>
                                             </div>
-                                            <div id="collapseOne" class="panel-collapse collapse  in show" role="tabpanel" aria-labelledby="headingOne">
+                                            <div id="collapseOne{{method.gentypeno}}" class="panel-collapse collapse  in"
+                                                role="tabpanel" aria-labelledby="headingOne">
                                                 <div class="panel-body">
-                                                    <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order won’t be shipped until the funds have cleared in our account.</p>
+                                                    <p>Make your payment directly into our bank account. Please use your
+                                                        Order ID as the payment reference. Your order won’t be shipped
+                                                        until the funds have cleared in our account.</p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingTwo">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                Cheque Payment
-                                                </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                                <div class="panel-body">
-                                                    <p>Please send your cheque to Store Name, Store Street, Store Town, Store State / County, Store Postcode.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                            <div class="panel-heading" role="tab" id="headingThree">
-                                                <h4 class="panel-title">
-                                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                PayPal
-                                                </a>
-                                                </h4>
-                                            </div>
-                                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                                <div class="panel-body">
-                                                    <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                     
+                                    </div> -->
+                                    <div *ngIf="submitted == true && order.paymentmethode.errors">
+                                        <small class="error-text" *ngIf="order.paymentmethode.errors.required">Payment Method is
+                                            required</small>
+                                    </div>
                                     </div>
                                     <div class="order-button-payment">
                                         <input type="button" (click)="ordercheckout()" value="Place order" />
                                     </div>
-                                    <ng-select [items]="paymentmethods"
-                                    (change)="onPaymentMethodChange($event)"
-                                              bindLabel="gentypename"
-                                              bindValue="gentypename"
-                                              placeholder="Select Payment Method"
-                                              formControlName="cmbpaymentmethod">
-                                              <ng-template ng-label-tmp let-item="item">
-                                                <b>{{item.gentypename}}<span><small><b>({{item.gentypeno}})</b></small></span></b>
-                                              </ng-template>
-                                            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
-                                              <b>{{item.gentypename}}<span><small><b>({{item.gentypeno}})</b></small></span></b>
-                                          </ng-template>
-                                    </ng-select>
+                                    <!-- <ng-select [items]="paymentmethods" (change)="onPaymentMethodChange($event)"
+                                        bindLabel="gentypename" bindValue="gentypename"
+                                        placeholder="Select Payment Method" formControlName="cmbpaymentmethod">
+                                        <ng-template ng-label-tmp let-item="item">
+                                            <b>{{item.gentypename}}<span><small><b>({{item.gentypeno}})</b></small></span></b>
+                                        </ng-template>
+                                        <ng-template ng-option-tmp let-item="item" let-index="index"
+                                            let-search="searchTerm">
+                                            <b>{{item.gentypename}}<span><small><b>({{item.gentypeno}})</b></small></span></b>
+                                        </ng-template>
+                                    </ng-select> -->
 
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-             </form>
+            </form>
         </div>
     </div>
     <!-- checkout-area end -->
