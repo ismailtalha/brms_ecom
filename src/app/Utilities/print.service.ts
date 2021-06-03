@@ -36,7 +36,7 @@ export class PrintService {
                 <div class="col-md-4">
                 <img src=${logoimg.currentSrc} style="width:75px !important ; height:50px !importnt">
                     <div class="billed"><span class="info-labels">Customer:</span><span class="ml-1">${order.custname}</span></div>
-                    <div class="billed"><span class="info-labels">Contact:</span><span class="ml-1">${order.mobileno}</span></div>
+                    <div class="billed"><span class="info-labels">Contact #:</span><span class="ml-1">${order.mobileno}</span></div>
                     <div class="billed"><span class="info-labels">Delivery Location:</span><span class="ml-1">${order.deliverylocation}</span></div>
                     <div class="billed"><span class="info-labels">Description:</span><span class="ml-1">${order.description}</span></div>
                     </div>
@@ -46,10 +46,10 @@ export class PrintService {
                 <div class="col-md-4 text-right mt-3">
                    
                      <div ><span class="info-labels">Company Address:</span><span class="ml-1">${company.adres}</span></div>
-                    <div class="billed"><span class="info-labels">Order no:</span><span class="ml-1">${order.docno}</span></div>
-                    <div class="billed"><span class="info-labels">Order Date:</span><span class="ml-1">${formateddate}</span></div>
+                    <div class="billed"><span class="info-labels">Order #</span><span class="ml-1">${order.docno}</span></div>
+                    <div class="billed"><span class="info-labels">Date:</span><span class="ml-1">${formateddate}</span></div>
                     <div class="billed"><span class="info-labels">Currency:</span><span class="ml-1">${order.currency}</span></div>
-                    <div class="billed"><span class="info-labels">Payment Mode:</span><span class="ml-1">${order.paymentmethode}</span></div>
+                    <div class="billed"><span class="info-labels">Payment Mode:</span><span class="ml-1">${order.paymentmethodename}</span></div>
                 </div>
             </div>
             <div class="mt-3">

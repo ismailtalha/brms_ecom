@@ -23,7 +23,7 @@ export class ordercheckoutmodel{
     totalnetamount:any;
     totaldiscount:any;
     paymentmethode:string;
-    //paymentmethodename:string;
+    paymentmethodename:string;
     currency:any;
     docdate:any;
     companyname:any;

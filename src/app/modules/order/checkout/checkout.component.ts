@@ -145,7 +145,7 @@ export class CheckoutComponent implements OnInit {
       console.log(orderobj);
       debugger
 
-      if(this.paymentmethod == '03')
+      if(this.paymentmethod == '08')//--08 meand card payment
       {
         this.pay(orderobj);
       }
@@ -249,22 +249,48 @@ export class CheckoutComponent implements OnInit {
       console.log('result', res)
 
       appthis.loader.stop();
+      if(res.errorstatusno == "1")//--Success
+      {
+        appthis.displaybox.successtwobuttons(res.docno, appthis.getdataservice.companydata[0].companyname).then((result) => {
+          console.log('aqwasdasdas', result)
+          // if (result.isConfirmed) {
+          //   this.orderresponse = res.docno;
+          //   this.generatepdf(this.orderresponse)
+          // }
+          if (result.isConfirmed) {
+            appthis.orderresponse = res;
+            appthis.print.directprint(appthis.orderresponse, appthis.getdataservice.companydata[0], 'cartbill', 'getlogo')
+          }
+        
+          appthis.router.navigate(["shop"]);
+          appthis.reset();
+  
+  
+        })
+      }
+      else if(res.errorstatusno == "2")//--Operation failed or Success with some errors
+      {
+        console.log('result', res.errortext)
+        this.toastr.show(res.errortext, "Error Messege");      
+      }
 
 
-      appthis.displaybox.successtwobuttons(res.docno, appthis.getdataservice.companydata[0].companyname).then((result) => {
-        console.log('aqwasdasdas', result)
-        // if (result.isConfirmed) {
-        //   this.orderresponse = res.docno;
-        //   this.generatepdf(this.orderresponse)
-        // }
-        if (result.isConfirmed) {
-          appthis.orderresponse = res;
-          appthis.print.directprint(appthis.orderresponse, appthis.getdataservice.companydata[0], 'cartbill', 'getlogo')
-        }
-        appthis.router.navigate(["shop"]);
-        appthis.reset();
+      // appthis.displaybox.successtwobuttons(res.docno, appthis.getdataservice.companydata[0].companyname).then((result) => {
+      //   console.log('aqwasdasdas', result)
+      //   // if (result.isConfirmed) {
+      //   //   this.orderresponse = res.docno;
+      //   //   this.generatepdf(this.orderresponse)
+      //   // }
+      //   if (result.isConfirmed) {
+      //     appthis.orderresponse = res;
+      //     appthis.print.directprint(appthis.orderresponse, appthis.getdataservice.companydata[0], 'cartbill', 'getlogo')
+      //   }
+      
+      //   appthis.router.navigate(["shop"]);
+      //   appthis.reset();
 
-      })
+
+      // })
     })
   }
   reset() {
@@ -311,7 +337,9 @@ export class CheckoutComponent implements OnInit {
     debugger 
     let appthis = this;
     var handler = (<any>window).StripeCheckout.configure({
-      key: 'pk_test_51IwOgWDtddSzXJzjlqZNu9Ep32kTpK5Dn23AqkP94f1Chdb8EgGyI6nLEvJ0o7JcVqvhmJQuy4NjjiZ40jF5sdct00n4Lpiwe4',
+      //key: 'pk_test_51IwOgWDtddSzXJzjlqZNu9Ep32kTpK5Dn23AqkP94f1Chdb8EgGyI6nLEvJ0o7JcVqvhmJQuy4NjjiZ40jF5sdct00n4Lpiwe4',
+      //key: 'sk_test_51IxW3hK4I6vGW0vTTFDGy1C2R59rw6mror1H54I0JyFAaSa6BXks3sl9AEUl0RrFxSJR4huXaxms2EvyH0UqiOko00gnexLDOY',
+      key: 'pk_test_51IxW3hK4I6vGW0vTS6Baj086T8u7MMzPjyfmcq8IunCPqoe4c91vEX2ebt1ZHuNjiYrnabAwRFR1KFPxOEWddNMX00qBFyd8N8',
       locale: 'auto',
       token: function (token: any) {
         // You can access the token ID with `token.id`.
