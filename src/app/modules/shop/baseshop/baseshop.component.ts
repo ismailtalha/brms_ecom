@@ -34,7 +34,7 @@ export class BaseshopComponent implements OnInit {
   sortby = "saleprice";
   sortup = false;
   sortdown = true;
-  units = [];
+  units:any = [];
   selectedunits = [];
   images=['src/assets/ItemImages/Devices/3.jpg','src/assets/ItemImages/Devices/4.jpg'];
   checkunit : boolean = false;
@@ -260,15 +260,23 @@ export class BaseshopComponent implements OnInit {
              filtereditems = tempitems;
            }
          });
+         let filteredArr = filtereditems.reduce((acc, current) => {
+          const x = acc.find(item => item.itemno === current.itemno);
+          if (!x) {
+            return acc.concat([current]);
+          } else {
+            return acc;
+          }
+        }, []);
      
-         return filtereditems;
+         return filteredArr;
        }
      
        ///// Search Filter for category brands groups
      
        searchfilter(type,text)
        {
-         
+         this.p = 1;
          if(type=="category")
          {
            let categories = this.cartservice.category.items ;
@@ -326,7 +334,9 @@ export class BaseshopComponent implements OnInit {
          debugger
           if(item.itemunitsdetails.length > 0)
           {
-            let units = item;
+            let units = [];
+            units = item;
+
              this.open(modalid,units);
           }
           else
@@ -376,6 +386,7 @@ export class BaseshopComponent implements OnInit {
        calctotal(unit,discount)
        {
          debugger
+         unit.qty = parseInt(unit.qty) ;
          if(unit.qty == 0 || unit.qty == null)
          {
           let index = this.cartservice.units.units.findIndex(u => u.factorunit === unit.factorunit);
@@ -391,6 +402,7 @@ export class BaseshopComponent implements OnInit {
          var netamount = amount - discountamount;
           unit.total =  amount;//unit.qty * unit.dsaleprice;
           unit.netamount =  netamount;
+          unit.discountamount = discountamount;
        }
        saveunit()
        {
@@ -400,6 +412,7 @@ export class BaseshopComponent implements OnInit {
           this.cartservice.units.units.forEach(element => {
             this.addtocart(element)
           });
+          
           this.modalService.dismissAll();
           
          }
@@ -408,7 +421,14 @@ export class BaseshopComponent implements OnInit {
           this.toastr.error("No unit selected")
          }
 
+         this.units.itemunitsdetails.forEach(element => {
+           element.qty = null
+           element.amount = null;
+           element.total = null;
+           element.netamount = null
+         });
 
+        
         
        }
 

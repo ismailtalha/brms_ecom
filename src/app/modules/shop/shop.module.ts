@@ -14,9 +14,10 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { BaseshopComponent } from './baseshop/baseshop.component';
 import { TableModule } from 'primeng/table';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { PositivenumberDirective } from 'src/app/Utilities/positivenumber.directive';
 
 @NgModule({
-  declarations: [ShopComponent, ItemDetailComponent, FeaturedComponent, NewarivalComponent, BaseshopComponent],
+  declarations: [ShopComponent, ItemDetailComponent, FeaturedComponent, NewarivalComponent, BaseshopComponent,PositivenumberDirective],
   imports: [
     CommonModule,
     ShopRoutingModule,
@@ -26,6 +27,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgxPaginationModule,
     NgbModule,
     OwlModule
+    
     
   ]
 })

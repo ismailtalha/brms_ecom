@@ -56,7 +56,7 @@ export class CheckoutComponent implements OnInit {
       userno: [{ value: null, disabled: true }, [Validators.required]],
       phone: [{ value: null, disabled: false }],
       authenticationtoken: [null],
-      paymentmethode: ['', Validators.required]
+      paymentmethode: [null, Validators.required]
     })
 
     let localStorageCustomer = localStorage.getItem('customer');
@@ -250,6 +250,13 @@ export class CheckoutComponent implements OnInit {
 
       appthis.loader.stop();
 
+      if(res.errorstatusno== "2")
+      {
+        this.toastr.error(res.errortext)
+        
+        return;
+
+      }
 
       appthis.displaybox.successtwobuttons(res.docno, appthis.getdataservice.companydata[0].companyname).then((result) => {
         console.log('aqwasdasdas', result)

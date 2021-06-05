@@ -61,11 +61,17 @@ export class NavbarComponent implements OnChanges {
   }
   logout()
   {
-    this.cookies.deleteAll();
-    this.cartservice.customer.customerdata = [];
-    localStorage.removeItem('customer');
-    this.cartservice.customer.isLogin = false;
-    localStorage.removeItem('isLogin');
+    let customer = JSON.parse(localStorage.getItem('customer')) ;
+    let data = {"userno": customer.userno};
+    this.dataService.logout(data).subscribe((data)=>{
+      debugger
+      this.cookies.deleteAll();
+      this.cartservice.customer.customerdata = [];
+      localStorage.removeItem('customer');
+      this.cartservice.customer.isLogin = false;
+      localStorage.removeItem('isLogin');
+    })
+    
   // this.reload();
     
   }
@@ -121,6 +127,7 @@ export class NavbarComponent implements OnChanges {
   {
     debugger
     var index = this.cartservice.cartdata.items.findIndex(x => x.ID === item.ID && x.itemno == item.itemno);
+   
     if(index >= 0)
     {
       
@@ -129,8 +136,21 @@ export class NavbarComponent implements OnChanges {
       this.cartservice.cartdata.items.splice(index,1);
       localStorage.removeItem('cart-data');
       localStorage.setItem('cart-data',JSON.stringify(this.cartservice.cartdata) )
+      this.cartservice.cartdata.total = 0;
+      this.cartservice.cartdata.totaldiscount = 0;
+      this.cartservice.cartdata.totalnetamount = 0;
+      for (let index = 0; index < this.cartservice.cartdata.items.length; index++) {
+        const element = this.cartservice.cartdata.items[index];
+        this.cartservice.cartdata.total = (this.cartservice.cartdata.total + element.amount);
+        this.cartservice.cartdata.totalnetamount = (this.cartservice.cartdata.totalnetamount + element.netamount);
+        this.cartservice.cartdata.totaldiscount = this.cartservice.cartdata.totaldiscount + (element.amount-element.netamount);
+      }
     }
-    let unitindex = this.cartservice.units.units.findIndex(u => u.factorunit === item.factorunit && u.itemname == item.itemno);
+    let unitindex = this.cartservice.units.units.findIndex(u => u.factorunit === item.factorunit && u.itemno == item.itemno);
+    if(unitindex != -1)
+    {
+      this.cartservice.units.units.splice(unitindex,1)
+    }
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());

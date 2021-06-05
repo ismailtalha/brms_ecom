@@ -127,4 +127,8 @@ export class DataService {
     console.log(id)
     return this.http.get(url + `sldsaleorderhdr/getbyuser?userno=${id}&authenticationtoken=${this.authtoken}`);
   }
+  logout(data)
+  {
+    return this.http.post(url + "custinfo/postlogout" , data);
+  }
 }
