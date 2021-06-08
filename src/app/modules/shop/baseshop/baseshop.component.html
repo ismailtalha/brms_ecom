@@ -256,7 +256,7 @@
                                                         alt="">
                                                 </ng-template>
                                             </a>
-                                            <span class="sticker-new">{{item.discountpercentagePortalDisplay}}%</span>
+                                            <span class="sticker-new">{{item.discountpercentagePortalDisplay}}% off</span>
                                         </div>
                                         <!-- Product Image End -->
                                         <!-- Product Content Start -->
@@ -272,7 +272,7 @@
                                                     href="javascript:void(0)">{{item.itemname}}</a></h4>
                                             <p><span class="price">{{cartservice?.companydata[0]?.currency}}
                                                     {{item.saleprice}}</span>
-                                                <span>In Stock : {{item.itemstockportaldisplay}}</span> </p>
+                                                <span>  Stock : {{item.itemstockportaldisplay}}</span> </p>
                                             <!-- <p><span class="price">{In Stock : {{item.itemstockportaldisplay}}}
                                                         {Discount % : {{item.discountpercentagePortalDisplay}}}</span> </p>                                                     -->
                                             <p></p>
@@ -327,7 +327,7 @@
 
                                         </a>
                                     </div>
-                                    <span class="sticker-new">{{item.discountpercentagePortalDisplay}}%</span>
+                                    <span class="sticker-new">{{item.discountpercentagePortalDisplay}}% off</span>
                                     <!-- Product Image End -->
                                     <!-- Product Content Start -->
                                     <div class="pro-content">
@@ -347,7 +347,7 @@
                                         <!-- <p><span class="price">{In Stock : {{item.itemstockportaldisplay}}}
                                             {Discount % : {{item.discountpercentagePortalDisplay}}}</span> </p>  -->
                                         <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati velit, similique voluptas doloribus assumenda quis libero animi cumque dignissimos quisquam, quaerat ea laboriosam incidunt ullam.</p> -->
-                                        <p>In Stock : {{item.itemstockportaldisplay}}</p>
+                                        <p>  Stock : {{item.itemstockportaldisplay}}</p>
                                         <p>{{item.itemdetails}}</p>
                                         <div class="pro-actions">
                                             <div class="actions-secondary">
@@ -433,7 +433,8 @@
         <h4 class="modal-title" id="modal-basic-title">Unit Selection of
             <span><strong>{{units.itemname}}</strong></span>
             <p>
-                <span><i><b>{{units.discountpercentage}} % Discount on each</b></i></span>
+                <!-- <span><i><b>{{units.discountpercentage}} % Discount on each</b></i></span> -->
+                <span><i><b>{{units.discountpercentagePortalDisplay}} % off on each</b></i></span>
             </p>
         </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
@@ -448,13 +449,12 @@
                         <thead>
                             <tr>
                                 <td></td>
-                                <td>Unit no</td>
-                                <td>Unit name</td>
+                                <td>Unit</td>
+                                <td>Unit Name</td>
                                 <td>Price</td>
                                 <td>Quanity</td>
                                 <td>Amount</td>
                                 <td>Discount</td>
-
                                 <td>Stock</td>
                                 <td>Net Amount</td>
                             </tr>
@@ -463,11 +463,13 @@
                            
                             <tr *ngFor="let unit of units.itemunitsdetails">
                                 <td><input type="checkbox" [disabled]="unit.qty == 0 || unit.qty == null"
-                                        (change)="selectunit(unit,units)"></td>
+                                    (change)="selectunit(unit,units)">
+                                        
+                                    </td>
                                 <td>{{unit.factorunit}}</td>
                                 <td>{{unit.factorunitname}}</td>
                                 <td>{{unit.dsaleprice}}</td>
-                                <td><input type="number" appPositivenumber name="unit.qty" (change)="calctotal(unit,units.discountpercentage)"
+                                <td><input type="number" appPositivenumber name="unit.qty" (change)="calctotal(unit,units.discountpercentagePortalDisplay)"
                                         [(ngModel)]="unit.qty">
                                 </td>
                                 <td><input type="number" name="total{{unit.factorunit}}" [(ngModel)]="unit.total"></td>

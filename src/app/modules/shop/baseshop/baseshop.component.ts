@@ -376,7 +376,7 @@ export class BaseshopComponent implements OnInit {
             saleprice: unit.dsaleprice,
             quantity: unit.qty,
             amount:unit.dsaleprice * unit.qty,
-            discount:item.discountpercentage,
+            discount:item.discountpercentagepotaldisplay,
             discountamount:(unit.dsaleprice * unit.qty)*(item.discountpercentage / 100),
             netamount:unit.netamount,
             rowno :unit.factorunit

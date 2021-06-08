@@ -190,8 +190,8 @@
                                         <!-- Cart Footer Inner Start -->
                                         <div class="cart-footer fix cart-footer-border">
                                             <p>Total :<span class="f-right">{{cartservice.cartdata.total | number : '1.2-2'}}</span></p>
-                                            <p>Total Discount Amount:<span class="f-right">{{cartservice.cartdata.totaldiscount | number : '1.2-2'}}</span></p>
-                                            <p>Total Net Amount :<span class="f-right">{{cartservice.cartdata.totalnetamount | number : '1.2-2'}}</span></p> 
+                                            <p>Discount Amount:<span class="f-right">{{cartservice.cartdata.totaldiscount | number : '1.2-2'}}</span></p>
+                                            <p>Net Amount :<span class="f-right">{{cartservice.cartdata.totalnetamount | number : '1.2-2'}}</span></p> 
                                             <div class="cart-actions" *ngIf="cartservice?.cartdata?.count != 0">
                                                 <a class="checkout" routerLink ="/order/checkout" href="javascript:void(0)">Checkout</a>
                                             </div>
