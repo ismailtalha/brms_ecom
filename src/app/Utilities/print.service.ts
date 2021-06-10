@@ -63,7 +63,7 @@ export class PrintService {
                                 <th>Rate</th>
                                 <th>Qty</th>
                                 <th>Amount</th>
-                                <th>Discount</th>
+                                <th>Disc %</th>
                                 <th>Net Amount</th>
                             </tr>
                         </thead>

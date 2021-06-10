@@ -297,7 +297,7 @@
                                            </option>
                                        </select>
                                         -->
-                                        <ng-select [items]="paymentmethods"
+                                        <ng-select [items]="paymentmethods" (change)="onPaymentMethodChange($event)" 
                                         bindLabel="gentypename" bindValue="gentypeno"
                                         placeholder="Select Payment Method" formControlName="paymentmethode" >
                                        

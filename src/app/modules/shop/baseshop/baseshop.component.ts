@@ -116,25 +116,54 @@ export class BaseshopComponent implements OnInit {
        addtocart(data) {
          debugger
          let items = [];
-         var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno && x.itemno == data.itemno);
+         var factorno = "";
+var factorunitname = "";
+  if(data.factorunit == undefined)
+    {
+      factorno = data.baseunitno;
+      factorunitname = data.baseunitname;
+    }
+  else
+    {
+      factorno = data.factorunit;
+      factorunitname = data.factorunitname;
+    }
+         //var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno && x.itemno == data.itemno);
+         var index = this.cartservice.cartdata.items.findIndex(x => x.ID === data.rowno && x.itemno == data.itemno
+                    && factorno == x.factorno);
          var qty = data.quantity ? data.quantity : 1;
          var price = data.saleprice;
          var amount = qty*price;
-         var discountamount = (data.discount/100)*amount;
+         //var discountamount = (data.discount/100)*amount;
+         var discountamount = data.discountamount;// : (data.discountpercentageportaldisplay/100)*amount;
+         var discount = data.discount;// : data.discountpercentageportaldisplay;
+         //var discount = data.discountpercentageporaldisplay;
+         if(data.discountamount == undefined)
+{
+
+  discountamount = (data.discountpercentagePortalDisplay/100)*amount;
+          discount = data.discountpercentagePortalDisplay;
+}
+
+
+if (discountamount == undefined)
+  discountamount = 0;
          var netamount = amount - discountamount;
+
 
          let obj = {
            ID: data.rowno,
            itemname: data.itemname,
            itemno:data.itemno,
            price: data.saleprice,
-           factorunitname:data.factorunitname,
-           factorunit:data.factorunit,
-           factorno:data.factorunit,
+           factorunitname:factorunitname,//data.factorunitname,
+           factorunit:factorno,//data.factorunit,
+           factorno:factorno,//data.factorunit,
            baseunitno:data.baseunitno,
-           discount:data.discount,
+           discount:discount,
            quantity:qty,
            amount:amount,
+           discountamount:discountamount,
            //quantity: data.quantity ? data.quantity : 1,
            //amount:data.quantity ? data.saleprice * data.quantity :data.saleprice * 1,
            netamount: netamount,
@@ -142,6 +171,13 @@ export class BaseshopComponent implements OnInit {
          if (index < 0) {
            this.cartservice.cartdata.items.push(obj)
            this.cartservice.cartdata.count = data.quantity ? (this.cartservice.cartdata.count + data.quantity) : (this.cartservice.cartdata.count + 1);
+         }
+         else{
+               this.cartservice.cartdata.items[index].quantity = this.cartservice.cartdata.items[index].quantity +obj.quantity;
+               this.cartservice.cartdata.items[index].amount = this.cartservice.cartdata.items[index].amount +obj.amount;
+               this.cartservice.cartdata.items[index].discountamount = this.cartservice.cartdata.items[index].discountamount +obj.discountamount;
+               this.cartservice.cartdata.items[index].netamount = this.cartservice.cartdata.items[index].netamount +obj.netamount;
+               this.cartservice.cartdata.count = this.cartservice.cartdata.count +obj.quantity;
          }
         //  else {
         //    this.cartservice.cartdata.items[index].amount = 0;
@@ -376,8 +412,8 @@ export class BaseshopComponent implements OnInit {
             saleprice: unit.dsaleprice,
             quantity: unit.qty,
             amount:unit.dsaleprice * unit.qty,
-            discount:item.discountpercentagepotaldisplay,
-            discountamount:(unit.dsaleprice * unit.qty)*(item.discountpercentage / 100),
+            discount:item.discountpercentagePortalDisplay,
+            discountamount:unit.discountamount,//(unit.dsaleprice * unit.qty)*(item.discountpercentageportaldisplay / 100),
             netamount:unit.netamount,
             rowno :unit.factorunit
           });
