@@ -20,12 +20,18 @@ export class RegisterComponent implements OnInit {
   submitted=false;
   ngOnInit(): void {
     this.customer = this.fb.group({
-      fname: [null, [Validators.required]],
-       lname:[null],
+      custname: [null],
+      custlastname:[null],
        phone:[null],
        email:[null, [Validators.email]],
        password:[null,[Validators.required]],
-       userno:[null,[Validators.required]]
+       userno:[null,[Validators.required]],
+       ntnno:[null],
+       billingaddress:[null],
+       address:[null],
+       companyname:[null],
+       contact:[null]
+
     });
   }
   reload() {
@@ -75,19 +81,15 @@ export class RegisterComponent implements OnInit {
     
     this.submitted = true;
     if (this.customer.valid) {
-      let userobj = {
-        username: this.customer.value.fname + this.customer.value.lname,
-        password: this.customer.value.password,
-        usertype: "normal",
-      }
+    
       this.loader.start();
       let customerobj = this.customer.value;
-          customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
-          customerobj.contact =  this.customer.value.phone;
-          customerobj.password  = this.customer.value.password;
+          // customerobj.custname =  this.customer.value.fname + this.customer.value.lname;
+          // customerobj.contact =  this.customer.value.phone;
+          // customerobj.password  = this.customer.value.password;
           this.dataService.createCustomer(customerobj).subscribe((customer: any) => {
             this.getdataservice.customer.customerdata = JSON.stringify(customer) ;
-            localStorage.setItem('customer', customer);
+            localStorage.setItem('customer', JSON.stringify(customer));
             this.loader.stop();
             this.router.navigate(['shop']);
             localStorage.setItem('isLogin',"true");
