@@ -131,4 +131,8 @@ export class DataService {
   {
     return this.http.post(url + "custinfo/postlogout" , data);
   }
+  getItemImages(data) {
+    console.log(data)
+    return this.http.get(url + `iteminfo/GetItemImages?itemnos=${data}`);
+  }
 }

@@ -38,6 +38,7 @@ export class BaseshopComponent implements OnInit {
   selectedunits = [];
   images=['src/assets/ItemImages/Devices/3.jpg','src/assets/ItemImages/Devices/4.jpg'];
   checkunit : boolean = false;
+  currentpage: any;
  
   constructor(private dataService: DataService,
     public eventemitter: EmitterService,
@@ -468,4 +469,32 @@ if (discountamount == undefined)
         
        }
 
+       getPage(data)
+       {
+         debugger
+         this.currentpage = data;
+         let itemnos = "";
+         for (let index = data; index < 10; index++) {
+           let element = this.items[index];
+           itemnos = itemnos + element.itemno + "," 
+         }
+         this.getItemImages(itemnos)
+
+       }
+
+       getItemImages(data)
+       {
+        // this.loader.start();
+         this.dataService.getItemImages(data).subscribe((result)=>{
+          // this.loader.stop();
+          for (let index = this.currentpage; index < 10; index++) {
+            let element = this.items[index];
+            element.itemimagelogo = result[index].itemimagelogo
+          }
+         }, (error) => {
+           this.loader.stop();
+          console.log(error);
+          
+        })
+       }
 }
