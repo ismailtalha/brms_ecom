@@ -241,11 +241,17 @@
                                         <!-- Product Image Start -->
                                         <div class="pro-img">
                                             <a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
-                                                <div *ngIf="item?.itemimagelogo; else noImage">
+                                                <!-- <div *ngIf="item?.itemimagelogo; else noImage">
                                                     <img class="primary-img"
                                                         src="data:image/jpeg;base64,{{item.itemimagelogo}}" alt="">
                                                     <img class="secondary-img"
                                                         src="data:image/jpeg;base64,{{item.itemimagelogo}}" alt="">
+                                                </div> -->
+                                                <div *ngIf="item?.itemimagepath; else noImage">
+                                                    <img class="primary-img"
+                                                        src="{{item.itemimagepath}}" alt="">
+                                                    <img class="secondary-img"
+                                                        src="{{item.itemimagepath}}" alt="">
                                                 </div>
                                                 <ng-template #noImage>
                                                     <img class="primary-img"
@@ -269,10 +275,16 @@
                                                 <i class="fa fa-star"></i>
                                             </div> -->
                                             <h4><a a routerLink="/shop/itemdetail/{{item.rowno}}"
-                                                    href="javascript:void(0)">{{item.itemname}}</a></h4>
-                                            <p><span class="price">{{cartservice?.companydata[0]?.currency}}
-                                                    {{item.saleprice}}</span>
-                                                <span>  Stock : {{item.itemstockportaldisplay}}</span> </p>
+                                                    href="javascript:void(0)">{{item.itemname}} {{item.itemno}}</a></h4>
+                                                    <span *ngIf="cartservice?.customer?.customerdata?.length == 0">
+                                                      
+                                                      <a routerLink ="/auth/login" href="javascript:void(0)"><span style="font-weight: 600;"><u>Login to view Prices</u></span></a>
+                                                    </span>
+                                                    <span *ngIf="cartservice?.customer?.customerdata?.length != 0">
+                                                        <p><span class="price">{{cartservice?.companydata[0]?.currency}}
+                                                            {{item.saleprice}}</span>
+                                                        <span>  Stock : {{item.itemstockportaldisplay}}</span> </p>
+                                                    </span>
                                             <!-- <p><span class="price">{In Stock : {{item.itemstockportaldisplay}}}
                                                         {Discount % : {{item.discountpercentagePortalDisplay}}}</span> </p>                                                     -->
                                             <p></p>
@@ -305,11 +317,17 @@
                                     <!-- Product Image Start -->
                                     <div class="pro-img">
                                         <a a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
-                                            <div *ngIf="item?.itemimagelogo; else noImage">
+                                            <!-- <div *ngIf="item?.itemimagelogo; else noImage">
                                                 <img class="primary-img"
                                                     src="data:image/jpeg;base64,{{item.itemimagelogo}}" alt="">
                                                 <img class="secondary-img"
                                                     src="data:image/jpeg;base64,{{item.itemimagelogo}}" alt="">
+                                            </div> -->
+                                            <div *ngIf="item?.itemimagepath; else noImage">
+                                                <img class="primary-img"
+                                                    src="{{item.itemimagepath}}" alt="">
+                                                <img class="secondary-img"
+                                                    src="{{item.itemimagepath}}" alt="">
                                             </div>
                                             <ng-template #noImage>
                                                 <img class="primary-img"
@@ -376,7 +394,8 @@
                     <!-- <li><a href="#">1</a></li>
                         <li class="active"><a href="#">2</a></li>
                         <li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
-                    <pagination-controls (pageChange)="getPage($event)"></pagination-controls>
+                        
+                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
                     <!-- </ul> -->
                     <div class="toolbar-sorter-footer">
                         <label>show</label>

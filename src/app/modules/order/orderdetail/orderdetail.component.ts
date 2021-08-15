@@ -12,10 +12,11 @@ import { GetDataService } from 'src/app/services/getdata.service';
   styleUrls: ['./orderdetail.component.css']
 })
 export class OrderdetailComponent implements OnInit {
-  singleitem: {};
+  singleitem: any;
    itemslist: any = [];
    itemsPerPage=5;
    selected:any;
+   p:any;
 
   constructor(public cartservice:GetDataService,private dataService: DataService, private loader: NgxUiLoaderService,
     private router: Router,

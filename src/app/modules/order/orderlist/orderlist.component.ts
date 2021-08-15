@@ -13,6 +13,7 @@ import { GetDataService } from 'src/app/services/getdata.service';
 export class OrderlistComponent implements OnInit {
   orders: any;
   itemsPerPage: any = 6;
+  p:any;
   constructor(private dataService: DataService,
      public cartservice: GetDataService,
       private toastr: ToastrService,
