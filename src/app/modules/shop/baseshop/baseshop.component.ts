@@ -22,7 +22,7 @@ export class BaseshopComponent implements OnInit {
   filterarray: any = [];
   category: any = [];
   brands: any = [];
-  itemsPerPage: any = 6;
+  itemsPerPage: any = 10;
   isCollapsed = false;
   catsearch;
   groupsearch;

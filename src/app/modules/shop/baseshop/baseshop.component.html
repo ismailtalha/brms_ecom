@@ -1,6 +1,6 @@
 <!-- Shop Page Start -->
 
-<div class="breadcrumb-area ptb-60 ptb-sm-30">
+<div class="breadcrumb-area ptb-20 ptb-sm-30">
     <div class="container">
         <div class="breadcrumb">
             <ul>
@@ -21,187 +21,10 @@
         <!-- Row End -->
         <div class="row">
             <!-- Sidebar Shopping Option Start -->
-            <div class="col-lg-3  order-2">
-                <div class="sidebar white-bg">
-
-
-                    <!-- groups -->
-                    <div class="single-items">
-                        <div class="accordion" id="Groups">
-                            <div class="item">
-                                <div class="item-header" id="headingOne">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse"
-                                            data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Item Groups
-                                            <i class="fa fa-angle-down"></i>
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                    data-parent="#Groups">
-                                    <input type="text" class="form-control" placeholder="Search Group"
-                                        [(ngModel)]="groupsearch" (ngModelChange)="searchfilter('group',groupsearch)">
-                                    <div class="t-p">
-                                        <ul class="manufactures-list" *ngFor="let group of itemgroups">
-                                            <li><input type="checkbox" id="{{group.itemgroupno}}"
-                                                    value={{group.itemgroupno}}
-                                                    (change)="filter(group.itemgroupno,'itemgroup')">&nbsp;<label
-                                                    style="color: black;"
-                                                    for="{{group.itemgroupno}}">{{group.itemgroupname}}
-                                                    ({{group.itemcount}})</label></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- category -->
-                    <div class="single-items">
-                        <div class="accordion" id="Categories">
-                            <div class="item">
-                                <div class="item-header" id="headingOne">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse"
-                                            data-target="#CatOne" aria-expanded="true" aria-controls="CatOne">
-                                            Categories
-                                            <i class="fa fa-angle-down"></i>
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="CatOne" class="collapse show" aria-labelledby="headingOne"
-                                    data-parent="#Categories">
-                                    <input type="text" class="form-control" placeholder="Search Category"
-                                        [(ngModel)]="catsearch" (ngModelChange)="searchfilter('category',catsearch)">
-
-                                    <div class="t-p">
-
-                                        <ul *ngFor="let cat of categories" class="manufactures-list">
-                                            <li>
-
-                                                <input type="checkbox" id="{{cat.productno}}" value={{cat.productno}}
-                                                    (change)="filter(cat.productno,'category')">&nbsp;<label
-                                                    style="color:black" for="{{cat.productno}}">
-                                                    {{cat.productname}} ({{cat.itemcount}})</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- brands -->
-
-                    <div class="single-items">
-                        <div class="accordion" id="Brands">
-                            <div class="item">
-                                <div class="item-header" id="headingOne">
-                                    <h2 class="mb-0">
-                                        <button class="btn btn-link" type="button" data-toggle="collapse"
-                                            data-target="#BrandsOne" aria-expanded="true" aria-controls="BrandsOne">
-                                            Brands
-                                            <i class="fa fa-angle-down"></i>
-                                        </button>
-                                    </h2>
-                                </div>
-                                <div id="BrandsOne" class="collapse show" aria-labelledby="headingOne"
-                                    data-parent="#Brands">
-                                    <input type="text" class="form-control" placeholder="Search Brand"
-                                        [(ngModel)]="brandsearch" (ngModelChange)="searchfilter('brand',brandsearch)">
-                                    <div class="t-p">
-
-                                        <ul class="manufactures-list" *ngFor="let brand of resbrands">
-                                            <li><input type="checkbox" id="{{brand.makeno}}" value={{brand.makeno}}
-                                                    (change)="filter(brand.makeno,'brand')">&nbsp; <label
-                                                    style="color:black" for="{{brand.makeno}}">{{brand.makename}}
-                                                    ({{brand.itemcount}})</label></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <!-- <div class="single-sidebar">
-                        <div class="group-title">
-                            <h2>color</h2>
-                        </div>
-                        <ul class="color-option">
-                            <li>
-                                <a class="blue" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="green" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="black" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="rose" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="red" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="purple" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="rose" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="yellow" href="#"></a>
-                            </li>
-                            <li>
-                                <a class="orange" href="#"></a>
-                            </li>
-                        </ul>
-                    </div> -->
-                    <!-- <div class="single-sidebar">
-                        <div class="group-title">
-                            <h2>price</h2>
-                        </div>
-                        <form action="#">
-                            <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content">
-                                <div class="ui-slider-range ui-corner-all ui-widget-header" ></div>
-                            </div>
-                                <input id="amount" class="amount" readonly="" type="text">
-                        </form>
-                    </div> -->
-
-                    <!-- <div class="single-sidebar">
-                        <div class="group-title">
-                          
-                            <h2 data-toggle="collapse" href="#multiCollapseExample1">Item Groups</h2>
-                        </div>
-                        <div class="collapse multi-collapse" id="multiCollapseExample1">
-                        <ul #collapse="ngbCollapse" [(ngbCollapse)]="isCollapsed" class="manufactures-list"
-                            *ngFor="let group of itemgroups">
-                            <li><input type="checkbox" value={{group.itemgroupno}}
-                                    (change)="filter(group.itemgroupno,'itemgroup')">&nbsp;<a
-                                    href="#">{{group.itemgroupname}} (9)</a></li>
-                        </ul>
-                        </div>
-                    </div> -->
-
-
-
-
-
-
-
-                    <!-- Single Banner Start -->
-
-                    <!-- Single Banner End -->
-                </div>
-            </div>
+           
             <!-- Sidebar Shopping Option End -->
             <!-- Product Categorie List Start -->
-            <div class="col-lg-9 order-lg-2">
+            <div class="col-lg-12 order-lg-2">
                 <!-- Grid & List View Start -->
                 <div class="grid-list-top border-default universal-padding fix mb-30">
                     <div class="grid-list-view f-left">
@@ -235,7 +58,7 @@
                         <div id="grid-view" class="tab-pane active">
                             <div class="row">
 
-                                <div class="col-lg-4 col-sm-6"
+                                <div class="col-lg-3 col-sm-6"
                                     *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
                                     <div class="single-product">
                                         <!-- Product Image Start -->

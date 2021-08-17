@@ -341,8 +341,12 @@ ul.ht-dropdown.dropdown-style-two li {
     position: relative;
 }
 
-.ht-dropdown.dropdown-style-two{
+/* .ht-dropdown.dropdown-style-two{
     left: auto;
+    right: 0;
+} */
+ht-dropdown.dropdown-style-two {
+     left: none;
     right: 0;
 }
 .header-list-menu li:last-child ul.ht-dropdown{
@@ -1428,10 +1432,15 @@ img.primary-img {
 /*----------------------------------------*/
 /* 9. Breadcrumb CSS
 /*----------------------------------------*/
-.breadcrumb-area .breadcrumb {
+/* .breadcrumb-area .breadcrumb {
     background-color: #f5f5f5;
     margin-bottom: 0;
     padding: 25px 15px;
+} */
+.breadcrumb-area .breadcrumb {
+    background-color: #f5f5f5;
+    margin-bottom: 0;
+    padding: none;
 }
 
 .breadcrumb-area .breadcrumb li.active a,.breadcrumb li:hover a {
@@ -4003,4 +4012,7 @@ legend {
 
 .mobile-menu nav ul{
     display: none;
+}
+.container {
+    max-width: 1300px !important;   
 }
