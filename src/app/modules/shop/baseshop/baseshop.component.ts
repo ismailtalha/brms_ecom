@@ -353,15 +353,23 @@ export class BaseshopComponent implements OnInit {
 
   checkitemunits(modalid, item) {
     debugger
-    if (item.itemunitsdetails.length > 0) {
-      let units = [];
-      units = item;
-
-      this.open(modalid, units);
+    if(this.cartservice?.customer?.customerdata?.length > 0)
+    {
+      if (item.itemunitsdetails.length > 0) {
+        let units = [];
+        units = item;
+  
+        this.open(modalid, units);
+      }
+      else {
+        this.addtocart(item);
+      }
     }
-    else {
-      this.addtocart(item);
+    else
+    {
+      this.toastr.warning('Login To Add Products In Cart')
     }
+    
   }
 
   open(modalid, data) {
