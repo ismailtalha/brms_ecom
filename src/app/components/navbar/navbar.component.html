@@ -78,7 +78,7 @@
                 <div class="col-xl-10 col-lg-9 d-none d-lg-block">
                     <div class="middle-menu">
                         <nav>
-                            <ul class="middle-menu-list">
+                            <ul class="middle-menu-list" >
                                 <!-- <li><a routerLink ="/dashboard" href="javascript:void(0)">home</a> -->
                                     <!-- Home Version Dropdown Start -->
                                     <!-- <ul class="ht-dropdown home-dropdown">
@@ -128,78 +128,17 @@
                                     <li><a routerLink ="/shop/featured" href="javascript:void(0)">Featured</a>
                                         <li><a routerLink ="/shop/newarrival" href="javascript:void(0)">New Arrival</a>
                                             <li><a routerLink ="#" href="javascript:void(0)">Clearance</a> -->
-                                                <li><a routerLink ="#" href="javascript:void(0)">E-Liquid</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a routerLink ="#" href="javascript:void(0)">SALT Inc</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a routerLink ="#" href="javascript:void(0)">DEVICES</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a routerLink ="#" href="javascript:void(0)">Coils/Refillable Pods</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a routerLink ="#" href="javascript:void(0)">Tanks</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a routerLink ="#" href="javascript:void(0)">Coils/Refillable Pods</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a routerLink ="#" href="javascript:void(0)">Tanks</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a routerLink ="#" href="javascript:void(0)">DEVICES</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
-                                <li><a routerLink ="#" href="javascript:void(0)">Tanks</a>
-                                    <ul class="ht-dropdown dropdown-style-two">
-                                        <li><a href="#">Brand 1</a></li>
-                                        <li><a href="#">Brand 2</a></li>
-                                        <li><a href="#">Brand 3</a></li>
-                                       
-                                    </ul>
-                                </li>
+                                                
+                                                    <li *ngFor="let data of navbardata"><a routerLink ="#" href="javascript:void(0)">{{data.productname}}</a>
+                                                        <ul class="ht-dropdown dropdown-style-two" *ngFor="let detail of data.productinfo_makedetails">
+                                                            <li><a href="#">{{detail.makename}}</a></li>
+                                                            
+                                                        </ul>
+                                                        </li>
+
+                                             
+                                          
+                               
                             
                             
                                 <!-- <li><a routerLink ="/company/contact" href="javascript:void(0)">contact us</a></li>                                         -->

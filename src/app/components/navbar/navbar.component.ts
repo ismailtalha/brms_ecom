@@ -27,6 +27,7 @@ export class NavbarComponent implements OnChanges {
   imageurl: any;
   customer:any = [];
   productname;
+  navbardata: any;
   constructor(public domSanitizer: DomSanitizer,public eventemitter : EmitterService,public route:Router,public cartservice:GetDataService,
      location: Location,  private element: ElementRef, private router: Router, private cookies: CookieService,
       private dataService: DataService,private toast:ToastrService) {
@@ -101,8 +102,17 @@ export class NavbarComponent implements OnChanges {
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([currentUrl]);
   }
+  getnavbardata()
+  {
+    this.dataService.getnavbardata().subscribe((res:any) => {
+      
+      
+      this.navbardata = res;
+    })
+  }
   ngOnInit() {
-   
+
+    this.getnavbardata();
     if(this.cartservice.customer.customerdata.length == 0)
     {
       if(localStorage.getItem('customer'))
@@ -114,6 +124,7 @@ export class NavbarComponent implements OnChanges {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
     this.getcartdata();
    // this.getcompanyinfo();
+
   }
 
   getcartdata()

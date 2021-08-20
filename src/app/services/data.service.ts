@@ -92,6 +92,15 @@ export class DataService {
     return this.http.get(url + `iteminfo/get`);
   }
 
+  getFetauredtop10() {
+    return this.http.get(url + `iteminfo/GetFeatured?recordsCount=10`);
+  }
+  getClearancetop10() {
+    return this.http.get(url + `iteminfo/GetClearance?recordsCount=10`);
+  }
+  getNewArrivaltop10() {
+    return this.http.get(url + `iteminfo/GetNewArrival?recordsCount=10`);
+  }
   getsingleProduct(id) {
     console.log(id)
     return this.http.get(url + `iteminfo/get?no=${id}`);
@@ -134,5 +143,9 @@ export class DataService {
   getItemImages(data) {
     console.log(data)
     return this.http.get(url + `iteminfo/GetItemImages?itemnos=${data}`);
+  }
+
+  getnavbardata() {
+    return this.http.get(url + `productinfo/getWITHMAKE`);
   }
 }

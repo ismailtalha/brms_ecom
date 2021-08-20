@@ -38,6 +38,9 @@ export class BaseshopComponent implements OnInit {
   checkunit: boolean = false;
   currentpage: any;
   pageOfItems: any[];
+  FetauredItems: any;
+  ClearanceItems: Object;
+  NewArrivalItems: any;
 
   constructor(private dataService: DataService,
     public eventemitter: EmitterService,
@@ -49,7 +52,7 @@ export class BaseshopComponent implements OnInit {
   items: any = [];
   ngOnInit(): void {
     console.log('hello shop')
-    this.getmultiplerequests();
+   this.getmultiplerequests();
     this.eventemitter.listen('searchproduct', data => {
       this.filter(data, 'productsearch')
     })
@@ -72,23 +75,23 @@ export class BaseshopComponent implements OnInit {
   public getmultiplerequests() {
     this.loader.start();
     let items = this.dataService.getProducts();
-    let category = this.dataService.getcategory();
-    let itemgroups = this.dataService.getitemgroup();
-    let brands = this.dataService.getbrands();
-    forkJoin([items, category, itemgroups, brands]).subscribe(([itemres, catres, itemgroupres, resbrands]) => {
+    let FetauredItems = this.dataService.getFetauredtop10();
+    let ClearanceItems = this.dataService.getClearancetop10();
+    let NewArrivalItems = this.dataService.getNewArrivaltop10();
+    forkJoin([items, FetauredItems, ClearanceItems, NewArrivalItems]).subscribe(([itemres, FetauredItemsres, ClearanceItemsres, NewArrivalItemsres]) => {
 
       this.items = itemres;
       console.log('returned items', this.getfiltereditems())
       this.items = this.getfiltereditems();
       this.cartservice.allitems.items = this.items;
       this.totalitemscount = this.items.length;
-      this.categories = catres;
+      this.FetauredItems = FetauredItemsres;
       this.getitemscount(this.categories, 'productno');
       this.cartservice.category.items = this.categories;
-      this.itemgroups = itemgroupres;
+      this.ClearanceItems = ClearanceItemsres;
       this.getitemscount(this.itemgroups, 'itemgroupno');
       this.cartservice.itemgroup.items = this.itemgroups;
-      this.resbrands = resbrands
+      this.NewArrivalItems = NewArrivalItemsres
       this.getitemscount(this.resbrands, 'makeno');
       this.cartservice.brands.items = this.resbrands;
       console.log('items', this.items, 'categories', this.categories, 'groups', this.itemgroups);
