@@ -78,7 +78,8 @@ export class BaseshopComponent implements OnInit {
     let FetauredItems = this.dataService.getFetauredtop10();
     let ClearanceItems = this.dataService.getClearancetop10();
     let NewArrivalItems = this.dataService.getNewArrivaltop10();
-    forkJoin([items, FetauredItems, ClearanceItems, NewArrivalItems]).subscribe(([itemres, FetauredItemsres, ClearanceItemsres, NewArrivalItemsres]) => {
+    // forkJoin([items, FetauredItems, ClearanceItems, NewArrivalItems]).subscribe(([itemres, FetauredItemsres, ClearanceItemsres, NewArrivalItemsres]) => {
+      forkJoin([items, FetauredItems, ClearanceItems,NewArrivalItems]).subscribe(([itemres, FetauredItemsres, ClearanceItemsres,NewArrivalItemsres]) => {
 
       this.items = itemres;
       console.log('returned items', this.getfiltereditems())

@@ -99,11 +99,15 @@ export class DataService {
     return this.http.get(url + `iteminfo/GetClearance?recordsCount=10`);
   }
   getNewArrivaltop10() {
-    return this.http.get(url + `iteminfo/GetNewArrival?recordsCount=10`);
+    return this.http.get(url + `iteminfo/GetNewArrivals?recordsCount=10`);
   }
   getsingleProduct(id) {
     console.log(id)
     return this.http.get(url + `iteminfo/get?no=${id}`);
+  }
+  getfiltereditems(productno,makeno)
+  {
+    return this.http.get(url + 'iteminfo/GetByProductAndMake?productno='+productno+'&makenos='+makeno)
   }
   getcompany()
   {

@@ -210,4 +210,9 @@ export class NavbarComponent implements OnChanges {
         localStorage.removeItem('cart-data')
       }
     }
+
+    getFilteredItems(category,makeno)
+    {
+      this.route.navigate(["/shop/filteredItems/"+category+"/"+makeno])
+    }
 }

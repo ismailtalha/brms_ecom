@@ -26,17 +26,17 @@
             <!-- Product Categorie List Start -->
             <div class="col-lg-12 order-lg-2">
                 <!-- Grid & List View Start -->
-                <div class="grid-list-top border-default universal-padding fix mb-30">
-                    <div class="grid-list-view f-left">
+                <!-- <div class="grid-list-top border-default universal-padding fix mb-30"> -->
+                    <!-- <div class="grid-list-view f-left">
                         <ul class="list-inline nav">
                             <li><a data-toggle="tab" class="active" href="#grid-view"><i class="fa fa-th"></i></a></li>
                             <li><a data-toggle="tab" href="#list-view"><i class="fa fa-list-ul"></i></a>
                             </li>
                             <li><span class="grid-item-list"> Items {{items.length}} of {{totalitemscount}}</span></li>
                         </ul>
-                    </div>
+                    </div> -->
                     <!-- Toolbar Short Area Start -->
-                    <div class="main-toolbar-sorter f-right">
+                    <!-- <div class="main-toolbar-sorter f-right">
                         <div class="toolbar-sorter">
                             <label>sort by</label>
                             <select class="sorter" name="sorter" (change)="changesortby($event)">
@@ -48,10 +48,15 @@
                             <span *ngIf="sortdown"><span href="#"><i class="fa fa-arrow-down"
                                         (click)="applysort('down')"></i></span></span>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- Toolbar Short Area End -->
-                </div>
+                <!-- </div> -->
                 <!-- Grid & List View End -->
+                <div class="best-seller-product pb-40">
+                        <div class="group-title">
+                            <h2>Featured Products</h2>
+                        </div>
+                </div>
                 <div class="main-categorie">
                     <!-- Grid & List Main Area End -->
                     <div class="tab-content fix">
@@ -59,17 +64,11 @@
                             <div class="row">
 
                                 <div class="col-lg-3 col-sm-6"
-                                    *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                                    *ngFor="let item of FetauredItems">
                                     <div class="single-product">
                                         <!-- Product Image Start -->
                                         <div class="pro-img">
                                             <a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
-                                                <!-- <div *ngIf="item?.itemimagelogo; else noImage">
-                                                    <img class="primary-img"
-                                                        src="data:image/jpeg;base64,{{item.itemimagelogo}}" alt="">
-                                                    <img class="secondary-img"
-                                                        src="data:image/jpeg;base64,{{item.itemimagelogo}}" alt="">
-                                                </div> -->
                                                 <div *ngIf="item?.itemimagepath; else noImage">
                                                     <img class="primary-img"
                                                         src="{{item.itemimagepath}}" alt="">
@@ -87,16 +86,7 @@
                                             </a>
                                             <span class="sticker-new">{{item.discountpercentagePortalDisplay}}% off</span>
                                         </div>
-                                        <!-- Product Image End -->
-                                        <!-- Product Content Start -->
                                         <div class="pro-content">
-                                            <!-- <div class="product-rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div> -->
                                             <h4><a a routerLink="/shop/itemdetail/{{item.rowno}}"
                                                     href="javascript:void(0)">{{item.itemname}} {{item.itemno}}</a></h4>
                                                     <span *ngIf="cartservice?.customer?.customerdata?.length == 0">
@@ -107,11 +97,7 @@
                                                         <p><span class="price">{{cartservice?.companydata[0]?.currency}}
                                                             {{item.saleprice}}</span>
                                                         <span>  Stock : {{item.itemstockportaldisplay}}</span> </p>
-                                                    </span>
-                                            <!-- <p><span class="price">{In Stock : {{item.itemstockportaldisplay}}}
-                                                        {Discount % : {{item.discountpercentagePortalDisplay}}}</span> </p>                                                     -->
-                                            <p></p>
-                                            <!-- <p>Discount % : {{item.discountpercentagePortalDisplay}}</p> -->
+                                                    </span>       
                                             <p>{{item.itemdetails}}</p>
                                             <div class="pro-actions">
                                                 <div class="actions-secondary">
@@ -131,21 +117,27 @@
                                 </div>
 
                             </div>
+                          
                         </div>
-                        <!-- #grid view End -->
-                        <div id="list-view" class="tab-pane">
-                            <!-- Single Product Start -->
-                            <div *ngFor="let item of items | paginate: { itemsPerPage: itemsPerPage, currentPage: p }">
+                    </div>
+                </div>
+                <div class="best-seller-product pb-40">
+                    <div class="group-title">
+                        <h2>Clearance Products</h2>
+                    </div>
+            </div>
+            <div class="main-categorie">
+                <!-- Grid & List Main Area End -->
+                <div class="tab-content fix">
+                    <div id="grid-view" class="tab-pane active">
+                        <div class="row">
+
+                            <div class="col-lg-3 col-sm-6"
+                                *ngFor="let item of ClearanceItems">
                                 <div class="single-product">
                                     <!-- Product Image Start -->
                                     <div class="pro-img">
-                                        <a a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
-                                            <!-- <div *ngIf="item?.itemimagelogo; else noImage">
-                                                <img class="primary-img"
-                                                    src="data:image/jpeg;base64,{{item.itemimagelogo}}" alt="">
-                                                <img class="secondary-img"
-                                                    src="data:image/jpeg;base64,{{item.itemimagelogo}}" alt="">
-                                            </div> -->
+                                        <a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
                                             <div *ngIf="item?.itemimagepath; else noImage">
                                                 <img class="primary-img"
                                                     src="{{item.itemimagepath}}" alt="">
@@ -160,77 +152,113 @@
                                                     src="../../../../assets/ItemImages/default-product-image.png"
                                                     alt="">
                                             </ng-template>
-
-
-
-
-
-
                                         </a>
+                                        <span class="sticker-new">{{item.discountpercentagePortalDisplay}}% off</span>
                                     </div>
-                                    <span class="sticker-new">{{item.discountpercentagePortalDisplay}}% off</span>
-                                    <!-- Product Image End -->
-                                    <!-- Product Content Start -->
                                     <div class="pro-content">
-                                        <!-- <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div> -->
-                                        <h4><a routerLink="/shop/itemdetail/{{item.itemno}}"
-                                                href="javascript:void(0)">{{item.itemname}}</a></h4>
-                                        <p><span class="price">{{cartservice?.companydata[0]?.currency}}
-                                                {{item.saleprice}}
-                                            </span>
-                                        </p>
-                                        <!-- <p><span class="price">{In Stock : {{item.itemstockportaldisplay}}}
-                                            {Discount % : {{item.discountpercentagePortalDisplay}}}</span> </p>  -->
-                                        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati velit, similique voluptas doloribus assumenda quis libero animi cumque dignissimos quisquam, quaerat ea laboriosam incidunt ullam.</p> -->
-                                        <p>  Stock : {{item.itemstockportaldisplay}}</p>
+                                        <h4><a a routerLink="/shop/itemdetail/{{item.rowno}}"
+                                                href="javascript:void(0)">{{item.itemname}} {{item.itemno}}</a></h4>
+                                                <span *ngIf="cartservice?.customer?.customerdata?.length == 0">
+                                                  
+                                                  <a routerLink ="/auth/login" href="javascript:void(0)"><span style="font-weight: 600;"><u>Login to view Prices</u></span></a>
+                                                </span>
+                                                <span *ngIf="cartservice?.customer?.customerdata?.length != 0">
+                                                    <p><span class="price">{{cartservice?.companydata[0]?.currency}}
+                                                        {{item.saleprice}}</span>
+                                                    <span>  Stock : {{item.itemstockportaldisplay}}</span> </p>
+                                                </span>       
                                         <p>{{item.itemdetails}}</p>
                                         <div class="pro-actions">
                                             <div class="actions-secondary">
-                                                <a href="wishlist.html" data-toggle="tooltip" title="Add to Wishlist"><i
-                                                        class="fa fa-heart"></i></a>
-                                                <a class="add-cart" (click)="checkitemunits(item)" data-toggle="tooltip"
-                                                    title="Add to Cart">Add To Cart</a>
-                                                <a href="compare.html" data-toggle="tooltip" title="Add to Compare"><i
-                                                        class="fa fa-signal"></i></a>
+                                                <a href="wishlist.html" data-toggle="tooltip"
+                                                    title="Add to Wishlist"><i class="fa fa-heart"></i></a>
+                                                <a class="add-cart" (click)="checkitemunits(content,item)"
+                                                    data-toggle="tooltip" title="Add to Cart">Add To Cart</a>
+
+                                                <a href="compare.html" data-toggle="tooltip"
+                                                    title="Add to Compare"><i class="fa fa-signal"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- Product Content End -->
+                                    <!-- <span class="sticker-new">-20%</span> -->
                                 </div>
                             </div>
 
-
                         </div>
-                        <!-- #list view End -->
-                    </div>
-                    <!-- Grid & List Main Area End -->
-                </div>
-                <!--Breadcrumb and Page Show Start -->
-                <div class="pagination-box fix">
-                    <!-- <ul class="blog-pagination "> -->
-                    <!-- <li><a href="#">1</a></li>
-                        <li class="active"><a href="#">2</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right"></i></a></li> -->
-                        
-                    <pagination-controls (pageChange)="p = $event"></pagination-controls>
-                    <!-- </ul> -->
-                    <div class="toolbar-sorter-footer">
-                        <label>show</label>
-                        <select class="sorter" name="sorter">
-                            <option (click)="perpageitems(10)" value="Position" selected="selected">10</option>
-                            <option (click)="perpageitems(20)" value="Product Name">20</option>
-                            <option (click)="perpageitems(30)" value="Price">30</option>
-                        </select>
-                        <span>per page</span>
+                      
                     </div>
                 </div>
-                <!--Breadcrumb and Page Show End -->
+            </div>
+            <div class="best-seller-product pb-40">
+                <div class="group-title">
+                    <h2>New Arrival Products</h2>
+                </div>
+        </div>
+        <div class="main-categorie">
+            <!-- Grid & List Main Area End -->
+            <div class="tab-content fix">
+                <div id="grid-view" class="tab-pane active">
+                    <div class="row">
+
+                        <div class="col-lg-3 col-sm-6"
+                            *ngFor="let item of NewArrivalItems">
+                            <div class="single-product">
+                                <!-- Product Image Start -->
+                                <div class="pro-img">
+                                    <a routerLink="/shop/itemdetail/{{item.itemno}}" href="javascript:void(0)">
+                                        <div *ngIf="item?.itemimagepath; else noImage">
+                                            <img class="primary-img"
+                                                src="{{item.itemimagepath}}" alt="">
+                                            <img class="secondary-img"
+                                                src="{{item.itemimagepath}}" alt="">
+                                        </div>
+                                        <ng-template #noImage>
+                                            <img class="primary-img"
+                                                src="../../../../assets/ItemImages/default-product-image.png"
+                                                alt="">
+                                            <img class="secondary-img"
+                                                src="../../../../assets/ItemImages/default-product-image.png"
+                                                alt="">
+                                        </ng-template>
+                                    </a>
+                                    <span class="sticker-new">{{item.discountpercentagePortalDisplay}}% off</span>
+                                </div>
+                                <div class="pro-content">
+                                    <h4><a a routerLink="/shop/itemdetail/{{item.rowno}}"
+                                            href="javascript:void(0)">{{item.itemname}} {{item.itemno}}</a></h4>
+                                            <span *ngIf="cartservice?.customer?.customerdata?.length == 0">
+                                              
+                                              <a routerLink ="/auth/login" href="javascript:void(0)"><span style="font-weight: 600;"><u>Login to view Prices</u></span></a>
+                                            </span>
+                                            <span *ngIf="cartservice?.customer?.customerdata?.length != 0">
+                                                <p><span class="price">{{cartservice?.companydata[0]?.currency}}
+                                                    {{item.saleprice}}</span>
+                                                <span>  Stock : {{item.itemstockportaldisplay}}</span> </p>
+                                            </span>       
+                                    <p>{{item.itemdetails}}</p>
+                                    <div class="pro-actions">
+                                        <div class="actions-secondary">
+                                            <a href="wishlist.html" data-toggle="tooltip"
+                                                title="Add to Wishlist"><i class="fa fa-heart"></i></a>
+                                            <a class="add-cart" (click)="checkitemunits(content,item)"
+                                                data-toggle="tooltip" title="Add to Cart">Add To Cart</a>
+
+                                            <a href="compare.html" data-toggle="tooltip"
+                                                title="Add to Compare"><i class="fa fa-signal"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Product Content End -->
+                                <!-- <span class="sticker-new">-20%</span> -->
+                            </div>
+                        </div>
+
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
             </div>
             <!-- product Categorie List End -->
 

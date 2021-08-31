@@ -15,9 +15,10 @@ import { BaseshopComponent } from './baseshop/baseshop.component';
 import { TableModule } from 'primeng/table';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PositivenumberDirective } from 'src/app/Utilities/positivenumber.directive';
+import { FiltereditemsComponent } from './filtereditems/filtereditems.component';
 
 @NgModule({
-  declarations: [ShopComponent, ItemDetailComponent, FeaturedComponent, NewarivalComponent, BaseshopComponent,PositivenumberDirective],
+  declarations: [ShopComponent, ItemDetailComponent, FeaturedComponent, NewarivalComponent, BaseshopComponent,PositivenumberDirective, FiltereditemsComponent],
   imports: [
     CommonModule,
     ShopRoutingModule,

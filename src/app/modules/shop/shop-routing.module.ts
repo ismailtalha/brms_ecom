@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FeaturedComponent } from './featured/featured.component';
+import { FiltereditemsComponent } from './filtereditems/filtereditems.component';
 import { ItemDetailComponent } from './item-detail/item-detail.component';
 import { NewarivalComponent } from './newarival/newarival.component';
 import { ShopComponent } from './shop/shop.component';
@@ -28,6 +29,11 @@ const routes: Routes = [
       {
         path: 'itemdetail/:id',
         component: ItemDetailComponent,
+        
+      },
+      {
+        path: 'filteredItems/:category/:makeno',
+        component: FiltereditemsComponent,
         
       }    
     ]

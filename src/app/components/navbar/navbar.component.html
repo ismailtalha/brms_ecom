@@ -131,7 +131,7 @@
                                                 
                                                     <li *ngFor="let data of navbardata"><a routerLink ="#" href="javascript:void(0)">{{data.productname}}</a>
                                                         <ul class="ht-dropdown dropdown-style-two" *ngFor="let detail of data.productinfo_makedetails">
-                                                            <li><a href="#">{{detail.makename}}</a></li>
+                                                            <li><a (click)="getFilteredItems(data.productno,detail.makeno)">{{detail.makename}}</a></li>
                                                             
                                                         </ul>
                                                         </li>
